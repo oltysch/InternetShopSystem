@@ -1,8 +1,5 @@
-package entity.products;
+package com.epam.ot.products;
 
-/**
- * Created by Admin on 26.05.2015.
- */
 public class EntertainmentDevice extends ElectricDevice {
     private String screenResolution;
 

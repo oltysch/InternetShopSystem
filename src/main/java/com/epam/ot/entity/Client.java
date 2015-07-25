@@ -1,8 +1,5 @@
-package entity;
+package com.epam.ot.entity;
 
-/**
- * Created by Admin on 21.05.2015.
- */
 public class Client {
     private Order order;
 

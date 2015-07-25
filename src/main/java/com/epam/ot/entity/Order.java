@@ -1,12 +1,9 @@
-package entity;
+package com.epam.ot.entity;
 
-import entity.products.Product;
+import com.epam.ot.products.Product;
 
 import java.util.ArrayList;
 
-/**
- * Created by Admin on 21.05.2015.
- */
 public class Order {
     private Client client;
     private ArrayList<Product> orderList = new ArrayList<Product>(); //Product in this order
@@ -24,7 +21,7 @@ public class Order {
         orderList.add(product);
     }
 
-    //shows entity in order list
+    //shows com.epam.ot.entity in order list
     public void showOrder() {
         for (Product product:orderList) {
             System.out.println("Название: " + product.getType() + "Цена: "+product.getPrice());

@@ -3,7 +3,7 @@
  * The Basic class from Product
  */
 
-package entity.products;
+package com.epam.ot.products;
 
 public abstract class Product {
     private String type;

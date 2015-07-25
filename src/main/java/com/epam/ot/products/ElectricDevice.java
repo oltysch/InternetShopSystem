@@ -1,4 +1,4 @@
-package entity.products;
+package com.epam.ot.products;
 
 /*
  * Basic class for all Electric Devices

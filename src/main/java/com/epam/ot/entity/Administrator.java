@@ -1,13 +1,10 @@
-package entity;
+package com.epam.ot.entity;
 
-import entity.Lights;
-import entity.products.Product;
+import com.epam.ot.entity.Lights;
+import com.epam.ot.products.Product;
 
 import java.util.ArrayList;
 
-/**
- * Created by Admin on 22.05.2015.
- */
 public class Administrator {
     private ArrayList<Product> products = new ArrayList<Product>();
     private ArrayList<Client> blackClients = new ArrayList<Client>();
@@ -21,7 +18,7 @@ public class Administrator {
         }
     }
 
-    //creating a new entity
+    //creating a new com.epam.ot.entity
     public void createNewProduct(String name, double price) {
         products.add(new Lights(name, price));
 
