@@ -24,7 +24,7 @@ public class Order {
     //shows com.epam.ot.entity in order list
     public void showOrder() {
         for (Product product:orderList) {
-            System.out.println("Название: " + product.getType() + "Цена: "+product.getPrice());
+            System.out.println("Название: " + product.getName() + "Цена: " + product.getPrice());
         }
     }
 

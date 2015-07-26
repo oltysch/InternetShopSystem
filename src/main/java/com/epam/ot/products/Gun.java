@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Gun extends Product {
-    private long id;
-    private String model;
     private String origin;
     private Handy handy;
     private int firingRange;
@@ -14,12 +12,9 @@ public class Gun extends Product {
     private Boolean opticsAvailability;
     private String material;
 
-    public Gun() {
-    }
-
-    public Gun(String model, String origin, String handy, int firingRange, int effectiveFiringRange,
+    public Gun(long id, String model, Double price, String origin, String handy, int firingRange, int effectiveFiringRange,
                Boolean cartridgeClip, Boolean optics, String material) {
-        this.model = model;
+        super(id, model, price);
         this.origin = origin;
         this.handy = Handy.valueOf(handy);
         this.firingRange = firingRange;
@@ -29,9 +24,13 @@ public class Gun extends Product {
         this.material = material;
     }
 
+    public Gun() {
+        super();
+    }
+
     @Override
     public String toString() {
-        return model + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
+        return getModel() + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
     }
 
     //TODO delete this after tests
@@ -46,13 +45,14 @@ public class Gun extends Product {
         String str = "fake";
     }
 
-
+    //TODO - need? or no?
     public String getModel() {
-        return model;
+        return getName();
     }
 
+    //TODO - need? or no?
     public void setModel(String model) {
-        this.model = model;
+        setName(model);
     }
 
     public String getOrigin() {
@@ -96,11 +96,11 @@ public class Gun extends Product {
     }
 
     public long getId() {
-        return id;
+        return getId();
     }
 
     public void setId(long id) {
-        this.id = id;
+        setId(id);
     }
 
     public Boolean getOpticsAvailability() {

@@ -3,12 +3,12 @@ package com.epam.ot.products;
 public class EntertainmentDevice extends ElectricDevice {
     private String screenResolution;
 
-    public EntertainmentDevice(String name, int power, int price) {
-        super(name, power, price);
+    public EntertainmentDevice(long id, String type, String name, int power, Double price) {
+        super(id, type, name, power, price);
     }
 
-    public EntertainmentDevice(String name, int power, int price, String resolution) {
-        super(name, power, price);
+    public EntertainmentDevice(long id, String type, String name, int power, Double price, String resolution) {
+        super(id, type, name, power, price);
         this.screenResolution = resolution;
     }
 
@@ -22,14 +22,9 @@ public class EntertainmentDevice extends ElectricDevice {
 
     @Override
     public String toString() {
-        String result = getName() + ", Price: " + getPrice() + ", Power: " + getPower();
+        String result = getType() + ": " + getName() + ", Price: " + getPrice() + ", Power: " + getPower();
         if (screenResolution != null) {
             result += ", Resolution: " + screenResolution;
-        }
-        if (this.isPluggedIn()) {
-            result += ", on";
-        } else {
-            result += ", off";
         }
         return result;
     }

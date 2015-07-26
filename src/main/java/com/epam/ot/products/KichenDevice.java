@@ -3,13 +3,13 @@ package com.epam.ot.products;
 public class KichenDevice extends ElectricDevice {
     private String appointment;
 
-    public KichenDevice(String name, int power, int price, String appointment) {
-        super(name, power, price);
+    public KichenDevice(long id, String type, String name, int power, Double price, String appointment) {
+        super(id, type, name, power, price);
         this.appointment = appointment;
     }
 
-    public KichenDevice(String name, int power, int price) {
-        super(name, power, price);
+    public KichenDevice(long id, String type, String name, int power, Double price) {
+        super(id, type, name, power, price);
     }
 
     public String getAppointment() {
@@ -22,14 +22,9 @@ public class KichenDevice extends ElectricDevice {
 
     @Override
     public String toString() {
-        String result = getName() + ", Price: " + getPrice() + ", Power: " + getPower();
+        String result = getType() + ": " + getName() + ", Price: " + getPrice() + ", Power: " + getPower();
         if (appointment != null) {
             result += ", Appointment: " + appointment;
-        }
-        if (isPluggedIn()) {
-            result += ", on";
-        } else {
-            result += ", off";
         }
         return result;
     }

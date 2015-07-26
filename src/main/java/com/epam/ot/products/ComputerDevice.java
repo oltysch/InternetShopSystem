@@ -1,35 +1,30 @@
 package com.epam.ot.products;
 
 public class ComputerDevice extends ElectricDevice {
-    private double processingPowerHZ;
+    private Double processingPowerHZ;
 
-    public ComputerDevice(String name, int power, int price) {
-        super(name, power, price);
+    public ComputerDevice(long id, String type, String name, int power, Double price) {
+        super(id, type, name, power, price);
     }
 
-    public ComputerDevice(String name, int power, int price, double processingPowerHZ) {
-        super(name, power, price);
+    public ComputerDevice(long id, String type, String name, int power, Double price, Double processingPowerHZ) {
+        super(id, type, name, power, price);
         this.processingPowerHZ = processingPowerHZ;
     }
 
-    public double getProcessingPower() {
+    public Double getProcessingPower() {
         return processingPowerHZ;
     }
 
-    public void setProcessingPower(double processingPower) {
+    public void setProcessingPower(Double processingPower) {
         this.processingPowerHZ = processingPower;
     }
 
     @Override
     public String toString() {
-        String result = getName() + ", Price: " + getPrice() + ", Power: " + getPower();
-        if (processingPowerHZ != 0.0D) {
+        String result = getType() + ": " + getName() + ", Price: " + getPrice() + ", Power: " + getPower();
+        if (processingPowerHZ != null) {
             result += ", CPU: " + processingPowerHZ + " GHz";
-        }
-        if (isPluggedIn()) {
-            result += ", on";
-        } else {
-            result += ", off";
         }
         return result;
     }

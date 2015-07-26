@@ -6,27 +6,41 @@
 package com.epam.ot.products;
 
 public abstract class Product {
-    private String type;
+    private long id;
+    private String name;
     private Double price;
 
-    public Product(String name, Double price) {
-        this.type = name;
+    public Product(long id, String name, Double price) {
+        this.id = id;
+        this.name = name;
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public Product() {
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

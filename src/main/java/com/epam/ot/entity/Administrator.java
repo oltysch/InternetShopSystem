@@ -1,13 +1,14 @@
 package com.epam.ot.entity;
 
-import com.epam.ot.entity.Lights;
+import com.epam.ot.products.ComputerDevice;
+import com.epam.ot.products.Gun;
 import com.epam.ot.products.Product;
 
 import java.util.ArrayList;
 
 public class Administrator {
-    private ArrayList<Product> products = new ArrayList<Product>();
-    private ArrayList<Client> blackClients = new ArrayList<Client>();
+    private ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<Client> blackClients = new ArrayList<>();
 
     //register the order
     public void registerOrder(Client client) {
@@ -18,9 +19,8 @@ public class Administrator {
         }
     }
 
-    //creating a new com.epam.ot.entity
-    public void createNewProduct(String name, double price) {
-        products.add(new Lights(name, price));
-
+    //TODO - make more universal method
+    public void createNewComputerDevice(String type, String name, int power, Double price) {
+        products.add(new ComputerDevice(type, name, power, price));
     }
 }
