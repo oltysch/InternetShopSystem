@@ -1,8 +1,5 @@
 package com.epam.ot.products;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Gun extends Product {
     private String origin;
     private Handy handy;
@@ -31,18 +28,6 @@ public class Gun extends Product {
     @Override
     public String toString() {
         return getModel() + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
-    }
-
-    //TODO delete this after tests
-    //this a fake getter - needs for testing parser and writer
-    public String getStr() {
-        return "fake";
-    }
-
-    //TODO delete this after tests
-    //this a fake setter - needs for testing parser and writer
-    public void setStr(String s) {
-        String str = "fake";
     }
 
     //TODO - need? or no?
@@ -95,12 +80,14 @@ public class Gun extends Product {
         this.cartridgeClipAvailability = cartridgeClipAvailability;
     }
 
+    //TODO - need? or no?
     public long getId() {
-        return getId();
+        return super.getId();
     }
 
+    //TODO - need? or no?
     public void setId(long id) {
-        setId(id);
+        super.setId(id);
     }
 
     public Boolean getOpticsAvailability() {
@@ -118,7 +105,6 @@ public class Gun extends Product {
     public void setMaterial(String material) {
         this.material = material;
     }
-
 
     public enum Handy {One_handed, Two_handed;}
 }

@@ -9,8 +9,8 @@ import java.util.Vector;
 public class ConnectionPool {
     private static ConnectionPool instance;
     private PropertyManager propertyManager = new PropertyManager("connection.properties");
-    private Vector<Connection> availableConnections = new Vector<Connection>();
-    private Vector<Connection> usedConnections = new Vector<Connection>();
+    private Vector<Connection> availableConnections = new Vector<>();
+    private Vector<Connection> usedConnections = new Vector<>();
 
     public ConnectionPool() {
 

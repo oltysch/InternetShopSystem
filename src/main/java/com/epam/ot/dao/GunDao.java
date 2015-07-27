@@ -14,7 +14,7 @@ public interface GunDao {
 
     Gun merge();
 
-    //TODO - choose inputs: com.epam.ot.entity or com.epam.ot.entity values or &&
+    //TODO - choose inputs: entity or entity values or &&
     void insert(int id, String model, String origin, String handy, int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability, String material);
 
     void insert(Gun gun);

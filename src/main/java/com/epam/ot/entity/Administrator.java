@@ -1,8 +1,6 @@
 package com.epam.ot.entity;
 
-import com.epam.ot.products.ComputerDevice;
-import com.epam.ot.products.Gun;
-import com.epam.ot.products.Product;
+import com.epam.ot.products.*;
 
 import java.util.ArrayList;
 
@@ -21,6 +19,6 @@ public class Administrator {
 
     //TODO - make more universal method
     public void createNewComputerDevice(String type, String name, int power, Double price) {
-        products.add(new ComputerDevice(type, name, power, price));
+        products.add(new ComputerDevice((int) Math.random() * 100, type, name, power, price));
     }
 }

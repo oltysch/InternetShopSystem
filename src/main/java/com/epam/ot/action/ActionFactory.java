@@ -10,7 +10,7 @@ public class ActionFactory {
 
     static {
         //TODO make actions classes
-        actions.put();
+        actions.put("", new LoginAction());
     }
 
     public Action getAction(HttpServletRequest req) {
