@@ -37,11 +37,11 @@ public class JdbcGunDao implements GunDao {
                 gun.setId(resultSet.getLong(ID));
                 gun.setModel(resultSet.getString(MODEL));
                 gun.setOrigin(resultSet.getString(ORIGIN));
-                gun.setHandy(resultSet.getString(HANDY));
-                gun.setFiringRange(resultSet.getInt(FIRING_RANGE));
-                gun.setEffectiveFiringRange(resultSet.getInt(EFFECTIVE_FIRING_RANGE));
-                gun.setCartridgeClipAvailability(resultSet.getBoolean(CARTRIDGE_CLIP_AVAILABILITY));
-                gun.setOpticsAvailability(resultSet.getBoolean(OPTICS_AVAILABILITY));
+                gun.setHandy(Gun.Handy.valueOf(resultSet.getString(HANDY)));
+                gun.getTtc().setFiringRange(resultSet.getInt(FIRING_RANGE));
+                gun.getTtc().setEffectiveFiringRange(resultSet.getInt(EFFECTIVE_FIRING_RANGE));
+                gun.getTtc().setCartridgeClipAvailability(resultSet.getBoolean(CARTRIDGE_CLIP_AVAILABILITY));
+                gun.getTtc().setOpticsAvailability(resultSet.getBoolean(OPTICS_AVAILABILITY));
                 gun.setMaterial(resultSet.getString(MATERIAL));
                 return gun;
             } else {

@@ -6,10 +6,7 @@ import javax.xml.bind.annotation.*;
         "model",
         "origin",
         "handy",
-        "firingRange",
-        "effectiveFiringRange",
-        "cartridgeClipAvailability",
-        "opticsAvailability",
+        "ttc",
         "material"})
 @XmlRootElement(name = "gun")
 public class Gun extends Product {
@@ -17,23 +14,18 @@ public class Gun extends Product {
     private String origin;
     @XmlElement
     private Handy handy;
-    @XmlElement
-    private int firingRange;
-    @XmlElement
-    private int effectiveFiringRange;
-    @XmlElement
-    private Boolean cartridgeClipAvailability;
-    @XmlElement
-    private Boolean opticsAvailability;
+    @XmlElement(name = "TTC")
+    private Gun.Ttc ttc;
     @XmlElement
     private String material;
 
-    public Gun(long id, String model, Double price, String origin, String handy, int firingRange, int effectiveFiringRange,
+    public Gun(long id, String model, Double price, String origin, Handy handy, int firingRange, int effectiveFiringRange,
                Boolean cartridgeClip, Boolean optics, String material) {
         super(id, model, price);
         this.origin = origin;
-        this.handy = Handy.valueOf(handy);
+        this.handy = handy;
         this.material = material;
+        ttc = new Ttc(firingRange, effectiveFiringRange, cartridgeClip, optics);
     }
 
     public Gun() {
@@ -42,7 +34,8 @@ public class Gun extends Product {
 
     @Override
     public String toString() {
-        return getModel() + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
+//        return getName() + " " + origin + " " + handy + " " + material + "\n     FR: " + ttc.getFiringRange() + " EFR: " + ttc.getEffectiveFiringRange() + " CC: " + ttc.getCartridgeClipAvailability() + " Opt.: " + ttc.getOpticsAvailability();
+        return getName() + " " + origin + " " + handy + " " + material + "\n     FR: " + ttc.getFiringRange() + " EFR: " + ttc.getEffectiveFiringRange() + " CC: " + ttc.getCartridgeClipAvailability() + " Opt.: " + ttc.getOpticsAvailability();
     }
 
     //TODO - need? or no?
@@ -64,36 +57,20 @@ public class Gun extends Product {
         this.origin = origin;
     }
 
+    public Ttc getTtc() {
+        return ttc;
+    }
+
+    public void setTtc(Ttc ttc) {
+        this.ttc = ttc;
+    }
+
     public String getHandy() {
         return handy.toString();
     }
 
-    public void setHandy(String handy) {
-        this.handy = Handy.valueOf(handy);
-    }
-
-    public int getFiringRange() {
-        return firingRange;
-    }
-
-    public void setFiringRange(int firingRange) {
-        this.firingRange = firingRange;
-    }
-
-    public int getEffectiveFiringRange() {
-        return effectiveFiringRange;
-    }
-
-    public void setEffectiveFiringRange(int effectiveFiringRange) {
-        this.effectiveFiringRange = effectiveFiringRange;
-    }
-
-    public Boolean getCartridgeClipAvailability() {
-        return cartridgeClipAvailability;
-    }
-
-    public void setCartridgeClipAvailability(Boolean cartridgeClipAvailability) {
-        this.cartridgeClipAvailability = cartridgeClipAvailability;
+    public void setHandy(Handy handy) {
+        this.handy = handy;
     }
 
     //TODO - need? or no?
@@ -106,14 +83,6 @@ public class Gun extends Product {
         super.setId(id);
     }
 
-    public Boolean getOpticsAvailability() {
-        return opticsAvailability;
-    }
-
-    public void setOpticsAvailability(Boolean opticsAvailability) {
-        this.opticsAvailability = opticsAvailability;
-    }
-
     public String getMaterial() {
         return material;
     }
@@ -123,4 +92,60 @@ public class Gun extends Product {
     }
 
     public enum Handy {One_handed, Two_handed;}
+
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "TTC", propOrder = {
+            "firingRange",
+            "effectiveFiringRange",
+            "cartridgeClipAvailability",
+            "opticsAvailability"
+    })
+    public static class Ttc {
+        private int firingRange;
+        private int effectiveFiringRange;
+        private boolean cartridgeClipAvailability;
+        private boolean opticsAvailability;
+
+        public Ttc() {
+        }
+
+        public Ttc(int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability) {
+            this.firingRange = firingRange;
+            this.effectiveFiringRange = effectiveFiringRange;
+            this.cartridgeClipAvailability = cartridgeClipAvailability;
+            this.opticsAvailability = opticsAvailability;
+        }
+
+        public int getFiringRange() {
+            return firingRange;
+        }
+
+        public void setFiringRange(int firingRange) {
+            this.firingRange = firingRange;
+        }
+
+        public int getEffectiveFiringRange() {
+            return effectiveFiringRange;
+        }
+
+        public void setEffectiveFiringRange(int effectiveFiringRange) {
+            this.effectiveFiringRange = effectiveFiringRange;
+        }
+
+        public boolean getCartridgeClipAvailability() {
+            return cartridgeClipAvailability;
+        }
+
+        public void setCartridgeClipAvailability(boolean cartridgeClipAvailability) {
+            this.cartridgeClipAvailability = cartridgeClipAvailability;
+        }
+
+        public boolean getOpticsAvailability() {
+            return opticsAvailability;
+        }
+
+        public void setOpticsAvailability(boolean opticsAvailability) {
+            this.opticsAvailability = opticsAvailability;
+        }
+    }
 }

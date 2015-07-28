@@ -5,11 +5,11 @@
     <model>Glock-18</model>
     <origin>Austria</origin>
     <handy>One_handed</handy>
-    <!--<TTC>-->
-    <firingRange>100</firingRange>
-    <effectiveFiringRange>50</effectiveFiringRange>
-    <cartridgeClipAvailability>true</cartridgeClipAvailability>
-    <opticsAvailability>false</opticsAvailability>
-    <!--</TTC>-->
+    <TTC>
+        <firingRange>100</firingRange>
+        <effectiveFiringRange>50</effectiveFiringRange>
+        <cartridgeClipAvailability>true</cartridgeClipAvailability>
+        <opticsAvailability>false</opticsAvailability>
+    </TTC>
     <material>Plastic</material>
 </gun>
