@@ -1,12 +1,31 @@
 package com.epam.ot.products;
 
+import javax.xml.bind.annotation.*;
+
+@XmlType(name = "", propOrder = {
+        "model",
+        "origin",
+        "handy",
+        "firingRange",
+        "effectiveFiringRange",
+        "cartridgeClipAvailability",
+        "opticsAvailability",
+        "material"})
+@XmlRootElement(name = "gun")
 public class Gun extends Product {
+    @XmlElement
     private String origin;
+    @XmlElement
     private Handy handy;
+    @XmlElement
     private int firingRange;
+    @XmlElement
     private int effectiveFiringRange;
+    @XmlElement
     private Boolean cartridgeClipAvailability;
+    @XmlElement
     private Boolean opticsAvailability;
+    @XmlElement
     private String material;
 
     public Gun(long id, String model, Double price, String origin, String handy, int firingRange, int effectiveFiringRange,
@@ -14,10 +33,6 @@ public class Gun extends Product {
         super(id, model, price);
         this.origin = origin;
         this.handy = Handy.valueOf(handy);
-        this.firingRange = firingRange;
-        this.effectiveFiringRange = effectiveFiringRange;
-        this.cartridgeClipAvailability = cartridgeClip;
-        this.opticsAvailability = optics;
         this.material = material;
     }
 
@@ -31,6 +46,7 @@ public class Gun extends Product {
     }
 
     //TODO - need? or no?
+    @XmlElement(name = "model")
     public String getModel() {
         return getName();
     }
