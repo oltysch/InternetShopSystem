@@ -5,9 +5,19 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-<jsp:include page="left_sidebar.jsp"></jsp:include>
-<jsp:include page="content.jsp"></jsp:include>
-<jsp:include page="footer.jsp"></jsp:include>
+<div id="header">
+    <jsp:include page="header.jsp"/>
+</div>
+<div id="container">
+    <div id="sidebar">
+        <jsp:include page="left_sidebar.jsp"/>
+    </div>
+    <div id="content">
+        <jsp:include page="content.jsp"/>
+    </div>
+</div>
+<div id="footer">
+    <jsp:include page="footer.jsp"/>
+</div>
 </body>
 </html>

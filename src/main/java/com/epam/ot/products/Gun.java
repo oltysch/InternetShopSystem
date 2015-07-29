@@ -1,7 +1,6 @@
 package com.epam.ot.products;
 
 import javax.xml.bind.annotation.*;
-
 @XmlType(name = "", propOrder = {
         "model",
         "origin",
@@ -34,14 +33,13 @@ public class Gun extends Product {
 
     @Override
     public String toString() {
-//        return getName() + " " + origin + " " + handy + " " + material + "\n     FR: " + ttc.getFiringRange() + " EFR: " + ttc.getEffectiveFiringRange() + " CC: " + ttc.getCartridgeClipAvailability() + " Opt.: " + ttc.getOpticsAvailability();
         return getName() + " " + origin + " " + handy + " " + material + "\n     FR: " + ttc.getFiringRange() + " EFR: " + ttc.getEffectiveFiringRange() + " CC: " + ttc.getCartridgeClipAvailability() + " Opt.: " + ttc.getOpticsAvailability();
     }
 
     //TODO - need? or no?
     @XmlElement(name = "model")
     public String getModel() {
-        return getName();
+        return super.getName();
     }
 
     //TODO - need? or no?

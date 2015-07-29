@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import static org.junit.Assert.*;
@@ -26,6 +27,7 @@ public class JaxbGunParserTest {
 
     @Test
     public void testParseGun() throws Exception {
+        //TODO - split the tests and move implements upper
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
         GunParser parser = new JaxbGunParser();
         Gun gun = parser.parseGun(input);
@@ -34,5 +36,7 @@ public class JaxbGunParserTest {
         GunWriter writer = new JaxbGunWriter();
         Gun gun2 = new Gun(5, "test", 300.0, "USA", Gun.Handy.One_handed, 1000, 500, true, true, "plastic");
         writer.writeGun(file, gun2);
+        Gun gun3 = parser.parseGun(new FileInputStream(file));
+        System.out.println(gun3);
     }
 }

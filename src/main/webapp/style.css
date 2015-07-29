@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+}
+
+#header {
+    background-color: darkgray;
+    width: 1300px;
+    height: 192px;
+    margin: 0px auto;
+    padding: 0px;
+}
+
+#container {
+    width: 1300px;
+    margin: 0px auto;
+}
+
+#sidebar {
+    background-color: #969696;
+    float: left;
+    width: 258px;
+    padding: 6px 6px
+}
+
+#content {
+    background-color: #b9b9b9;
+    width: 980px; /*1030px*/
+    margin-left: 270px;
+    padding: 12px 25px;
+}
+
+#footer {
+    clear: both;
+    background-color: lightgray;
+    width: 1300px;
+    margin: 0px auto;
+}
