@@ -4,28 +4,21 @@
     <xs:element name="gun">
         <xs:complexType>
             <xs:sequence>
+                <xs:element type="xs:string" name="type"/>
                 <xs:element type="xs:string" name="model"/>
                 <xs:element type="xs:string" name="origin"/>
-                <xs:element type="tns:Handy" name="handy"/>
                 <xs:element minOccurs="1" maxOccurs="1" name="TTC">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element minOccurs="0" type="xs:int" name="firingRange"/>
-                            <xs:element minOccurs="0" type="xs:int" name="effectiveFiringRange"/>
-                            <xs:element minOccurs="0" type="xs:boolean" name="cartridgeClipAvailability"/>
-                            <xs:element minOccurs="0" type="xs:boolean" name="opticsAvailability"/>
+                            <xs:element type="xs:string" name="caliber"/>
+                            <xs:element type="xs:int" name="magazineCapacity"/>
+                            <xs:element type="xs:int" name="fireRate"/>
+                            <xs:element type="xs:int" name="firingRange"/>
+                            <xs:element type="xs:int" name="effectiveFiringRange"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element type="xs:string" name="material"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <!-- hands count need for using weapon-->
-    <xs:simpleType name="Handy">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="One_handed"/>
-            <xs:enumeration value="Two_handed"/>
-        </xs:restriction>
-    </xs:simpleType>
 </xs:schema>

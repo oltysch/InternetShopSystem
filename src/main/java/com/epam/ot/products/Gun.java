@@ -1,30 +1,27 @@
 package com.epam.ot.products;
 
 import javax.xml.bind.annotation.*;
+
 @XmlType(name = "", propOrder = {
+        "type",
         "model",
         "origin",
-        "handy",
-        "ttc",
-        "material"})
+        "ttc"})
 @XmlRootElement(name = "gun")
 public class Gun extends Product {
     @XmlElement
     private String origin;
     @XmlElement
-    private Handy handy;
+    private String type;
     @XmlElement(name = "TTC")
     private Gun.Ttc ttc;
-    @XmlElement
-    private String material;
 
-    public Gun(long id, String model, Double price, String origin, Handy handy, int firingRange, int effectiveFiringRange,
-               Boolean cartridgeClip, Boolean optics, String material) {
+    public Gun(long id, String type, String model, Double price, String origin, String caliber, int magazineCapacity,
+               int fireRate, int firingRange, int effectiveFiringRange) {
         super(id, model, price);
         this.origin = origin;
-        this.handy = handy;
-        this.material = material;
-        ttc = new Ttc(firingRange, effectiveFiringRange, cartridgeClip, optics);
+        this.type = type;
+        ttc = new Ttc(caliber, magazineCapacity, fireRate, firingRange, effectiveFiringRange);
     }
 
     public Gun() {
@@ -33,7 +30,7 @@ public class Gun extends Product {
 
     @Override
     public String toString() {
-        return getName() + " " + origin + " " + handy + " " + material + "\n     FR: " + ttc.getFiringRange() + " EFR: " + ttc.getEffectiveFiringRange() + " CC: " + ttc.getCartridgeClipAvailability() + " Opt.: " + ttc.getOpticsAvailability();
+        return type + ": " + getModel() + " " + origin + "\n    Cal.: " + ttc.caliber + " x " + ttc.magazineCapacity + ", fRate: " + ttc.fireRate + " FR: " + ttc.firingRange + " EffectiveFR: " + ttc.effectiveFiringRange;
     }
 
     //TODO - need? or no?
@@ -45,6 +42,14 @@ public class Gun extends Product {
     //TODO - need? or no?
     public void setModel(String model) {
         setName(model);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getOrigin() {
@@ -63,55 +68,35 @@ public class Gun extends Product {
         this.ttc = ttc;
     }
 
-    public String getHandy() {
-        return handy.toString();
-    }
-
-    public void setHandy(Handy handy) {
-        this.handy = handy;
-    }
-
-    //TODO - need? or no?
-    public long getId() {
-        return super.getId();
-    }
-
-    //TODO - need? or no?
-    public void setId(long id) {
-        super.setId(id);
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
-        this.material = material;
-    }
-
     public enum Handy {One_handed, Two_handed;}
 
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TTC", propOrder = {
+            "caliber",
+            "magazineCapacity",
+            "fireRate",
             "firingRange",
-            "effectiveFiringRange",
-            "cartridgeClipAvailability",
-            "opticsAvailability"
+            "effectiveFiringRange"
     })
     public static class Ttc {
+        //TODO make metric class
         private int firingRange;
         private int effectiveFiringRange;
-        private boolean cartridgeClipAvailability;
-        private boolean opticsAvailability;
+        private int magazineCapacity;
+        //TODO make caliber class
+        private String caliber;
+        //TODO make fire rate class
+        private int fireRate;
 
         public Ttc() {
         }
 
-        public Ttc(int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability) {
+        public Ttc(String caliber, int magazineCapacity, int fireRate, int firingRange, int effectiveFiringRange) {
+            this.caliber = caliber;
+            this.magazineCapacity = magazineCapacity;
+            this.fireRate = fireRate;
             this.firingRange = firingRange;
             this.effectiveFiringRange = effectiveFiringRange;
-            this.cartridgeClipAvailability = cartridgeClipAvailability;
-            this.opticsAvailability = opticsAvailability;
         }
 
         public int getFiringRange() {
@@ -122,6 +107,14 @@ public class Gun extends Product {
             this.firingRange = firingRange;
         }
 
+        public int getFireRate() {
+            return fireRate;
+        }
+
+        public void setFireRate(int fireRate) {
+            this.fireRate = fireRate;
+        }
+
         public int getEffectiveFiringRange() {
             return effectiveFiringRange;
         }
@@ -130,20 +123,20 @@ public class Gun extends Product {
             this.effectiveFiringRange = effectiveFiringRange;
         }
 
-        public boolean getCartridgeClipAvailability() {
-            return cartridgeClipAvailability;
+        public int getMagazineCapacity() {
+            return magazineCapacity;
         }
 
-        public void setCartridgeClipAvailability(boolean cartridgeClipAvailability) {
-            this.cartridgeClipAvailability = cartridgeClipAvailability;
+        public void setMagazineCapacity(int magazineCapacity) {
+            this.magazineCapacity = magazineCapacity;
         }
 
-        public boolean getOpticsAvailability() {
-            return opticsAvailability;
+        public String getCaliber() {
+            return caliber;
         }
 
-        public void setOpticsAvailability(boolean opticsAvailability) {
-            this.opticsAvailability = opticsAvailability;
+        public void setCaliber(String caliber) {
+            this.caliber = caliber;
         }
     }
 }

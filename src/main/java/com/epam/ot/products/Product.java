@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public abstract class Product {
     private long id;
     private String name;
+    //TODO make price class
     private Double price;
 
     public Product(long id, String name, Double price) {

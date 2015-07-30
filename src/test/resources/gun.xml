@@ -2,14 +2,14 @@
 <gun xmlns="http://www.epam.com/GunShop"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.epam.com/GunShop http://www.epam.com/GunShop/gun.xsd">
+    <type>pistol</type>
     <model>Glock-18</model>
     <origin>Austria</origin>
-    <handy>One_handed</handy>
     <TTC>
+        <caliber>9mm</caliber>
+        <magazineCapacity>20</magazineCapacity>
+        <fireRate>100</fireRate>
         <firingRange>100</firingRange>
         <effectiveFiringRange>50</effectiveFiringRange>
-        <cartridgeClipAvailability>true</cartridgeClipAvailability>
-        <opticsAvailability>false</opticsAvailability>
     </TTC>
-    <material>Plastic</material>
 </gun>

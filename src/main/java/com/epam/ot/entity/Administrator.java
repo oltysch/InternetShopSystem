@@ -19,6 +19,6 @@ public class Administrator {
 
     //TODO - make more universal method
     public void createNewComputerDevice(String type, String name, int power, Double price) {
-        products.add(new ComputerDevice((int) Math.random() * 100, type, name, power, price));
+        products.add(new Gun());
     }
 }

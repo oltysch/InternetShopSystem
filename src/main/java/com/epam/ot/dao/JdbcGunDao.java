@@ -34,15 +34,15 @@ public class JdbcGunDao implements GunDao {
             boolean found = resultSet.next();
             if (found) {
                 Gun gun = new Gun();
-                gun.setId(resultSet.getLong(ID));
+                /*gun.setId(resultSet.getLong(ID));
                 gun.setModel(resultSet.getString(MODEL));
                 gun.setOrigin(resultSet.getString(ORIGIN));
                 gun.setHandy(Gun.Handy.valueOf(resultSet.getString(HANDY)));
                 gun.getTtc().setFiringRange(resultSet.getInt(FIRING_RANGE));
                 gun.getTtc().setEffectiveFiringRange(resultSet.getInt(EFFECTIVE_FIRING_RANGE));
-                gun.getTtc().setCartridgeClipAvailability(resultSet.getBoolean(CARTRIDGE_CLIP_AVAILABILITY));
+                gun.getTtc().setMagazineCapacity(resultSet.getBoolean(CARTRIDGE_CLIP_AVAILABILITY));
                 gun.getTtc().setOpticsAvailability(resultSet.getBoolean(OPTICS_AVAILABILITY));
-                gun.setMaterial(resultSet.getString(MATERIAL));
+                gun.setMaterial(resultSet.getString(MATERIAL));*/
                 return gun;
             } else {
                 return null;

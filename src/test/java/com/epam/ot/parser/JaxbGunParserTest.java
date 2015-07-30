@@ -34,9 +34,9 @@ public class JaxbGunParserTest {
         System.out.println(gun);
         File file = new File("123.xml");
         GunWriter writer = new JaxbGunWriter();
-        Gun gun2 = new Gun(5, "test", 300.0, "USA", Gun.Handy.One_handed, 1000, 500, true, true, "plastic");
+        Gun gun2 = new Gun(5, "Assault Rifle", "AK-47", 20000.0, "USSR", "7.62x39mm", 30, 600, 800, 1500);
         writer.writeGun(file, gun2);
         Gun gun3 = parser.parseGun(new FileInputStream(file));
-        System.out.println(gun3);
+        System.out.println("\n" + gun3);
     }
 }
