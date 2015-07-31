@@ -11,9 +11,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Product {
     private long id;
+    //TODO create UUID
     private String name;
     //TODO make price class
     private Double price;
+    //TODO make applying for this
+    private String description;
 
     public Product(long id, String name, Double price) {
         this.id = id;

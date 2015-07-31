@@ -14,7 +14,7 @@ public interface GunDao {
 
     Gun merge();
 
-    //TODO - choose inputs: entity or entity values or &&
+    //TODO - choose inputs: users or users values or &&
     void insert(int id, String model, String origin, String handy, int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability, String material);
 
     void insert(Gun gun);

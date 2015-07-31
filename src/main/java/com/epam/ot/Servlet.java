@@ -21,8 +21,5 @@ public class Servlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        /*String res = "test info\n" + req + "\n" + req.getLocalName() + "\n" + req.getHeaderNames()
-                + "\n" + req.getPathInfo() + "\n" + req.getMethod();
-        resp.sendError(HttpServletResponse.SC_NOT_FOUND, res);*/
     }
 }

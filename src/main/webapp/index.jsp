@@ -5,19 +5,8 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<div id="header">
-    <jsp:include page="header.jsp"/>
-</div>
-<div id="container">
-    <div id="sidebar">
-        <jsp:include page="left_sidebar.jsp"/>
-    </div>
-    <div id="content">
-        <jsp:include page="content.jsp"/>
-    </div>
-</div>
-<div id="footer">
-    <jsp:include page="footer.jsp"/>
-</div>
+<a href="login.jsp">Вход</a>
+<a href="register.jsp">Регистрация</a>
+<%--TODO - insert guns list--%>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class Gun extends Product {
     private Gun.Ttc ttc;
 
     public Gun(long id, String type, String model, Double price, String origin, String caliber, int magazineCapacity,
-               int fireRate, int firingRange, int effectiveFiringRange) {
+               String fireRate, int firingRange, int effectiveFiringRange) {
         super(id, model, price);
         this.origin = origin;
         this.type = type;
@@ -86,12 +86,12 @@ public class Gun extends Product {
         //TODO make caliber class
         private String caliber;
         //TODO make fire rate class
-        private int fireRate;
+        private String fireRate;
 
         public Ttc() {
         }
 
-        public Ttc(String caliber, int magazineCapacity, int fireRate, int firingRange, int effectiveFiringRange) {
+        public Ttc(String caliber, int magazineCapacity, String fireRate, int firingRange, int effectiveFiringRange) {
             this.caliber = caliber;
             this.magazineCapacity = magazineCapacity;
             this.fireRate = fireRate;
@@ -107,11 +107,11 @@ public class Gun extends Product {
             this.firingRange = firingRange;
         }
 
-        public int getFireRate() {
+        public String getFireRate() {
             return fireRate;
         }
 
-        public void setFireRate(int fireRate) {
+        public void setFireRate(String fireRate) {
             this.fireRate = fireRate;
         }
 
