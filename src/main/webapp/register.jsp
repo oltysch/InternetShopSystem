@@ -5,11 +5,11 @@
 </head>
 <body>
 <form>
-    <label>Регистрация</label>
-    <label>Логин</label><input name="login" type="text" placeholder="steve_jobs">
-    <label>Электронная почта</label><input name="email" type="email" placeholder="steve_jobs@apple.com">
-    <label>password</label><input name="password" type="password" placeholder="gagaga56">
-    <button>Зарегистрироваться</button>
+    <label>Регистрация</label><br>
+    <label>Логин: </label><input name="login" type="text" placeholder="steve_jobs"><br>
+    <label>Электронная почта: </label><input name="email" type="email" placeholder="steve_jobs@apple.com"><br>
+    <label>password: </label><input name="password" type="password" placeholder="gagaga56"><br>
+    <button type="submit">Зарегистрироваться</button>
 </form>
 </body>
 </html>

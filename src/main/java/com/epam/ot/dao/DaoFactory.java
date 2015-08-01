@@ -6,6 +6,7 @@ import java.sql.Connection;
 
 public abstract class DaoFactory {
     private static final ConnectionPool pool = ConnectionPool.getInstance();
+    private UserDao userDao;
 
     public static DaoFactory getInstance() {
         Connection connection = pool.getConnection();
@@ -13,6 +14,8 @@ public abstract class DaoFactory {
     }
 
     public abstract GunDao createGunDao();
+
+    public abstract UserDao createUserDao();
 
     public abstract void beginConnectionScope();
 

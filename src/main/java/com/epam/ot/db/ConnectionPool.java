@@ -12,10 +12,6 @@ public class ConnectionPool {
     private Vector<Connection> availableConnections = new Vector<>();
     private Vector<Connection> usedConnections = new Vector<>();
 
-    public ConnectionPool() {
-
-    }
-
     public ConnectionPool(int initConnectionCount) {
         try {
             Class.forName(propertyManager.getProperty("driver"));
@@ -29,7 +25,8 @@ public class ConnectionPool {
 
     public static synchronized ConnectionPool getInstance() {
         if (instance == null) {
-            instance = new ConnectionPool();
+            //TODO how many?
+            instance = new ConnectionPool(1);
         }
         return instance;
     }

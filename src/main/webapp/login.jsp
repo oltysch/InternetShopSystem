@@ -4,11 +4,11 @@
     <title>Gun Shop</title>
 </head>
 <body>
-<form>
-    <label>Логин</label>
-    <input name="login" type="text" placeholder="steve_jobs"/>
-    <input name="password" type="password" placeholder="gagaga53"/>
-    <button>Войти</button>
+<form action="${pageContext.request.contextPath}/new/login" method="post">
+    <label>Логин: </label><input name="login" type="text" placeholder="steve_jobs"/><br>
+    <label>Пароль: </label><input name="password" type="password" placeholder="gagaga53"/><br>
+    <button type="submit">Войти</button><br>
+    ${loginError}
 </form>
 </body>
 </html>

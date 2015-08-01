@@ -16,8 +16,8 @@ public class Gun extends Product {
     @XmlElement(name = "TTC")
     private Gun.Ttc ttc;
 
-    public Gun(long id, String type, String model, Double price, String origin, String caliber, int magazineCapacity,
-               String fireRate, int firingRange, int effectiveFiringRange) {
+    public Gun(int id, String type, String model, Double price, String origin, String caliber, int magazineCapacity,
+               int fireRate, int firingRange, int effectiveFiringRange) {
         super(id, model, price);
         this.origin = origin;
         this.type = type;
@@ -86,12 +86,12 @@ public class Gun extends Product {
         //TODO make caliber class
         private String caliber;
         //TODO make fire rate class
-        private String fireRate;
+        private int fireRate;
 
         public Ttc() {
         }
 
-        public Ttc(String caliber, int magazineCapacity, String fireRate, int firingRange, int effectiveFiringRange) {
+        public Ttc(String caliber, int magazineCapacity, int fireRate, int firingRange, int effectiveFiringRange) {
             this.caliber = caliber;
             this.magazineCapacity = magazineCapacity;
             this.fireRate = fireRate;
@@ -107,11 +107,11 @@ public class Gun extends Product {
             this.firingRange = firingRange;
         }
 
-        public String getFireRate() {
+        public int getFireRate() {
             return fireRate;
         }
 
-        public void setFireRate(String fireRate) {
+        public void setFireRate(int fireRate) {
             this.fireRate = fireRate;
         }
 

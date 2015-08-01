@@ -16,6 +16,11 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
+    public UserDao createUserDao() {
+        return new JdbcUserDao(connection);
+    }
+
+    @Override
     public void beginConnectionScope() {
         try {
             connection.rollback();

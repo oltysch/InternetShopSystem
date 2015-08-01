@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JdbcGunDao implements GunDao {
+    //TODO - move this into properties
     public static final String FIND_BY_ID = "SELECT * FROM GUNS WHERE id = ?";
     public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS (id, model, origin, handy, firing_range, effective_firing_range, cartridge_clip_availability, optics_availability, material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_GUN = "DELETE FROM GUNS WHERE id = ?";
@@ -22,6 +23,7 @@ public class JdbcGunDao implements GunDao {
     public static final String MATERIAL = "material";
     private final Connection connection;
 
+    //TODO remake JdbcGunDao
     public JdbcGunDao(Connection connection) {
         this.connection = connection;
     }
@@ -34,15 +36,6 @@ public class JdbcGunDao implements GunDao {
             boolean found = resultSet.next();
             if (found) {
                 Gun gun = new Gun();
-                /*gun.setId(resultSet.getLong(ID));
-                gun.setModel(resultSet.getString(MODEL));
-                gun.setOrigin(resultSet.getString(ORIGIN));
-                gun.setHandy(Gun.Handy.valueOf(resultSet.getString(HANDY)));
-                gun.getTtc().setFiringRange(resultSet.getInt(FIRING_RANGE));
-                gun.getTtc().setEffectiveFiringRange(resultSet.getInt(EFFECTIVE_FIRING_RANGE));
-                gun.getTtc().setMagazineCapacity(resultSet.getBoolean(CARTRIDGE_CLIP_AVAILABILITY));
-                gun.getTtc().setOpticsAvailability(resultSet.getBoolean(OPTICS_AVAILABILITY));
-                gun.setMaterial(resultSet.getString(MATERIAL));*/
                 return gun;
             } else {
                 return null;
@@ -52,57 +45,41 @@ public class JdbcGunDao implements GunDao {
         }
     }
 
-    public void removeById(int id) {
+    public void update(Gun gun) {
 
     }
 
-    public void update() {
-
-    }
-
-    public void save() {
-
-    }
-
-    public Gun merge() {
+    public Gun save(Gun gun) {
         return null;
     }
 
-    public void insert(int id, String model, String origin, String handy, int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability, String material) {
+    public Gun merge(Gun gun) {
+        return null;
+    }
+
+    public Gun insert(Gun gun) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GUNS);
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, model);
-            preparedStatement.setString(3, origin);
-            preparedStatement.setString(4, handy);
-            preparedStatement.setInt(5, firingRange);
-            preparedStatement.setInt(6, effectiveFiringRange);
-            preparedStatement.setBoolean(7, cartridgeClipAvailability);
-            preparedStatement.setBoolean(8, opticsAvailability);
-            preparedStatement.setString(9, material);
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(1, gun.getId());
+            preparedStatement.setString(2, gun.getType());
+            preparedStatement.setString(3, gun.getModel());
+            preparedStatement.setDouble(4, gun.getPrice());
+            preparedStatement.setString(5, gun.getOrigin());
+//            TODO make description
+//            preparedStatement.setClob(6, gun.get);
+            //TODO insert ttc's
+
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-
-
-        /*
-        Connection connection = pool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PERSON (id, firstName, lastName) VALUES (DEFAULT, ?, ?)");
-        preparedStatement.setString(1, gun.getModel());
-        preparedStatement.setString(2, gun.getFiringRange());
-        preparedStatement.executeUpdate();
-        //TODO - make keys in BD and here
-        generatedKeys.next();
-        long id = generatedKeys.getLong(1);
-        person.setId(id);*/
+        return gun;
     }
 
-    public void insert(Gun gun) {
-
+    public boolean remove(Gun gun) {
+        return true;
     }
 
-    public void upset() {
-
+    public boolean removeById(int id) {
+        return true;
     }
 }

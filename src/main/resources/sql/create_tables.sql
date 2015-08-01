@@ -1,4 +1,4 @@
-# creating products tables
+-- creating products tables
 CREATE TABLE GUNS
 (
   id          INT AUTO_INCREMENT PRIMARY KEY    NOT NULL,
@@ -29,5 +29,11 @@ CREATE TABLE BULLETS
   UNIQUE (caliber, name)
 );
 
-# creating users tables
-# TODO make tables for users and admins
+-- creating users tables
+-- TODO make tables for users and admins
+CREATE TABLE USERS
+(
+  id        INT AUTO_INCREMENT PRIMARY KEY   NOT NULL,
+  login     VARCHAR(60) UNIQUE               NOT NULL,
+  password  VARCHAR(60)                      NOT NULL
+)

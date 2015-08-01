@@ -3,21 +3,17 @@ package com.epam.ot.dao;
 import com.epam.ot.products.Gun;
 
 public interface GunDao {
-
     Gun findById(int id);
 
-    void removeById(int id);
+    void update(Gun gun);
 
-    void update();
+    Gun save(Gun gun);
 
-    void save();
+    Gun merge(Gun gun);
 
-    Gun merge();
+    Gun insert(Gun gun);
 
-    //TODO - choose inputs: users or users values or &&
-    void insert(int id, String model, String origin, String handy, int firingRange, int effectiveFiringRange, boolean cartridgeClipAvailability, boolean opticsAvailability, String material);
+    boolean remove(Gun gun);
 
-    void insert(Gun gun);
-
-    void upset();
+    boolean removeById(int id);
 }

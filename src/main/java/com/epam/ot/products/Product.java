@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Product {
-    private long id;
+    private int id;
     //TODO create UUID
     private String name;
     //TODO make price class
@@ -18,7 +18,7 @@ public abstract class Product {
     //TODO make applying for this
     private String description;
 
-    public Product(long id, String name, Double price) {
+    public Product(int id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -44,11 +44,11 @@ public abstract class Product {
         this.price = price;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
