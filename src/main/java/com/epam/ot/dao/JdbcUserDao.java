@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class JdbcUserDao implements UserDao {
     public static final String FIND_BY_ID = "SELECT * FROM USERS WHERE id = ?";
-    public static final String FIND_BY_LOGIN = "SELECT * FROM USERS WHERE LOGIN = ?";
+    public static final String FIND_BY_ACCOUNT = "SELECT * FROM USERS WHERE LOGIN = ? AND PASSWORD = ?";
     private final Connection connection;
 
     public JdbcUserDao(Connection connection) {
@@ -22,10 +22,11 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByAccount(String login, String password) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_LOGIN);
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ACCOUNT);
             preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
             //TODO find problem, result user always null
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();

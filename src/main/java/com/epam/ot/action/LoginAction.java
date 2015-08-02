@@ -15,19 +15,18 @@ public class LoginAction implements Action {
         String password = req.getParameter("password");
         //TODO fix this all
         DaoFactory daoFactory = DaoFactory.getInstance();
-        daoFactory.beginConnectionScope();
-        daoFactory.beginTransaction();
+//        daoFactory.beginConnectionScope();
+//        daoFactory.beginTransaction();
         UserDao userDao = daoFactory.createUserDao();
-        User user = userDao.findByLogin(login);
-        daoFactory.endTransaction();
-        daoFactory.endConnectionScope();
-//        User user = new User("test", "", "test");
+        User user = userDao.findByAccount(login, password);
+//        daoFactory.endTransaction();
+//        daoFactory.endConnectionScope();
 
         if (user != null) {
             req.getSession().setAttribute("user", user);
             return new ActionResult("shop", true);
         } else {
-            req.setAttribute("loginError", "wrong password");
+            req.setAttribute("loginError", "Wrong login or password!");
             return new ActionResult("login");
         }
     }

@@ -5,7 +5,7 @@ import com.epam.ot.users.User;
 public interface UserDao {
     User findById(int id);
 
-    User findByLogin(String login);
+    User findByAccount(String login, String password);
 
     void update(User user);
 
