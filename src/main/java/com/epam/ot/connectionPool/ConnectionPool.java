@@ -1,6 +1,4 @@
-package com.epam.ot.db;
-
-import com.epam.ot.util.PropertyManager;
+package com.epam.ot.connectionPool;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,33 +6,51 @@ import java.util.Vector;
 
 public class ConnectionPool {
     private static ConnectionPool instance;
-    private PropertyManager propertyManager = new PropertyManager("connection.properties");
     private Vector<Connection> availableConnections = new Vector<>();
     private Vector<Connection> usedConnections = new Vector<>();
+    private String driverName;
+    private String url;
+    private String login;
+    private String password;
+    private int maxConnections;
 
-    public ConnectionPool(int initConnectionCount) {
+    private ConnectionPool(String driverName, String url, String login, String password, int maxConnections) {
+        this.driverName = driverName;
+        this.url = url;
+        this.login = login;
+        this.password = password;
+        this.maxConnections = maxConnections;
         try {
-            Class.forName(propertyManager.getProperty("driver"));
+            Class.forName(this.driverName);
         } catch (Exception e) {
             throw new ConnectionPoolException(e);
         }
-        for (int i = 0; i < initConnectionCount; i++) {
-            availableConnections.addElement(newConnection());
+        for (int i = 0; i < this.maxConnections; i++) {
+            availableConnections.addElement(getConnection());
         }
     }
 
-    public static synchronized ConnectionPool getInstance() {
+    public static synchronized ConnectionPool getInstance(String driverName, String url, String login, String password, int maxConnections) {
         if (instance == null) {
-            //TODO how many?
-            instance = new ConnectionPool(1);
+            instance = new ConnectionPool(driverName, url, login, password, maxConnections);
         }
         return instance;
     }
 
-    public synchronized Connection getConnection() {
+    private Connection getConnection() {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, login, password);
+        } catch (Exception e) {
+            throw new ConnectionPoolException(e);
+        }
+        return conn;
+    }
+
+    public synchronized Connection retrieve() {
         Connection newConn = null;
         if (availableConnections.size() == 0) {
-            newConn = newConnection();
+            newConn = getConnection();
         } else {
             newConn = (Connection) availableConnections.lastElement();
             availableConnections.removeElement(newConn);
@@ -51,16 +67,6 @@ public class ConnectionPool {
                 throw new NullPointerException("Connection not in the usedConnections");
             }
         }
-    }
-
-    private Connection newConnection() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(propertyManager.getProperty("url"), propertyManager.getProperty("login"), propertyManager.getProperty("password"));
-        } catch (Exception e) {
-            throw new ConnectionPoolException(e);
-        }
-        return conn;
     }
 
     public int getAvailableConnectionsCount() {

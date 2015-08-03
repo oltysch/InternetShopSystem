@@ -17,7 +17,6 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-//        throw new ServletException("we are here");
         actionFactory = new ActionFactory();
     }
 

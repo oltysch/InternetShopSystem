@@ -49,15 +49,15 @@ public class JdbcGunDao implements GunDao {
 
     }
 
-    public Gun save(Gun gun) {
-        return null;
+    public void save(Gun gun) {
+
     }
 
-    public Gun merge(Gun gun) {
-        return null;
+    public void merge(Gun gun) {
+
     }
 
-    public Gun insert(Gun gun) {
+    public void insert(Gun gun) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GUNS);
             preparedStatement.setInt(1, gun.getId());
@@ -72,7 +72,6 @@ public class JdbcGunDao implements GunDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-        return gun;
     }
 
     public boolean remove(Gun gun) {

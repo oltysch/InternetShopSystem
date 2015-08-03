@@ -1,26 +1,25 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.db.ConnectionPool;
-
-import java.sql.Connection;
+import com.epam.ot.connectionPool.ConnectionPool;
 
 public abstract class DaoFactory {
-    private static final ConnectionPool pool = ConnectionPool.getInstance();
-
     public static DaoFactory getInstance() {
-        Connection connection = pool.getConnection();
-        return new JdbcDaoFactory(connection);
+        return new JdbcDaoFactory();
     }
 
-    public abstract GunDao createGunDao();
+    public abstract DaoManager createDaoManager();
 
-    public abstract UserDao createUserDao();
+    public abstract void releaseConnection(DaoManager daoManager);
 
-    public abstract void beginConnectionScope();
+    /*public abstract GunDao createGunDao();
+
+    public abstract UserDao createUserDao();*/
+
+    /*public abstract void beginConnectionScope();
 
     public abstract void beginTransaction();
 
     public abstract void endTransaction();
 
-    public abstract void endConnectionScope();
+    public abstract void endConnectionScope();*/
 }

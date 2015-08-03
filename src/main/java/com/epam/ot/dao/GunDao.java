@@ -2,16 +2,18 @@ package com.epam.ot.dao;
 
 import com.epam.ot.products.Gun;
 
+import java.sql.Connection;
+
 public interface GunDao {
     Gun findById(int id);
 
     void update(Gun gun);
 
-    Gun save(Gun gun);
+    void save(Gun gun);
 
-    Gun merge(Gun gun);
+    void merge(Gun gun);
 
-    Gun insert(Gun gun);
+    void insert(Gun gun);
 
     boolean remove(Gun gun);
 

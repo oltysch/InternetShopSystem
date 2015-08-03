@@ -1,4 +1,4 @@
-package com.epam.ot.db;
+package com.epam.ot.connectionPool;
 
 public class ConnectionPoolException extends RuntimeException {
     public ConnectionPoolException() {

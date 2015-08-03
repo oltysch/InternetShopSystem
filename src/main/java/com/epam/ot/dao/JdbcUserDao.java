@@ -27,7 +27,6 @@ public class JdbcUserDao implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ACCOUNT);
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
-            //TODO find problem, result user always null
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
@@ -47,18 +46,18 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User save(User user) {
-        return null;
+    public void save(User user) {
+
     }
 
     @Override
-    public User merge(User user) {
-        return null;
+    public void merge(User user) {
+
     }
 
     @Override
-    public User insert(User user) {
-        return null;
+    public void insert(User user) {
+
     }
 
     @Override
