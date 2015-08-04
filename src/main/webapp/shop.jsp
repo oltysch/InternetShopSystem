@@ -4,7 +4,9 @@
     <title>Gun Shop</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/new/logout">Выйти</a>
-here was a guns list
+${login}<br>
+<a href="${pageContext.request.contextPath}/new/logout">Выйти</a><br>
+${guns.get(0)}<br>
+${guns.get(1)}
 </body>
 </html>

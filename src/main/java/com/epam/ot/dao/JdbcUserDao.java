@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class JdbcUserDao implements UserDao {
     public static final String FIND_BY_ID = "SELECT * FROM USERS WHERE id = ?";
     public static final String FIND_BY_ACCOUNT = "SELECT * FROM USERS WHERE LOGIN = ? AND PASSWORD = ?";
+    public static final String INSERT_USER = "INSERT INTO USERS VALUES (DEFAULT, ?, ?)";
     private final Connection connection;
 
     public JdbcUserDao(Connection connection) {
@@ -46,18 +47,15 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public void save(User user) {
-
-    }
-
-    @Override
-    public void merge(User user) {
-
-    }
-
-    @Override
     public void insert(User user) {
-
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

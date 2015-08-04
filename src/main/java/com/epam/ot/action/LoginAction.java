@@ -15,11 +15,14 @@ public class LoginAction implements Action {
 
         DaoFactory daoFactory = DaoFactory.getInstance();
         DaoManager daoManager = daoFactory.createDaoManager();
+        daoManager.beginTransaction();
         User user = daoManager.getUserDao().findByAccount(login, password);
+        daoManager.commit();
+//        daoManager.rollback();
         daoFactory.releaseConnection(daoManager);
 
         if (user != null) {
-            req.getSession().setAttribute("user", user);
+            req.getSession().setAttribute("login", login);
             return new ActionResult("shop", true);
         } else {
             req.setAttribute("loginError", "Wrong login or password!");

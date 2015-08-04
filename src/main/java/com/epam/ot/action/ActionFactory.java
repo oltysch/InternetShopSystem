@@ -15,7 +15,9 @@ public class ActionFactory {
         actions.put("POST/login", new LoginAction());
         actions.put("GET/logout", new LogoutAction());
         actions.put("GET/register", new ShowPageAction("register"));
-        actions.put("GET/shop", new ShowPageAction("shop"));
+        actions.put("POST/register", new RegisterAction());
+        actions.put("GET/success_register", new ShowPageAction("success_register"));
+        actions.put("GET/shop", new ShowShopAction());
     }
 
     public Action getAction(HttpServletRequest req) {

@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JdbcGunDao implements GunDao {
-    //TODO - move this into properties
     public static final String FIND_BY_ID = "SELECT * FROM GUNS WHERE id = ?";
+    //TODO split this into gun types
+    public static final String FIND_ALL = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.GUN_ID=GUNS.ID";
     public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS (id, model, origin, handy, firing_range, effective_firing_range, cartridge_clip_availability, optics_availability, material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_GUN = "DELETE FROM GUNS WHERE id = ?";
     public static final String ID = "id";
@@ -45,15 +48,23 @@ public class JdbcGunDao implements GunDao {
         }
     }
 
+    @Override
+    public List<Gun> findAll() {
+        List<Gun> guns = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Gun gun = new Gun(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getString(8), resultSet.getInt(9), resultSet.getInt(10));
+                guns.add(gun);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return guns;
+    }
+
     public void update(Gun gun) {
-
-    }
-
-    public void save(Gun gun) {
-
-    }
-
-    public void merge(Gun gun) {
 
     }
 

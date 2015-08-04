@@ -11,10 +11,6 @@ public interface UserDao {
 
     void update(User user);
 
-    void save(User user);
-
-    void merge(User user);
-
     void insert(User user);
 
     boolean remove(User user);
