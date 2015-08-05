@@ -1,5 +1,8 @@
 package com.epam.ot.dao;
 
+import javax.sql.ConnectionEventListener;
+import javax.sql.PooledConnection;
+import javax.sql.StatementEventListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -51,6 +54,7 @@ public class DaoManager {
     }
 
     public void beginTransaction() {
+        PooledConnection pooledConnection;
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {

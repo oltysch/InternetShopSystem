@@ -45,6 +45,12 @@ public class JdbcGunDao implements GunDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -60,6 +66,12 @@ public class JdbcGunDao implements GunDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return guns;
     }
@@ -77,11 +89,17 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setDouble(4, gun.getPrice());
             preparedStatement.setString(5, gun.getOrigin());
 //            TODO make description
-//            preparedStatement.setClob(6, gun.get);
-            //TODO insert ttc's
+//            preparedStatement.setClob(6, gun.getDiscription);
+            //TODO insert ttc's too
 
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

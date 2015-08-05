@@ -14,30 +14,15 @@ public class JdbcDaoFactory extends DaoFactory {
             propertyManager.getProperty("password"),
             Integer.parseInt(propertyManager.getProperty("maxConnections")));
 
-    /*public JdbcDaoFactory(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }*/
-
     @Override
-    public DaoManager createDaoManager() {
-        return new DaoManager(connectionPool.retrieve());
-    }
-
-    @Override
-    public void releaseConnection(DaoManager daoManager) {
-        Connection connection = daoManager.getConnection();
-        connectionPool.putBack(daoManager.getConnection());
-    }
-
-    /*@Override
     public GunDao createGunDao() {
-        return new JdbcGunDao(connectionPool.retrieve());
+        return new JdbcGunDao(connectionPool.getConnection());
     }
 
     @Override
     public UserDao createUserDao() {
-        return new JdbcUserDao(connectionPool.retrieve());
-    }*/
+        return new JdbcUserDao(connectionPool.getConnection());
+    }
 
     /*@Override
     public void beginConnectionScope() {

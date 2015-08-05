@@ -1,7 +1,7 @@
 package com.epam.ot.action;
 
 import com.epam.ot.dao.DaoFactory;
-import com.epam.ot.dao.DaoManager;
+import com.epam.ot.dao.UserDao;
 import com.epam.ot.users.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +14,8 @@ public class LoginAction implements Action {
         String password = req.getParameter("password");
 
         DaoFactory daoFactory = DaoFactory.getInstance();
-        DaoManager daoManager = daoFactory.createDaoManager();
-        daoManager.beginTransaction();
-        User user = daoManager.getUserDao().findByAccount(login, password);
-        daoManager.commit();
-//        daoManager.rollback();
-        daoFactory.releaseConnection(daoManager);
+        UserDao userDao = daoFactory.createUserDao();
+        User user = userDao.findByAccount(login, password);
 
         if (user != null) {
             req.getSession().setAttribute("login", login);

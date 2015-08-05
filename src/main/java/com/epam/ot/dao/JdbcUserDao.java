@@ -38,6 +38,12 @@ public class JdbcUserDao implements UserDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -55,6 +61,12 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

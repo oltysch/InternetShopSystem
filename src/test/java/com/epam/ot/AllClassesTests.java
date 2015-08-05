@@ -4,6 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Vector;
+
 import static org.junit.Assert.*;
 
 public class AllClassesTests {

@@ -7,13 +7,9 @@ public abstract class DaoFactory {
         return new JdbcDaoFactory();
     }
 
-    public abstract DaoManager createDaoManager();
+    public abstract GunDao createGunDao();
 
-    public abstract void releaseConnection(DaoManager daoManager);
-
-    /*public abstract GunDao createGunDao();
-
-    public abstract UserDao createUserDao();*/
+    public abstract UserDao createUserDao();
 
     /*public abstract void beginConnectionScope();
 
