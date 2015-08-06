@@ -18,8 +18,7 @@ public abstract class Product {
     //TODO make applying for this
     private String description;
 
-    public Product(int id, String name, Double price) {
-        this.id = id;
+    public Product(String name, Double price) {
         this.name = name;
         this.price = price;
     }

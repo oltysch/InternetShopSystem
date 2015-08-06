@@ -4,8 +4,8 @@ public class Bullet extends Product {
     private String caliber;
     private String type;
 
-    public Bullet(int id, String caliber, String name, String bulletType, Double price) {
-        super(id, name, price);
+    public Bullet(String caliber, String name, String bulletType, Double price) {
+        super(name, price);
         this.caliber = caliber;
         this.type = bulletType;
     }

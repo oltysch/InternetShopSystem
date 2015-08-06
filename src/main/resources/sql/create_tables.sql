@@ -15,7 +15,7 @@ CREATE TABLE GUNS_TTC
   effective_firing_range INT,
   magazine_capacity      INT,
   caliber                VARCHAR(25),
-  fire_rate              VARCHAR(15),
+  fire_rate INT,
   FOREIGN KEY (gun_id) REFERENCES GUNS (id)
 );
 CREATE TABLE BULLETS

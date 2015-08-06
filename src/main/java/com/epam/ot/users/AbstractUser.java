@@ -1,6 +1,7 @@
 package com.epam.ot.users;
 
 public abstract class AbstractUser {
+    private int id;
     private String login;
     private String email;
     private String password;
@@ -33,5 +34,13 @@ public abstract class AbstractUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

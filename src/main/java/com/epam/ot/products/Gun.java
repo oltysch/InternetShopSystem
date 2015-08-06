@@ -3,6 +3,7 @@ package com.epam.ot.products;
 import javax.xml.bind.annotation.*;
 
 @XmlType(name = "", propOrder = {
+        //TODO fix xsd and this
         "type",
         "model",
         "origin",
@@ -16,9 +17,9 @@ public class Gun extends Product {
     @XmlElement(name = "TTC")
     private Gun.Ttc ttc;
 
-    public Gun(int id, String type, String model, Double price, String origin, String caliber, int magazineCapacity,
-               String fireRate, int firingRange, int effectiveFiringRange) {
-        super(id, model, price);
+    public Gun(String type, String model, Double price, String origin, String caliber, int magazineCapacity,
+               int fireRate, int firingRange, int effectiveFiringRange) {
+        super(model, price);
         this.origin = origin;
         this.type = type;
         ttc = new Ttc(caliber, magazineCapacity, fireRate, firingRange, effectiveFiringRange);
@@ -87,12 +88,12 @@ public class Gun extends Product {
         //TODO make caliber class
         private String caliber;
         //TODO make fire rate class
-        private String fireRate;
+        private int fireRate;
 
         public Ttc() {
         }
 
-        public Ttc(String caliber, int magazineCapacity, String fireRate, int firingRange, int effectiveFiringRange) {
+        public Ttc(String caliber, int magazineCapacity, int fireRate, int firingRange, int effectiveFiringRange) {
             this.caliber = caliber;
             this.magazineCapacity = magazineCapacity;
             this.fireRate = fireRate;
@@ -108,11 +109,11 @@ public class Gun extends Product {
             this.firingRange = firingRange;
         }
 
-        public String getFireRate() {
+        public int getFireRate() {
             return fireRate;
         }
 
-        public void setFireRate(String fireRate) {
+        public void setFireRate(int fireRate) {
             this.fireRate = fireRate;
         }
 
