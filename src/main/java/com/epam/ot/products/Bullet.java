@@ -3,11 +3,13 @@ package com.epam.ot.products;
 public class Bullet extends Product {
     private String caliber;
     private String type;
+    private int qty;
 
-    public Bullet(String caliber, String name, String bulletType, Double price) {
+    public Bullet(String caliber, String name, String bulletType, Double price, int qty) {
         super(name, price);
         this.caliber = caliber;
         this.type = bulletType;
+        this.qty = qty;
     }
 
     public String getCaliber() {
@@ -26,7 +28,14 @@ public class Bullet extends Product {
         this.type = type;
     }
 
-    //TODO check usefulness of this idea
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
     @Override
     public String getName() {
         return caliber + " " + super.getName();

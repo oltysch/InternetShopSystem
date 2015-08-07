@@ -22,13 +22,13 @@ CREATE TABLE BULLETS
 (
   id          INT AUTO_INCREMENT PRIMARY KEY    NOT NULL,
   caliber     VARCHAR(25)                       NOT NULL,
-  name        VARCHAR(40),
-  bullet_type VARCHAR(50)                       NOT NULL,
+  name        VARCHAR(40) NOT NULL,
+  bullet_type VARCHAR(50),
   price       DOUBLE                            NOT NULL,
+  Qty         INT,
   description TEXT,
   UNIQUE (caliber, name)
 );
-
 -- creating users tables
 -- TODO make tables for users and admins
 CREATE TABLE USERS

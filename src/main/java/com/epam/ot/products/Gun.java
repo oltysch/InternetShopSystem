@@ -34,13 +34,11 @@ public class Gun extends Product {
         return type + ": " + getModel() + " " + origin + "\n    Cal.: " + ttc.caliber + " x " + ttc.magazineCapacity + ", fRate: " + ttc.fireRate + " FR: " + ttc.firingRange + " EffectiveFR: " + ttc.effectiveFiringRange;
     }
 
-    //TODO - need? or no?
     @XmlElement(name = "model")
     public String getModel() {
         return super.getName();
     }
 
-    //TODO - need? or no?
     public void setModel(String model) {
         setName(model);
     }

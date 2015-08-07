@@ -11,15 +11,16 @@ import java.util.List;
 
 public class JDBCBulletDao implements BulletDao {
     public static final String FIND_ALL = "SELECT * FROM BULLETS";
-    public static final String FIND_BY_ID = "SELECT * FROM GUNS WHERE id = ?";
-    public static final String FIND_BY_CALIBER = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.CALIBER=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_ID = "SELECT * FROM BULLETS WHERE id = ?";
+    public static final String FIND_BY_CALIBER = "SELECT * FROM BULLETS WHERE BULLETS.CALIBER=?";
     public static final String FIND_BY_NAME = "SELECT * FROM BULLETS WHERE BULLETS.NAME=?";
     public static final String FIND_BY_TYPE = "SELECT * FROM BULLETS WHERE BULLET_TYPE=?";
     public static final String FIND_BY_PRICE_RANGE = "SELECT * FROM BULLETS WHERE BULLETS.PRICE>=? AND BULLETS.PRICE<=?";
-    public static final String INSERT_BULLET = "INSERT INTO BULLETS VALUES (DEFAULT, ?, ?, ?, ?);";
+    public static final String INSERT_BULLET = "INSERT INTO BULLETS VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
     public static final String REMOVE_BULLET_BY_ID = "DELETE FROM BULLETS WHERE BULLETS.ID=?;";
     public static final String REMOVE_BULLET = "DELETE FROM BULLETS WHERE BULLETS.ID=? AND BULLETS.CALIBER=? AND BULLETS.NAME=?";
-    public static final String UPDATE_BULLET = "UPDATE BULLETS SET VALUES (DEFAULT, ?, ?, ?, ?) WHERE ID = ?";
+    //    public static final String UPDATE_BULLET = "UPDATE BULLETS SET VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+    public static final String UPDATE_BULLET = "UPDATE BULLETS SET CALIBER=?, BULLETS.NAME=?, BULLET_TYPE=?, PRICE=?, QTY=?, DESCRIPTION=? WHERE ID=?";
     private final Connection connection;
 
     public JDBCBulletDao(Connection connection) {
@@ -34,8 +35,9 @@ public class JDBCBulletDao implements BulletDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
                 bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
                 return bullet;
             } else {
                 return null;
@@ -59,8 +61,9 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
                 bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -83,8 +86,9 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
                 bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -107,8 +111,9 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
                 bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -132,9 +137,10 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet gun = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
-                gun.setId(resultSet.getInt(1));
-                bullets.add(gun);
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
+                bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
+                bullets.add(bullet);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -155,9 +161,10 @@ public class JDBCBulletDao implements BulletDao {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet gun = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
-                gun.setId(resultSet.getInt(1));
-                bullets.add(gun);
+                Bullet bullet = new Bullet(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getInt(6));
+                bullet.setId(resultSet.getInt(1));
+                bullet.setDescription(resultSet.getString(7));
+                bullets.add(bullet);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -179,7 +186,9 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(2, bullet.getName());
             preparedStatement.setString(3, bullet.getType());
             preparedStatement.setDouble(4, bullet.getPrice());
-            preparedStatement.setInt(5, bullet.getId());
+            preparedStatement.setInt(5, bullet.getQty());
+            preparedStatement.setString(6, bullet.getDescription());
+            preparedStatement.setInt(7, bullet.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -200,6 +209,8 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(2, bullet.getName());
             preparedStatement.setString(3, bullet.getType());
             preparedStatement.setDouble(4, bullet.getPrice());
+            preparedStatement.setInt(5, bullet.getQty());
+            preparedStatement.setString(6, bullet.getDescription());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

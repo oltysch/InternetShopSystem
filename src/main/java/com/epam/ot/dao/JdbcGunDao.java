@@ -11,20 +11,21 @@ import java.util.List;
 
 public class JdbcGunDao implements GunDao {
     //TODO split this into gun types
-    public static final String FIND_ALL = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_TYPE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.TYPE=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_MODEL = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.MODEL=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_PRICE_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.PRICE>=? AND GUNS.PRICE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_ORIGIN = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.ORIGIN=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_CALIBER = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.CALIBER=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_FIRING_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.FIRING_RANGE>=? AND GUNS_TTC.FIRING_RANGE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_EFFECTIVE_FIRING_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.EFFECTIVE_FIRING_RANGE>=? AND GUNS_TTC.EFFECTIVE_FIRING_RANGE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_MAGAZINE_CAPACITY = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.MAGAZINE_CAPACITY>=? AND GUNS_TTC.MAGAZINE_CAPACITY<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_FIRE_RATE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.FIRE_RATE>=? AND GUNS_TTC.FIRE_RATE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
-    public static final String FIND_BY_ID = "SELECT * FROM GUNS WHERE id = ?";
-    public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS VALUES (?, ?, ?, ?, ?);INSERT INTO GUNS_TTC VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String FIND_ALL = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_TYPE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.TYPE=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_MODEL = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.MODEL=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_PRICE_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.PRICE>=? AND GUNS.PRICE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_ORIGIN = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS.ORIGIN=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_CALIBER = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.CALIBER=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_FIRING_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.FIRING_RANGE>=? AND GUNS_TTC.FIRING_RANGE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_EFFECTIVE_FIRING_RANGE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.EFFECTIVE_FIRING_RANGE>=? AND GUNS_TTC.EFFECTIVE_FIRING_RANGE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_MAGAZINE_CAPACITY = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.MAGAZINE_CAPACITY>=? AND GUNS_TTC.MAGAZINE_CAPACITY<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_FIRE_RATE = "SELECT ID, GUNS.TYPE, MODEL, PRICE, ORIGIN, DESCRIPTION, CALIBER, MAGAZINE_CAPACITY, FIRE_RATE, FIRING_RANGE, EFFECTIVE_FIRING_RANGE FROM GUNS, GUNS_TTC WHERE GUNS_TTC.FIRE_RATE>=? AND GUNS_TTC.FIRE_RATE<=? AND GUNS_TTC.GUN_ID=GUNS.ID";
+    public static final String FIND_BY_ID = "SELECT * FROM GUNS, GUNS_TTC WHERE id = ? AND GUN_ID=ID";
+    public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS VALUES (?, ?, ?, ?, ?, ?);INSERT INTO GUNS_TTC VALUES (?, ?, ?, ?, ?, ?)";
     public static final String REMOVE_GUN_BY_ID = "DELETE FROM GUNS_TTC WHERE GUN_ID=?; DELETE FROM GUNS WHERE ID=?";
-    public static final String UPDATE_GUN = "UPDATE GUNS SET VALUES (DEFAULT, ?, ?, ?, ?) WHERE ID = ?;UPDATE GUNS_TTC SET VALUES (DEFAULT, ?, ?, ?, ?, ?) WHERE GUN_ID = ?";
+    //    public static final String UPDATE_GUN = "UPDATE GUNS SET VALUES (DEFAULT, ?, ?, ?, ?, ?) WHERE ID = ?;UPDATE GUNS_TTC SET VALUES (DEFAULT, ?, ?, ?, ?, ?) WHERE GUN_ID = ?";
+    public static final String UPDATE_GUN = "UPDATE GUNS SET TYPE=?, MODEL=?, PRICE=?, ORIGIN=?, DESCRIPTION=? WHERE ID = ?;UPDATE GUNS_TTC SET FIRING_RANGE=?, EFFECTIVE_FIRING_RANGE=?, MAGAZINE_CAPACITY=?, CALIBER=?, FIRE_RATE=?) WHERE GUN_ID = ?";
     private final Connection connection;
 
     //TODO remake JdbcGunDao
@@ -40,7 +41,9 @@ public class JdbcGunDao implements GunDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                Gun gun = new Gun();
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
+                gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 return gun;
             } else {
                 return null;
@@ -63,8 +66,9 @@ public class JdbcGunDao implements GunDao {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -87,8 +91,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -111,8 +116,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, model);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -136,8 +142,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -160,8 +167,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, origin);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -185,8 +193,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -210,8 +219,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -235,8 +245,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -259,8 +270,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -284,8 +296,9 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getString(5), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10), resultSet.getInt(11));
                 gun.setId(resultSet.getInt(1));
+                gun.setDescription(resultSet.getString(6));
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -308,13 +321,14 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(2, gun.getModel());
             preparedStatement.setDouble(3, gun.getPrice());
             preparedStatement.setString(4, gun.getOrigin());
-            preparedStatement.setInt(5, gun.getId());
-            preparedStatement.setInt(6, gun.getTtc().getFiringRange());
-            preparedStatement.setInt(7, gun.getTtc().getEffectiveFiringRange());
-            preparedStatement.setInt(8, gun.getTtc().getMagazineCapacity());
-            preparedStatement.setString(9, gun.getTtc().getCaliber());
-            preparedStatement.setInt(10, gun.getTtc().getFireRate());
-            preparedStatement.setInt(11, gun.getId());
+            preparedStatement.setString(5, gun.getDescription());
+            preparedStatement.setInt(6, gun.getId());
+            preparedStatement.setInt(7, gun.getTtc().getFiringRange());
+            preparedStatement.setInt(8, gun.getTtc().getEffectiveFiringRange());
+            preparedStatement.setInt(9, gun.getTtc().getMagazineCapacity());
+            preparedStatement.setString(10, gun.getTtc().getCaliber());
+            preparedStatement.setInt(11, gun.getTtc().getFireRate());
+            preparedStatement.setInt(12, gun.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -336,6 +350,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(3, gun.getModel());
             preparedStatement.setDouble(4, gun.getPrice());
             preparedStatement.setString(5, gun.getOrigin());
+            preparedStatement.setString(6, gun.getDescription());
 //            TODO insert TTCS
 //            preparedStatement.setString(6, gun.getId());
             preparedStatement.setString(7, gun.getOrigin());
