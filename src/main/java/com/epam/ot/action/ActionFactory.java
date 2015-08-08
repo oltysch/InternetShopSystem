@@ -18,6 +18,8 @@ public class ActionFactory {
         actions.put("POST/register", new RegisterAction());
         actions.put("GET/success_register", new ShowPageAction("success_register"));
         actions.put("GET/shop", new ShowShopAction());
+        actions.put("POST/addToCart", new AddToCartAction());
+        actions.put("GET/shopcart", new ShowPageAction("shopcart"));
     }
 
     public Action getAction(HttpServletRequest req) {
