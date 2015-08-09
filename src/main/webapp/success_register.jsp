@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<div>Поздравляем ${user}, теперь вы зарегистрированы. <a
+<div>Поздравляем ${user.getLogin()}, теперь вы зарегистрированы. <a
         href="${pageContext.request.contextPath}/new/shop">Продолжить</a></div>
 </body>
 </html>

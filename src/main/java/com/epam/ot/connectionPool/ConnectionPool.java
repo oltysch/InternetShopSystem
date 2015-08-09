@@ -6,13 +6,14 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class ConnectionPool {
-    //    private Vector<Connection> usedConnections = new Vector<>();
     public static final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static ConnectionPool instance;
-    private Vector<Connection> connectionList;
+    private List<Connection> connectionList;
     private String driverName;
     private String url;
     private String login;
@@ -33,12 +34,12 @@ public class ConnectionPool {
         try {
             Class.forName(this.driverName);
             logger.info("Registered JDBC Driver");
-            connectionList = new Vector<>();
+            connectionList = new ArrayList<>();
         } catch (ClassNotFoundException e) {
             logger.error("Driver not found!" + "\n" + e);
         }
         for (int i = 0; i < this.maxConnections; i++) {
-            connectionList.addElement(newConnection());
+            connectionList.add(newConnection());
         }
     }
 
@@ -56,15 +57,16 @@ public class ConnectionPool {
         if (connectionList.isEmpty()) {
             newConn = new PooledConnection(newConnection(), instance);
         } else {
-            newConn = new PooledConnection(connectionList.lastElement(), instance);
-            connectionList.removeElement(newConn);
+            Connection connection = connectionList.get(connectionList.size() - 1);
             try {
-                if (newConn.isClosed()) {
-                    newConn = new PooledConnection(getConnection(), instance);
+                if (connection == null || connection.isClosed()) {
+                    connection = newConnection();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            newConn = new PooledConnection(connection, instance);
+            connectionList.remove(connection);
         }
         return newConn;
     }
@@ -82,7 +84,7 @@ public class ConnectionPool {
 
     public synchronized void putBack(Connection connection) {
         if (connection != null) {
-            connectionList.addElement(connection);
+            connectionList.add(connection);
             logger.info("Connection added to pool");
         }
     }
@@ -97,6 +99,7 @@ public class ConnectionPool {
             }
         }
     }
+
 
     public int getAvailableConnectionsCount() {
         return connectionList.size();

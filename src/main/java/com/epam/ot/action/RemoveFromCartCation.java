@@ -1,24 +1,18 @@
 package com.epam.ot.action;
 
-import com.epam.ot.dao.DaoFactory;
-import com.epam.ot.dao.GunDao;
-import com.epam.ot.products.Gun;
 import com.epam.ot.users.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
-public class AddToCartAction implements Action {
-    private static final Logger logger = LogManager.getLogger(AddToCartAction.class);
+public class RemoveFromCartCation implements Action {
+    private static final Logger logger = LogManager.getLogger(RemoveFromCartCation.class);
     private ActionResult result;
 
-    public AddToCartAction() {
-        //TODO need page refresh instead redirect;
-        result = new ActionResult("shop", true);
+    public RemoveFromCartCation() {
+        result = new ActionResult("shopcart", true);
     }
 
     @Override
@@ -27,10 +21,7 @@ public class AddToCartAction implements Action {
         logger.info("selectedGunId=" + selectedGun);
         User user = (User) req.getSession().getAttribute("user");
         logger.info("userLogin=" + user.getLogin());
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        GunDao gunDao = daoFactory.createGunDao();
-        Gun gun = gunDao.findById(selectedGun);
-        user.addProduct(gun);
+        user.removeProduct(selectedGun);
 //        req.getSession().setAttribute("cart", guns);
         return result;
     }

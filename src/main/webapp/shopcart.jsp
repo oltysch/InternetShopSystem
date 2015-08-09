@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 08.08.2015
-  Time: 14:12
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Gun Shop</title>
 </head>
 <body>
-${cart}
+<c:forEach var="gun" items="${user.getShopcart()}" varStatus="iter">
+  <form action="${pageContext.request.contextPath}/new/removeFromCart" method="post">
+      ${gun}<input type="hidden" name="selectedGunId" value="${gun.getId()}"/>
+    <input type="submit" name="submit" value="убрать из корзины"/><br>
+  </form>
+</c:forEach>
+<a href="${pageContext.request.contextPath}/new/shop">назад</a>
 </body>
 </html>

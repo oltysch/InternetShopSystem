@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class RegisterAction implements Action {
+    private ActionResult result;
+
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         String login = req.getParameter("login");
@@ -19,7 +21,7 @@ public class RegisterAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         User user = new User(login, email, password);
         userDao.insert(user);
-        req.getSession().setAttribute("login", login);
+        req.getSession().setAttribute("user", user);
         return new ActionResult("success_register", true);
 
         /*TODO make login email and password checking

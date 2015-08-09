@@ -5,16 +5,16 @@
     <title>Gun Shop</title>
 </head>
 <body>
-${login}
-<form action="${pageContext.request.contextPath}/new/shopcart"><input type="submit" value="show cart"/></form>
+${user.getLogin()}
+<form action="${pageContext.request.contextPath}/new/shopcart"><input type="submit" value="посмотреть корзину"/></form>
 <br>
 <a href="${pageContext.request.contextPath}/new/logout">Выйти</a><br>
 
-<form action="${pageContext.request.contextPath}/new/addToCart" method="post">
-    <c:forEach var="gun" items="${guns}" varStatus="iter">
-        ${gun}<input type="hidden" name="gunId" value="${gun.getId()}"/>
-        <input type="submit" name="submit" value="add to cart"/><br>
-    </c:forEach>
-</form>
+<c:forEach var="gun" items="${guns}" varStatus="iter">
+    <form action="${pageContext.request.contextPath}/new/addToCart" method="post">
+            ${gun}<input type="hidden" name="selectedGunId" value="${gun.getId()}"/>
+        <input type="submit" name="submit" value="добавить в корзину"/><br>
+    </form>
+</c:forEach>
 </body>
 </html>
