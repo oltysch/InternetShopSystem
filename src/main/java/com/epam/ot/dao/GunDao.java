@@ -4,9 +4,12 @@ import com.epam.ot.products.Gun;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 public interface GunDao {
-    Gun findById(int id);
+    Gun findById(long id);
+
+    Gun findByUuid(UUID uuid);
 
     List<Gun> findAll();
 
@@ -34,5 +37,7 @@ public interface GunDao {
     //TODO remake removers
 //    boolean remove(Gun gun);
 
-    boolean removeById(int id);
+//    boolean removeById(long id);
+
+    boolean removeByUuid(UUID uuid);
 }

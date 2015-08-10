@@ -1,9 +1,13 @@
 package com.epam.ot.users;
 
+import java.util.UUID;
+
 public abstract class AbstractUser {
-    private int id;
+    private long id;
+    private UUID uuid;
     private String login;
     private String email;
+    private Role role;
     private String password;
 
     public AbstractUser(String login, String email, String password) {
@@ -36,11 +40,19 @@ public abstract class AbstractUser {
         this.password = password;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 }

@@ -19,7 +19,7 @@ public class ShowShopAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        //TODO List of Products
+        //TODO Use List of Products
         List<Gun> guns;
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();

@@ -7,11 +7,12 @@ package com.epam.ot.products;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.UUID;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Product {
-    private int id;
-    //TODO create UUID
+    private long id;
+    private UUID uuid;
     private String name;
     //TODO make price class
     private Double price;
@@ -39,16 +40,24 @@ public abstract class Product {
         return price;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescription() {

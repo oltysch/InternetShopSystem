@@ -3,9 +3,12 @@ package com.epam.ot.dao;
 import com.epam.ot.products.Bullet;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface BulletDao {
-    Bullet findById(int id);
+    Bullet findById(long id);
+
+    Bullet findByUuid(UUID uuid);
 
     List<Bullet> findByCaliber(String caliber);
 
@@ -23,5 +26,5 @@ public interface BulletDao {
 
     boolean remove(Bullet bullet);
 
-    boolean removeById(int id);
+    boolean removeById(long id);
 }

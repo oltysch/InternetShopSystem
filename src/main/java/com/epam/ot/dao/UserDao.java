@@ -4,9 +4,12 @@ import com.epam.ot.users.User;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 public interface UserDao {
-    User findById(int id);
+    User findById(long id);
+
+    User findByUuid(UUID uuid);
 
     User findByAccount(String login, String password);
 
@@ -18,7 +21,9 @@ public interface UserDao {
 
     boolean remove(User user);
 
-    boolean removeById(int id);
+    boolean removeById(long id);
+
+    boolean removeByUuid(UUID uuid);
 
     boolean removeByLogin(String login);
 }

@@ -154,7 +154,6 @@ public class PooledConnection implements Connection {
         return connection.setSavepoint(name);
     }
 
-    //TODO -
     @Override
     public void rollback(Savepoint savepoint) throws SQLException {
         connection.rollback(savepoint);

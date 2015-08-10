@@ -8,15 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class JdbcUserDao implements UserDao {
     public static final String FIND_BY_ID = "SELECT * FROM USERS WHERE id = ?";
+    public static final String FIND_BY_UUID = "SELECT * FROM USERS WHERE uuid = ?";
     public static final String FIND_BY_ACCOUNT = "SELECT * FROM USERS WHERE LOGIN = ? AND USERS.PASSWORD = ?";
-    public static final String INSERT_USER = "INSERT INTO USERS VALUES (DEFAULT, ?, ?)";
+    public static final String INSERT_USER = "INSERT INTO USERS VALUES (DEFAULT, ?, ?, ?, ?)";
     public static final String UPDATE_PASSWORD = "UPDATE USERS SET USERS.PASSWORD = ? WHERE LOGIN = ?";
-    public static final String REMOVE_USER = "DELETE FROM USERS WHERE ID=? AND LOGIN=? AND USERS.PASSWORD=?";
+    public static final String REMOVE_USER = "DELETE FROM USERS WHERE ID=? AND USERS.UUID=? AND LOGIN=? AND USERS.PASSWORD=?";
     public static final String FIND_ALL = "SELECT * FROM USERS";
     public static final String REMOVE_USER_BY_ID = "DELETE FROM USERS WHERE ID=?";
+    public static final String REMOVE_USER_BY_UUID = "DELETE FROM USERS WHERE USERS.UUID=?";
     public static final String REMOVE_USER_BY_LOGIN = "DELETE FROM USERS WHERE LOGIN=?";
     private final Connection connection;
 
@@ -25,16 +28,44 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(long id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
                 //TODO add email
-                User user = new User(resultSet.getString(2), "", resultSet.getString(3));
+                User user = new User(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
                 user.setId(resultSet.getInt(1));
+                user.setUuid((UUID) resultSet.getObject(2));
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DaoException(e);
+            }
+        }
+    }
+
+    @Override
+    public User findByUuid(UUID uuid) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_UUID);
+            preparedStatement.setObject(1, uuid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (found) {
+                //TODO add email
+                User user = new User(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
+                user.setId(resultSet.getInt(1));
+                user.setUuid((UUID) resultSet.getObject(2));
                 return user;
             } else {
                 return null;
@@ -59,7 +90,9 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(2), "", resultSet.getString(3));
+                User user = new User(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
+                user.setId(resultSet.getLong(1));
+                user.setUuid((UUID) resultSet.getObject(2));
                 return user;
             } else {
                 return null;
@@ -82,8 +115,9 @@ public class JdbcUserDao implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User(resultSet.getString(2), "", resultSet.getString(3));
+                User user = new User(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
                 user.setId(resultSet.getInt(1));
+                user.setUuid((UUID) resultSet.getObject(2));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -120,8 +154,10 @@ public class JdbcUserDao implements UserDao {
     public void insert(User user) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setObject(1, user.getUuid());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -139,9 +175,10 @@ public class JdbcUserDao implements UserDao {
         boolean res = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER);
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, user.getLogin());
-            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setObject(2, user.getUuid());
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setString(4, user.getPassword());
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {
@@ -157,11 +194,31 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean removeById(int id) {
+    public boolean removeById(long id) {
         boolean res = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+            res = true;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DaoException(e);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public boolean removeByUuid(UUID uuid) {
+        boolean res = false;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER_BY_UUID);
+            preparedStatement.setObject(1, uuid);
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {
