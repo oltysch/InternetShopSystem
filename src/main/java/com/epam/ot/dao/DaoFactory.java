@@ -9,6 +9,8 @@ public abstract class DaoFactory {
 
     public abstract GunDao createGunDao();
 
+    public abstract BulletDao createBulletDao();
+
     public abstract UserDao createUserDao();
 
     /*public abstract void beginConnectionScope();

@@ -9,8 +9,8 @@ public class User extends AbstractUser {
     //TODO remake user class
     private List<Product> shopcart;
 
-    public User(String login, String email, String password) {
-        super(login, email, password);
+    public User(String login, String email, Role role, String password) {
+        super(login, email, role, password);
         shopcart = new ArrayList<>();
     }
 

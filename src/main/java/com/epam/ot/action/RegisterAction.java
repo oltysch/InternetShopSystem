@@ -2,6 +2,7 @@ package com.epam.ot.action;
 
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
+import com.epam.ot.users.Role;
 import com.epam.ot.users.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ public class RegisterAction implements Action {
 
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
-        User user = new User(login, email, password);
+        User user = new User(login, email, Role.USER, password);
         userDao.insert(user);
         req.getSession().setAttribute("user", user);
         return new ActionResult("success_register", true);

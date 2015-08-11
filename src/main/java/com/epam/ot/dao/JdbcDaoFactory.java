@@ -20,6 +20,11 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
+    public BulletDao createBulletDao() {
+        return new JDBCBulletDao(connectionPool.getConnection());
+    }
+
+    @Override
     public UserDao createUserDao() {
         return new JdbcUserDao(connectionPool.getConnection());
     }

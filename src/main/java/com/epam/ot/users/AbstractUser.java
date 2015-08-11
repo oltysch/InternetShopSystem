@@ -10,10 +10,11 @@ public abstract class AbstractUser {
     private Role role;
     private String password;
 
-    public AbstractUser(String login, String email, String password) {
+    public AbstractUser(String login, String email, Role role, String password) {
         this.login = login;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public String getLogin() {
@@ -54,5 +55,13 @@ public abstract class AbstractUser {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

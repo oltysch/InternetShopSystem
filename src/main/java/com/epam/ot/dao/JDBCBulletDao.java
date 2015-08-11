@@ -12,16 +12,13 @@ import java.util.UUID;
 
 public class JDBCBulletDao implements BulletDao {
     public static final String FIND_ALL = "SELECT * FROM BULLETS";
-    public static final String FIND_BY_ID = "SELECT * FROM BULLETS WHERE id = ?";
-    public static final String FIND_BY_UUID = "SELECT * FROM BULLETS WHERE uuid = ?";
-    public static final String FIND_BY_CALIBER = "SELECT * FROM BULLETS WHERE BULLETS.CALIBER=?";
-    public static final String FIND_BY_NAME = "SELECT * FROM BULLETS WHERE BULLETS.NAME=?";
-    public static final String FIND_BY_TYPE = "SELECT * FROM BULLETS WHERE BULLET_TYPE=?";
-    public static final String FIND_BY_PRICE_RANGE = "SELECT * FROM BULLETS WHERE BULLETS.PRICE>=? AND BULLETS.PRICE<=?";
-    public static final String INSERT_BULLET = "INSERT INTO BULLETS VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
-    public static final String REMOVE_BULLET_BY_ID = "DELETE FROM BULLETS WHERE BULLETS.ID=?;";
-    public static final String REMOVE_BULLET = "DELETE FROM BULLETS WHERE BULLETS.ID=? AND BULLETS.CALIBER=? AND BULLETS.NAME=?";
+    public static final String FIND_BY_FIELD = "SELECT * FROM BULLETS WHERE ? = ?";
+    public static final String FIND_BY_FIELD_RANGE = "SELECT * FROM BULLETS WHERE ? >= ? AND ? <= ?";
+    //TODO make update all
     public static final String UPDATE_BULLET = "UPDATE BULLETS SET CALIBER=?, BULLETS.NAME=?, BULLET_TYPE=?, PRICE=?, QTY=?, DESCRIPTION=? WHERE ID=?";
+    public static final String INSERT_BULLET = "INSERT INTO BULLETS VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String REMOVE_BULLET_BY_FIELD = "DELETE FROM BULLETS WHERE ?=?";
+
     private final Connection connection;
 
     public JDBCBulletDao(Connection connection) {
@@ -30,65 +27,31 @@ public class JDBCBulletDao implements BulletDao {
 
     @Override
     public Bullet findById(long id) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean found = resultSet.next();
-            if (found) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
-                return bullet;
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
-        }
+        return findByField("id", id);
     }
 
     @Override
     public Bullet findByUuid(UUID uuid) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_UUID);
-            //TODO check this or use long
-            preparedStatement.setObject(1, uuid);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean found = resultSet.next();
-            if (found) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
-                return bullet;
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
+        return findByField("uuid", uuid);
+    }
+
+    @Override
+    public Bullet findByField(String field, Object value) {
+        List<Bullet> bullets = findArrayByField(field, value);
+        if (bullets.size() > 0) {
+            return bullets.get(0);
+        } else {
+            return null;
         }
     }
 
     @Override
-    public List<Bullet> findByCaliber(String caliber) {
+    public List<Bullet> findArrayByField(String field, Object value) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_CALIBER);
-            preparedStatement.setString(1, caliber);
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_FIELD);
+            preparedStatement.setString(1, field);
+            preparedStatement.setObject(2, value);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
@@ -110,64 +73,14 @@ public class JDBCBulletDao implements BulletDao {
     }
 
     @Override
-    public List<Bullet> findByName(String name) {
+    public List<Bullet> findArrayByFieldRange(String field, Object minValue, Object maxValue) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
-                bullets.add(bullet);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
-        }
-        return bullets;
-    }
-
-    @Override
-    public List<Bullet> findByType(String type) {
-        List<Bullet> bullets = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_TYPE);
-            preparedStatement.setString(1, type);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
-                bullets.add(bullet);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
-        }
-        return bullets;
-    }
-
-    @Override
-    public List<Bullet> findByPriceRange(int min, int max) {
-        List<Bullet> bullets = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_PRICE_RANGE);
-            preparedStatement.setInt(1, min);
-            preparedStatement.setInt(2, max);
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_FIELD_RANGE);
+            preparedStatement.setString(1, field);
+            preparedStatement.setObject(2, minValue);
+            preparedStatement.setString(3, field);
+            preparedStatement.setObject(4, maxValue);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
@@ -261,32 +174,16 @@ public class JDBCBulletDao implements BulletDao {
 
     @Override
     public boolean remove(Bullet bullet) {
-        boolean res = false;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_BULLET);
-            preparedStatement.setLong(1, bullet.getId());
-            preparedStatement.setString(2, bullet.getCaliber());
-            preparedStatement.setString(3, bullet.getName());
-            preparedStatement.executeUpdate();
-            res = true;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
-        }
-        return res;
+        return removeByField("id", bullet.getId());
     }
 
     @Override
-    public boolean removeById(long id) {
+    public boolean removeByField(String field, Object value) {
         boolean res = false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_BULLET_BY_ID);
-            preparedStatement.setLong(1, id);
+            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_BULLET_BY_FIELD);
+            preparedStatement.setString(1, field);
+            preparedStatement.setObject(2, value);
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {

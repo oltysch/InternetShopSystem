@@ -11,19 +11,27 @@ public interface UserDao {
 
     User findByUuid(UUID uuid);
 
-    User findByAccount(String login, String password);
+    User findByField(String field, Object value);
+
+    List<User> findArrayByField(String field, Object value);
+
+    List<User> findArrayByFieldRange(String field, Object minValue, Object maxValue);
 
     List<User> findAll();
 
-    void updatePassword(User user);
+    void updateUser(User user);
 
     void insert(User user);
 
     boolean remove(User user);
 
-    boolean removeById(long id);
+    boolean removeByField(String field, Object value);
+
+//    User findByAccount(String login, String password);
+
+    /*boolean removeById(long id);
 
     boolean removeByUuid(UUID uuid);
 
-    boolean removeByLogin(String login);
+    boolean removeByLogin(String login);*/
 }

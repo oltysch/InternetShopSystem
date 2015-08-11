@@ -11,9 +11,23 @@ public interface GunDao {
 
     Gun findByUuid(UUID uuid);
 
+    Gun findByField(String field, Object value);
+
+    List<Gun> findArrayByField(String field, Object value);
+
+    List<Gun> findArrayByFieldRange(String field, Object minValue, Object maxValue);
+
     List<Gun> findAll();
 
-    List<Gun> findByType(String type);
+    void update(Gun gun);
+
+    void insert(Gun gun);
+
+    boolean remove(Gun gun);
+
+    boolean removeByField(String field, Object value);
+
+    /*List<Gun> findByType(String type);
 
     List<Gun> findByModel(String model);
 
@@ -29,15 +43,11 @@ public interface GunDao {
 
     List<Gun> findByCaliber(String caliber);
 
-    List<Gun> findByFireRate(int min, int max);
+    List<Gun> findByFireRate(int min, int max);*/
 
-    void update(Gun gun);
-
-    void insert(Gun gun);
-    //TODO remake removers
 //    boolean remove(Gun gun);
 
 //    boolean removeById(long id);
 
-    boolean removeByUuid(UUID uuid);
+//    boolean removeByUuid(UUID uuid);
 }

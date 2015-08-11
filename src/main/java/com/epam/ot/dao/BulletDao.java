@@ -10,13 +10,11 @@ public interface BulletDao {
 
     Bullet findByUuid(UUID uuid);
 
-    List<Bullet> findByCaliber(String caliber);
+    Bullet findByField(String field, Object value);
 
-    List<Bullet> findByName(String name);
+    List<Bullet> findArrayByField(String field, Object value);
 
-    List<Bullet> findByType(String type);
-
-    List<Bullet> findByPriceRange(int min, int max);
+    List<Bullet> findArrayByFieldRange(String field, Object minValue, Object maxValue);
 
     List<Bullet> findAll();
 
@@ -26,5 +24,15 @@ public interface BulletDao {
 
     boolean remove(Bullet bullet);
 
-    boolean removeById(long id);
+    boolean removeByField(String field, Object value);
+
+    /*boolean removeById(long id);
+
+    List<Bullet> findByCaliber(String caliber);
+
+    List<Bullet> findByName(String name);
+
+    List<Bullet> findByType(String type);
+
+    List<Bullet> findByPriceRange(int min, int max);*/
 }

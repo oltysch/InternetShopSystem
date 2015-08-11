@@ -1,8 +1,10 @@
 package com.epam.ot.action;
 
+import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
 import com.epam.ot.products.Gun;
+import com.epam.ot.products.Product;
 import com.epam.ot.users.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +22,13 @@ public class ShowShopAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         //TODO Use List of Products
-        List<Gun> guns;
+        List<Product> products = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
-        guns = gunDao.findAll();
-        req.setAttribute("guns", guns);
+        BulletDao bulletDao = daoFactory.createBulletDao();
+        products.addAll(gunDao.findAll());
+        products.addAll(bulletDao.findAll());
+        req.setAttribute("products", products);
         return result;
     }
 }
