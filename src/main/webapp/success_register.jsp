@@ -11,7 +11,14 @@
     <title></title>
 </head>
 <body>
-<div>Поздравляем ${user.getLogin()}, теперь вы зарегистрированы. <a
-        href="${pageContext.request.contextPath}/new/shop">Продолжить</a></div>
+<div>Поздравляем ${login}, теперь вы зарегистрированы.
+    <form action="${pageContext.request.contextPath}/new/login" method="post">
+        <input name="login" type="hidden" value="${login}"><br>
+        <input name="password" type="hidden" value="${password}"/><br>
+        <button type="submit">Продолжить</button>
+        <br>
+        <%--TODO change to register--%>
+        <div style="color: red">${loginError}</div>
+    </form>
 </body>
 </html>

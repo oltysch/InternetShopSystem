@@ -8,6 +8,7 @@ import com.epam.ot.users.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 public class RegisterAction implements Action {
     private ActionResult result;
@@ -21,9 +22,11 @@ public class RegisterAction implements Action {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         User user = new User(login, email, Role.USER, password);
+        user.setUuid(UUID.randomUUID());
         userDao.insert(user);
-        req.getSession().setAttribute("user", user);
-        return new ActionResult("success_register", true);
+        req.setAttribute("login", user.getLogin());
+        req.setAttribute("password", user.getPassword());
+        return new ActionResult("success_register");
 
         /*TODO make login email and password checking
         if (user != null) {

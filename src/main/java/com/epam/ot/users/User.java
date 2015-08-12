@@ -4,6 +4,7 @@ import com.epam.ot.products.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class User extends AbstractUser {
     //TODO remake user class

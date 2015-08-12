@@ -10,9 +10,10 @@ ${user.getLogin()}
 <br>
 <a href="${pageContext.request.contextPath}/new/logout">Выйти</a><br>
 
-<c:forEach var="gun" items="${guns}" varStatus="iter">
+<c:forEach var="product" items="${products}" varStatus="iter">
     <form action="${pageContext.request.contextPath}/new/addToCart" method="post">
-            ${gun}<input type="hidden" name="selectedGunId" value="${gun.getId()}"/>
+            ${product.getName()}<input type="hidden" name="selectedProduct" value="${product.getUuid()}"/>
+        <input type="hidden" name="productType" value="${product.getClass().getSimpleName()}"/>
         <input type="submit" name="submit" value="добавить в корзину"/><br>
     </form>
 </c:forEach>

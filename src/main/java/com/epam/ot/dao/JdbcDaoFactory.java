@@ -28,40 +28,4 @@ public class JdbcDaoFactory extends DaoFactory {
     public UserDao createUserDao() {
         return new JdbcUserDao(connectionPool.getConnection());
     }
-
-    /*@Override
-    public void beginConnectionScope() {
-        try {
-            connection.rollback();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void beginTransaction() {
-        try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void endTransaction() {
-        try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void endConnectionScope() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }*/
 }

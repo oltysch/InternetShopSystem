@@ -22,7 +22,7 @@ public class LoginAction implements Action {
         String password = req.getParameter("password");
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
-        User user = userDao.findByField("EMAIL", login);
+        User user = userDao.findByLogin(login);
 
         if (user != null && (password.equals(user.getPassword()))) {
             req.getSession().setAttribute("user", user);
