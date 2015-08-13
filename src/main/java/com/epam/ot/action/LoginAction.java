@@ -4,6 +4,7 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.users.User;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,7 @@ public class LoginAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         User user = userDao.findByLogin(login);
 
+        Cookie cookie = new Cookie("xid", "dkufyiaugyu87ht8h479strgh7846");
         if (user != null && (password.equals(user.getPassword()))) {
             req.getSession().setAttribute("user", user);
             return new ActionResult(showIfSuccess, true);

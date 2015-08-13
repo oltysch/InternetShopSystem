@@ -21,7 +21,7 @@ public class AddToCartAction implements Action {
 
     public AddToCartAction() {
         //TODO need page refresh instead redirect;
-        result = new ActionResult("shop", true);
+        result = new ActionResult("products", true);
     }
 
     @Override

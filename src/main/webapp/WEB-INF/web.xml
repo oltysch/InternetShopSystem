@@ -10,6 +10,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>servlet</servlet-name>
-        <url-pattern>/new/*</url-pattern>
+        <url-pattern>/gunshop/*</url-pattern>
     </servlet-mapping>
 </web-app>

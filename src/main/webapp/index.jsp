@@ -5,6 +5,13 @@
     <title></title>
 </head>
 <body>
-<c:redirect url="/new/"/>
+<c:choose>
+    <c:when test="${not empty user}">
+        <c:redirect url="${pageContext.request.contextPath}/gunshop/products"/>
+    </c:when>
+    <c:otherwise>
+        <c:redirect url="/gunshop/"/>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

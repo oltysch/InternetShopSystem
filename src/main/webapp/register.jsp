@@ -5,7 +5,7 @@
     <title>Gun Shop</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/new/register" method="post">
+<form action="${pageContext.request.contextPath}/gunshop/register" method="post">
     <label>Регистрация</label><br>
     <label>Логин: </label><input name="login" type="text" placeholder="steve_jobs" required><br>
     <label>Электронная почта: </label><input name="email" type="email" placeholder="steve_jobs@apple.com" required><br>

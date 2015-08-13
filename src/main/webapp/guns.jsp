@@ -5,8 +5,14 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/new/login">Вход</a>
-<a href="${pageContext.request.contextPath}/new/register">Регистрация</a>
-<%--TODO - insert guns list--%>
+<c:choose>
+    <c:when test="${not empty user}">
+        <c:redirect url="${pageContext.request.contextPath}/gunshop/products"/>
+    </c:when>
+    <c:otherwise>
+        <a href="${pageContext.request.contextPath}/gunshop/login">Вход</a>
+        <a href="${pageContext.request.contextPath}/gunshop/register">Регистрация</a>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

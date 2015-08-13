@@ -7,21 +7,21 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RemoveFromCartCation implements Action {
-    private static final Logger logger = LogManager.getLogger(RemoveFromCartCation.class);
+public class RemoveFromCartAction implements Action {
+    private static final Logger logger = LogManager.getLogger(RemoveFromCartAction.class);
     private ActionResult result;
 
-    public RemoveFromCartCation() {
+    public RemoveFromCartAction() {
         result = new ActionResult("shopcart", true);
     }
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        Integer selectedGun = (Integer) Integer.parseInt((String) req.getParameter("selectedGunId"));
-        logger.info("selectedGunId=" + selectedGun);
+        String selectedProduct = (String) req.getParameter("selectedProductUuid");
+        logger.info("selectedProductUuid=" + selectedProduct);
         User user = (User) req.getSession().getAttribute("user");
         logger.info("userLogin=" + user.getLogin());
-        user.removeProduct(selectedGun);
+        user.removeProduct(selectedProduct);
 //        req.getSession().setAttribute("cart", guns);
         return result;
     }

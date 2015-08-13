@@ -26,7 +26,7 @@ public class Servlet extends HttpServlet {
 
         ActionResult result = action.execute(req, resp);
         if (result.isRedirect()) {
-            resp.sendRedirect(req.getContextPath() + "/new/" + result.getView());
+            resp.sendRedirect(req.getContextPath() + "/gunshop/" + result.getView());
         } else {
             req.getRequestDispatcher("/" + result.getView() + ".jsp").forward(req, resp);
         }

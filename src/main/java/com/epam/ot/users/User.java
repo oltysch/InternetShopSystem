@@ -34,9 +34,9 @@ public class User extends AbstractUser {
         shopcart.remove(product);
     }
 
-    public void removeProduct(int productId) {
+    public void removeProduct(String productUuid) {
         for (Product product : shopcart) {
-            if (product.getId() == productId) {
+            if (product.getUuid().equals(UUID.fromString(productUuid))) {
                 shopcart.remove(product);
                 break;
             }

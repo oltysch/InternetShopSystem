@@ -5,12 +5,20 @@
     <title>Gun Shop</title>
 </head>
 <body>
-<c:forEach var="gun" items="${user.getShopcart()}" varStatus="iter">
-  <form action="${pageContext.request.contextPath}/new/removeFromCart" method="post">
-      ${gun}<input type="hidden" name="selectedGunId" value="${gun.getId()}"/>
-    <input type="submit" name="submit" value="убрать из корзины"/><br>
-  </form>
-</c:forEach>
-<a href="${pageContext.request.contextPath}/new/shop">назад</a>
+<a href="${pageContext.request.contextPath}/gunshop/products">назад</a>
+<c:choose>
+    <c:when test="${not empty user.getShopcart()}">
+        <c:forEach var="product" items="${user.shopcart}" varStatus="iter">
+            <form action="${pageContext.request.contextPath}/gunshop/removeFromCart" method="post">
+                    ${product.name}<input type="hidden" name="selectedProductUuid" value="${product.uuid}"/>
+                <input type="submit" name="submit" value="убрать из корзины"/><br>
+            </form>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        <div>Ваша корзина пуста</div>
+    </c:otherwise>
+</c:choose>
+
 </body>
 </html>
