@@ -3,6 +3,11 @@
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%--<a:basePage>--%>
 <a:header/>
-<jsp:doBody/>
+<div id="container">
+    <a:sidebar/>
+    <div id="content">
+        <jsp:doBody/>
+    </div>
+</div>
 <a:footer/>
 <%--</a:basePage>--%>

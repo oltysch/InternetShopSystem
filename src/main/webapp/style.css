@@ -1,38 +1,48 @@
-/*TODO change styles and use in jsp's*/
 body {
-    margin: 0px;
+    margin: 0;
 }
 
 #header {
-    background-color: darkgray;
-    width: 1300px;
-    height: 192px;
-    margin: 0px auto;
-    padding: 0px;
+    height: 100px;
+    background-color: #999999;
 }
 
 #container {
-    width: 1300px;
-    margin: 0px auto;
+    background-color: #e5e5e5;
+    display: table;
+    width: 100%;
+    margin: auto;
 }
 
 #sidebar {
-    background-color: #969696;
-    float: left;
-    width: 258px;
-    padding: 6px 6px
+    background-color: gainsboro;
+    width: 180px;
+    display: table-cell;
+    /*padding: 8px;*/
+}
+
+#sidebar div[type="list"] {
+    margin: 16px 10px;
+}
+
+#sidebar div[type="list"] .top {
+    background-color: burlywood;
+    border-radius: 6px 6px 0px 0px;
+    padding: 4px;
+}
+
+#sidebar div[type="list"] ul {
+    margin: 0px;
+    background-color: antiquewhite;
 }
 
 #content {
-    background-color: #b9b9b9;
-    width: 980px; /*1030px*/
-    margin-left: 270px;
-    padding: 12px 25px;
+    padding: 8px 12px;
+    background-color: darkgrey;
+    display: table-cell;
 }
 
 #footer {
-    clear: both;
-    background-color: lightgray;
-    width: 1300px;
-    margin: 0px auto;
+    background-color: #282830;
+    height: 80px;
 }

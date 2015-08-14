@@ -3,14 +3,28 @@
 <html>
 <head>
     <title>Gun Shop</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/authorization-style.css"/>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/gunshop/register" method="post">
-    <label>Регистрация</label><br>
-    <label>Логин: </label><input name="login" type="text" placeholder="steve_jobs" required><br>
-    <label>Электронная почта: </label><input name="email" type="email" placeholder="steve_jobs@apple.com" required><br>
-    <label>password: </label><input name="password" type="password" placeholder="gagaga56" required><br>
-    <button type="submit">Зарегистрироваться</button>
-</form>
+<div class="top">
+    <a href="${pageContext.request.contextPath}/">Назад</a>
+        <span class="right">
+        </span>
+
+    <div class="clr"></div>
+</div>
+<div id="login-form">
+    <h1>Регистрация на сайте</h1>
+    <fieldset>
+        <form action="${pageContext.request.contextPath}/gunshop/register" method="post">
+            <input name="login" type="text" required placeholder="Введите ваш логин">
+            <input name="email" type="email" required placeholder="Введите ваш email">
+            <input name="password" type="password" required placeholder="Введите пароль">
+            <input class="selector" type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
+            <footer class="clearfix">
+            </footer>
+        </form>
+    </fieldset>
+</div>
 </body>
 </html>

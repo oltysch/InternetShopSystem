@@ -3,17 +3,16 @@
 <html>
 <head>
     <title>Gun Shop</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/authorization-style.css"/>
+    <link rel="stylesheet" href=${pageContext.request.contextPath}"/authorization-style.css"/>
 </head>
 <body>
-
 <c:choose>
     <c:when test="${not empty user}">
         <c:redirect url="${pageContext.request.contextPath}/gunshop/products"/>
     </c:when>
     <c:otherwise>
         <div class="top">
-            <a href="${pageContext.request.contextPath}/">Назад</a>
+            <br>
         <span class="right">
         </span>
 
@@ -22,15 +21,12 @@
         <div id="login-form">
             <h1>Авторизация на сайте</h1>
             <fieldset>
-                <form action="${pageContext.request.contextPath}/gunshop/login" method="post">
-                    <input name="login" type="text" required placeholder="Логин" value="${login}">
-                    <input name="password" type="password" required placeholder="Пароль">
-                    <input class="button" type="submit" value="ВОЙТИ">
+                <form>
+                    <input class="selector" type="submit" value="ВХОД"
+                           formaction="${pageContext.request.contextPath}/gunshop/login"><br>
+                    <input class="selector" type="submit" value="РЕГИСТРАЦИЯ"
+                           formaction="${pageContext.request.contextPath}/gunshop/register">
                     <footer class="clearfix">
-                            <%--TODO make this--%>
-                        <p><span class="info">?</span><a href="#">Забыли пароль?</a></p>
-
-                        <div style="color: red">${loginError}</div>
                     </footer>
                 </form>
             </fieldset>

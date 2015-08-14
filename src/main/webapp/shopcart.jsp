@@ -1,10 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Gun Shop</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
 </head>
 <body>
+<a:mainTemplate greeting="224" name="${user}">
 <a href="${pageContext.request.contextPath}/gunshop/products">назад</a>
 <c:choose>
     <c:when test="${not empty user.getShopcart()}">
@@ -19,6 +22,6 @@
         <div>Ваша корзина пуста</div>
     </c:otherwise>
 </c:choose>
-
+</a:mainTemplate>
 </body>
 </html>
