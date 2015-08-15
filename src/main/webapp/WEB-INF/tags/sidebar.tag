@@ -1,6 +1,6 @@
 <div id="sidebar">
     <div class="products" type="list">
-        <div class="top">PRODUCTS</div>
+        <div class="top">Guns</div>
         <div class="points">
             <ul>
                 <li>MENU POINT 1
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="products" type="list">
-        <div class="top">OTHER SIDEBAR</div>
+        <div class="top">Bullets</div>
         <div class="points">
             <ul>
                 <li>MENU POINT 1

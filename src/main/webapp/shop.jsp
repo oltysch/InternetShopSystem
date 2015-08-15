@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
 </head>
 <body>
-<a:mainTemplate greeting="adfsdfadf" name="${user}">
+<a:mainTemplate user="${user}">
     ${user.getLogin()}
     <form action="${pageContext.request.contextPath}/gunshop/shopcart"><input type="submit"
                                                                               value="посмотреть корзину"/>

@@ -1,8 +1,7 @@
-<%@ attribute name="greeting" required="true" %>
-<%@ attribute name="name" required="true" %>
+<%@ attribute name="user" required="true" %>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%--<a:basePage>--%>
-<a:header/>
+<a:header user="${user}"/>
 <div id="container">
     <a:sidebar/>
     <div id="content">

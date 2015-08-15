@@ -1,48 +1,63 @@
 body {
     margin: 0;
+    background: url(/bg.png) repeat;
 }
 
 #header {
     height: 100px;
-    background-color: #999999;
+    background-color: #fcfcfc;
+    width: 1000px;
+    margin: 0px auto 10px auto;
 }
 
 #container {
-    background-color: #e5e5e5;
-    display: table;
-    width: 100%;
+    /*background-color: #e5e5e5;*/
+    /*display: table;*/
+    width: 1000px;
     margin: auto;
 }
 
 #sidebar {
-    background-color: gainsboro;
+    /*background-color: #282830;*/
     width: 180px;
-    display: table-cell;
+    float: left;
+    /*display: table-cell;*/
     /*padding: 8px;*/
 }
 
 #sidebar div[type="list"] {
-    margin: 16px 10px;
+    margin: 0px 6px 18px 6px;
 }
 
 #sidebar div[type="list"] .top {
-    background-color: burlywood;
+    background-color: #282830;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
     border-radius: 6px 6px 0px 0px;
     padding: 4px;
 }
 
 #sidebar div[type="list"] ul {
     margin: 0px;
-    background-color: antiquewhite;
+    background-color: white;
 }
 
 #content {
-    padding: 8px 12px;
-    background-color: darkgrey;
-    display: table-cell;
+    padding: 8px 24px;
+    margin: 0px 0px 0px 190px;
+    background-color: white;
+    border-radius: 6px 6px 6px 6px;
+    /*display: table-cell;*/
+    width: 700px;
+    /*border: solid black 1px;*/
 }
 
 #footer {
-    background-color: #282830;
+    background-color: #f4f4f4;
     height: 80px;
+    width: 1000px;
+    margin: auto;
+    clear: both;
 }
