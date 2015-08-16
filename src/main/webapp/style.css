@@ -10,6 +10,29 @@ body {
     margin: 0px auto 10px auto;
 }
 
+#header .left {
+    width: 200px;
+    height: 90px;
+    margin-left: 30px;
+    float: left;
+    border: solid #282830 1px;
+}
+
+#header .mid {
+    width: 200px;
+    height: 90px;
+    float: left;
+    margin-left: 130px;
+    border: solid #282830 1px;
+}
+
+#header .right {
+    width: 200px;
+    height: 90px;
+    margin-left: 690px;
+    border: solid #282830 1px;
+}
+
 #container {
     /*background-color: #e5e5e5;*/
     /*display: table;*/
@@ -42,6 +65,7 @@ body {
 #sidebar div[type="list"] ul {
     margin: 0px;
     background-color: white;
+
 }
 
 #content {

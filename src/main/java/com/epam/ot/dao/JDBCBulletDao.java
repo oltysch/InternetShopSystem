@@ -1,6 +1,7 @@
 package com.epam.ot.dao;
 
 import com.epam.ot.products.Bullet;
+import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,28 +12,19 @@ import java.util.List;
 import java.util.UUID;
 
 public class JDBCBulletDao implements BulletDao {
-    public static final String FIND_ALL = "SELECT * FROM BULLETS";
-    public static final String FIND_BY_ID = "SELECT * FROM BULLETS WHERE id = ?";
-    public static final String FIND_BY_UUID = "SELECT * FROM BULLETS WHERE BULLETS.UUID = ?";
-    public static final String FIND_BY_CALIBER = "SELECT * FROM BULLETS WHERE BULLETS.CALIBER=?";
-    public static final String FIND_BY_NAME = "SELECT * FROM BULLETS WHERE BULLETS.NAME=?";
-    public static final String FIND_BY_TYPE = "SELECT * FROM BULLETS WHERE BULLET_TYPE=?";
-    public static final String FIND_BY_PRICE_RANGE = "SELECT * FROM BULLETS WHERE BULLETS.PRICE>=? AND BULLETS.PRICE<=?";
-    public static final String UPDATE_BULLET = "UPDATE BULLETS SET CALIBER=?, BULLETS.NAME=?, BULLET_TYPE=?, PRICE=?, QTY=?, DESCRIPTION=? WHERE ID=?";
-    public static final String INSERT_BULLET = "INSERT INTO BULLETS VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
-    public static final String REMOVE_BULLET = "DELETE FROM BULLETS WHERE BULLETS.ID=?";
-
     private final Connection connection;
+    private final PropertyManager propertyManager;
 
     public JDBCBulletDao(Connection connection) {
         this.connection = connection;
+        propertyManager = new PropertyManager("query.properties");
     }
 
     @Override
     public List<Bullet> findAll() {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
@@ -56,7 +48,7 @@ public class JDBCBulletDao implements BulletDao {
     @Override
     public Bullet findById(long id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.id"));
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
@@ -83,7 +75,7 @@ public class JDBCBulletDao implements BulletDao {
     @Override
     public Bullet findByUuid(UUID uuid) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_UUID);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.uuid"));
             preparedStatement.setObject(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
@@ -111,7 +103,7 @@ public class JDBCBulletDao implements BulletDao {
     public List<Bullet> findByCaliber(String caliber) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_CALIBER);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.caliber"));
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -137,7 +129,7 @@ public class JDBCBulletDao implements BulletDao {
     public List<Bullet> findByName(String name) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.name"));
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -163,7 +155,7 @@ public class JDBCBulletDao implements BulletDao {
     public List<Bullet> findByType(String type) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_TYPE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.type"));
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -189,7 +181,7 @@ public class JDBCBulletDao implements BulletDao {
     public List<Bullet> findByPriceRange(int min, int max) {
         List<Bullet> bullets = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_PRICE_RANGE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.priceRange"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -215,7 +207,7 @@ public class JDBCBulletDao implements BulletDao {
     @Override
     public void update(Bullet bullet) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BULLET);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.update"));
             preparedStatement.setString(1, bullet.getCaliber());
             preparedStatement.setString(2, bullet.getName());
             preparedStatement.setString(3, bullet.getType());
@@ -238,7 +230,7 @@ public class JDBCBulletDao implements BulletDao {
     @Override
     public void insert(Bullet bullet) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BULLET);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.insert"));
             preparedStatement.setObject(1, bullet.getUuid());
             preparedStatement.setString(2, bullet.getCaliber());
             preparedStatement.setString(3, bullet.getName());
@@ -262,7 +254,7 @@ public class JDBCBulletDao implements BulletDao {
     public boolean remove(Bullet bullet) {
         boolean res = false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_BULLET);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.delete"));
             preparedStatement.setLong(1, bullet.getId());
             preparedStatement.executeUpdate();
             res = true;

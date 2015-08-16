@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
 </head>
 <body>
-<a:mainTemplate user="${user}">
+<a:mainTemplate shopcart="корзина" exit="выход"><%--user="${user}"--%>
 <a href="${pageContext.request.contextPath}/gunshop/products">назад</a>
 <c:choose>
     <c:when test="${not empty user.getShopcart()}">

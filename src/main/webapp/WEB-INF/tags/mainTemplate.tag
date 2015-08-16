@@ -1,7 +1,9 @@
-<%@ attribute name="user" required="true" %>
+<%--<%@ attribute name="login" required="true" %>--%>
+<%@ attribute name="shopcart" required="true" %>
+<%@ attribute name="exit" required="true" %>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%--<a:basePage>--%>
-<a:header user="${user}"/>
+<a:header shopcart="${shopcart}" exit="${exit}"/>
 <div id="container">
     <a:sidebar/>
     <div id="content">

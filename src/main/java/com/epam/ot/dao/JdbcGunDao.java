@@ -1,6 +1,7 @@
 package com.epam.ot.dao;
 
 import com.epam.ot.products.Gun;
+import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,34 +12,19 @@ import java.util.List;
 import java.util.UUID;
 
 public class JdbcGunDao implements GunDao {
-    public static final String FIND_ALL = "SELECT * FROM GUNS, GUNS_TTC WHERE GUNS_TTC.GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_ID = "SELECT * FROM GUNS, GUNS_TTC WHERE ID = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_UUID = "SELECT * FROM GUNS, GUNS_TTC WHERE UUID = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_TYPE = "SELECT * FROM GUNS, GUNS_TTC WHERE TYPE = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_MODEL = "SELECT * FROM GUNS, GUNS_TTC WHERE MODEL = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_ORIGIN = "SELECT * FROM GUNS, GUNS_TTC WHERE ORIGIN = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_CALIBER = "SELECT * FROM GUNS, GUNS_TTC WHERE CALIBER = ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_PRICE_RANGE = "SELECT * FROM GUNS, GUNS_TTC WHERE PRICE >= ? AND PRICE <= ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_FIRING_RANGE = "SELECT * FROM GUNS, GUNS_TTC WHERE FIRING_RANGE >= ? AND FIRING_RANGE <= ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_EFFECTIVE_FIRING_RANGE = "SELECT * FROM GUNS, GUNS_TTC WHERE EFFECTIVE_FIRING_RANGE >= ? AND EFFECTIVE_FIRING_RANGE <= ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_MAGAZINE_CAPACITY_RANGE = "SELECT * FROM GUNS, GUNS_TTC WHERE MAGAZINE_CAPACITY >= ? AND MAGAZINE_CAPACITY <= ? AND GUN_UUID=GUNS.UUID";
-    public static final String FIND_BY_FIRE_RATE = "SELECT * FROM GUNS, GUNS_TTC WHERE FIRE_RATE >= ? AND FIRE_RATE <= ? AND GUN_UUID=GUNS.UUID";
-    //TODO make update all
-    public static final String UPDATE_GUN = "UPDATE GUNS SET TYPE=?, MODEL=?, PRICE=?, ORIGIN=?, DESCRIPTION=? WHERE GUNS.UUID = ?;UPDATE GUNS_TTC SET FIRING_RANGE=?, EFFECTIVE_FIRING_RANGE=?, MAGAZINE_CAPACITY=?, CALIBER=?, FIRE_RATE=? WHERE GUN_UUID = ?";
-    public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);INSERT INTO GUNS_TTC VALUES (?, ?, ?, ?, ?, ?)";
-    public static final String REMOVE_GUN = "DELETE FROM GUNS_TTC WHERE GUN_UUID=?; DELETE FROM GUNS WHERE GUNS.UUID = ?";
-
     private final Connection connection;
+    private final PropertyManager propertyManager;
 
     public JdbcGunDao(Connection connection) {
         this.connection = connection;
+        propertyManager = new PropertyManager("query.properties");
     }
 
     @Override
     public List<Gun> findAll() {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
@@ -62,7 +48,7 @@ public class JdbcGunDao implements GunDao {
     @Override
     public Gun findById(long id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.id"));
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -88,7 +74,7 @@ public class JdbcGunDao implements GunDao {
     @Override
     public Gun findByUuid(UUID uuid) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_UUID);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.uuid"));
             preparedStatement.setObject(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -115,7 +101,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByType(String type) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_TYPE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.type"));
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -141,7 +127,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByModel(String model) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_MODEL);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.model"));
             preparedStatement.setString(1, model);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -167,7 +153,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByOrigin(String origin) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ORIGIN);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.origin"));
             preparedStatement.setString(1, origin);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -193,7 +179,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByCaliber(String caliber) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_CALIBER);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.caliber"));
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -219,7 +205,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByPriceRange(int min, int max) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_PRICE_RANGE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.price"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -246,7 +232,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByFiringRange(int min, int max) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_FIRING_RANGE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.firingRange"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -273,7 +259,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByEffectiveFiringRange(int min, int max) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_EFFECTIVE_FIRING_RANGE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.effectiveFiringRange"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -300,7 +286,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByMagazineCapacity(int min, int max) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_MAGAZINE_CAPACITY_RANGE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.magazineCapacity"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -327,7 +313,7 @@ public class JdbcGunDao implements GunDao {
     public List<Gun> findByFireRate(int min, int max) {
         List<Gun> guns = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_FIRE_RATE);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.fireRate"));
             preparedStatement.setInt(1, min);
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -353,7 +339,7 @@ public class JdbcGunDao implements GunDao {
     @Override
     public void update(Gun gun) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GUN);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.update"));
             preparedStatement.setString(1, gun.getType());
             preparedStatement.setString(2, gun.getModel());
             preparedStatement.setDouble(3, gun.getPrice());
@@ -381,7 +367,7 @@ public class JdbcGunDao implements GunDao {
     @Override
     public void insert(Gun gun) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GUNS);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.insert"));
             preparedStatement.setObject(1, gun.getUuid());
             preparedStatement.setString(2, gun.getType());
             preparedStatement.setString(3, gun.getModel());
@@ -409,7 +395,7 @@ public class JdbcGunDao implements GunDao {
     public boolean remove(Gun gun) {
         boolean res = false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_GUN);
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.delete"));
             preparedStatement.setString(1, String.valueOf(gun.getUuid()));
             preparedStatement.setString(2, String.valueOf(gun.getUuid()));
             preparedStatement.executeUpdate();
