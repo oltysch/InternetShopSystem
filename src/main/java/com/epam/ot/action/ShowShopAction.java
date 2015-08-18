@@ -23,7 +23,8 @@ public class ShowShopAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         //TODO Use List of Products
         List<Product> products = new ArrayList<>();
-        String str = (String) req.getAttribute("seltp");
+        List<String> types = new ArrayList<>();
+        String str = (String) req.getParameter("seltp");
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         BulletDao bulletDao = daoFactory.createBulletDao();
@@ -33,7 +34,9 @@ public class ShowShopAction implements Action {
             products.addAll(gunDao.findAll());
             products.addAll(bulletDao.findAll());
         }
+        types.addAll(gunDao.findTypes());
         req.setAttribute("products", products);
+        req.setAttribute("types", types);
         return result;
     }
 }

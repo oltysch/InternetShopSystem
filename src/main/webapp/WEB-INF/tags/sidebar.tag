@@ -3,10 +3,8 @@
         <div class="top">Guns</div>
         <div class="points">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products" seltp="pistol">pistol</a>
-                <li><a href="${pageContext.request.contextPath}/">MENU POINT 2</a>
-                <li><a href="${pageContext.request.contextPath}/">MENU POINT 3</a>
-                <li><a href="${pageContext.request.contextPath}/">MENU POINT 4</a>
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=pistol">pistol</a>
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Assault Rifle">assault rifles</a>
             </ul>
         </div>
     </div>
@@ -14,10 +12,9 @@
         <div class="top">Bullets</div>
         <div class="points">
             <ul>
-                <li>MENU POINT 1
-                <li>MENU POINT 2
-                <li>MENU POINT 3
-                <li>MENU POINT 4
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=BEAR BROWN">pistol</a>
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=BEAR SILVER">pistol</a>
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Federal">pistol</a>
             </ul>
         </div>
     </div>

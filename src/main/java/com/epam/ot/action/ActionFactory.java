@@ -1,11 +1,14 @@
 package com.epam.ot.action;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ActionFactory {
-
+    public static final Logger logger = LogManager.getLogger(ActionFactory.class);
     static Map<String, Action> actions;
 
     static {
@@ -24,6 +27,7 @@ public class ActionFactory {
     }
 
     public Action getAction(HttpServletRequest req) {
+        logger.info(req);
         return actions.get(req.getMethod() + req.getPathInfo());
     }
 }

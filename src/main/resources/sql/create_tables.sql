@@ -1,4 +1,14 @@
 -- creating products tables
+CREATE TABLE GUNS_TYPES
+(
+  id   BIGINT AUTO_INCREMENT PRIMARY KEY   NOT NULL,
+  type VARCHAR(50) UNIQUE                  NOT NULL
+);
+CREATE TABLE BULLETS_TYPES
+(
+  id   BIGINT AUTO_INCREMENT PRIMARY KEY   NOT NULL,
+  type VARCHAR(50) UNIQUE                  NOT NULL
+);
 CREATE TABLE GUNS
 (
   id    BIGINT AUTO_INCREMENT PRIMARY KEY     NOT NULL,
@@ -7,7 +17,8 @@ CREATE TABLE GUNS
   model VARCHAR(60) UNIQUE                    NOT NULL,
   price DOUBLE                                NOT NULL,
   origin      VARCHAR(80),
-  description TEXT
+  description TEXT,
+  FOREIGN KEY (type) REFERENCES GUNS_TYPES (type)
 );
 CREATE TABLE GUNS_TTC
 (
@@ -30,7 +41,8 @@ CREATE TABLE BULLETS
   price   DOUBLE                               NOT NULL,
   Qty         INT,
   description TEXT,
-  UNIQUE (caliber, name, bullet_type)
+  UNIQUE (caliber, name, bullet_type),
+  FOREIGN KEY (bullet_type) REFERENCES BULLETS_TYPES (type)
 );
 
 -- creating users tables

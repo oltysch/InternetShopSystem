@@ -1,35 +1,100 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+:focus {
+    outline: 0;
+}
+
+body {
+    line-height: 1;
+    color: black;
+    background: white;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+}
+
+blockquote, q {
+    quotes: "" "";
+}
+
 body {
     margin: 0;
     background: url(/bg.png) repeat;
 }
 
+body a {
+    color: #075296;
+}
+
 #header {
-    height: 100px;
+    height: 90px;
     background-color: #fcfcfc;
-    width: 1000px;
+    padding: 10px 80px 0px 80px;
+    width: 840px;
     margin: 0px auto 10px auto;
+    font-family: Arial;
+    font-size: 20px;
+    /*border: solid #282830 1px;*/
 }
 
 #header .left {
     width: 200px;
-    height: 90px;
-    margin-left: 30px;
+    /*height: 90px;*/
+    /*margin-left: 70px;*/
+    padding: auto 0px;
     float: left;
+    /*vertical-align: middle;*/
+    /*border: solid #282830 1px;*/
 }
 
 #header .mid {
     width: 200px;
-    height: 90px;
+    /*height: 90px;*/
     float: left;
-    margin-left: 130px;
+    /*margin: auto 0px;*/
+    margin-left: 140px;
+    padding: auto 0px;
+    /*vertical-align: middle;*/
+    /*border: solid #282830 1px;*/
 }
 
 #header .right {
     width: 200px;
-    height: 90px;
-    margin-left: 690px;
+    /*height: 70px;*/
+    /*margin: 25px 0px;*/
+    margin-left: 640px;
+    /*padding: 20px 0px 0px 0px;*/
     text-align: right;
-
+    /*vertical-align: middle;*/
+    /*border: solid #282830 1px;*/
 }
 
 #container {
@@ -64,7 +129,7 @@ body {
 #sidebar div[type="list"] ul {
     margin: 0px;
     background-color: white;
-
+    list-style: none;
 }
 
 #content {

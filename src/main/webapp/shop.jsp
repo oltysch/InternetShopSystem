@@ -3,10 +3,10 @@
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Gun Shop</title>
     <%--TODO make normal css style--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
-    <meta charset="utf-8">
 </head>
 <body>
 <a:mainTemplate shopcart="корзина" exit="выход">
