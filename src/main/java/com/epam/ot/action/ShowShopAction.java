@@ -23,20 +23,23 @@ public class ShowShopAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         //TODO Use List of Products
         List<Product> products = new ArrayList<>();
-        List<String> types = new ArrayList<>();
-        String str = (String) req.getParameter("seltp");
+        String selectType = (String) req.getParameter("seltp");
+        String productType = (String) req.getParameter("prType");
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         BulletDao bulletDao = daoFactory.createBulletDao();
-        if (str != null) {
-            products.addAll(gunDao.findByType(str));
+        if (selectType != null) {
+            products.addAll(gunDao.findByType(selectType));
+            products.addAll(bulletDao.findByType(selectType));
+        } else if (productType != null && productType.equals("guns")) {
+            products.addAll(gunDao.findAll());
+        } else if (productType != null && productType.equals("bullets")) {
+            products.addAll(bulletDao.findAll());
         } else {
             products.addAll(gunDao.findAll());
             products.addAll(bulletDao.findAll());
         }
-        types.addAll(gunDao.findTypes());
         req.setAttribute("products", products);
-        req.setAttribute("types", types);
         return result;
     }
 }
