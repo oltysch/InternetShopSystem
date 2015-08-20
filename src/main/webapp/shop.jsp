@@ -3,22 +3,12 @@
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Gun Shop</title>
     <%--TODO make normal css style--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
 </head>
 <body>
-<a:mainTemplate shopcart="корзина" exit="выход">
-    <%--user="${user}"--%>
-    <%--${user.getLogin()}<br>
-    <a href="${pageContext.request.contextPath}/gunshop/shopcart">корзина</a>
-    <form action="${pageContext.request.contextPath}/gunshop/shopcart"><input type="submit"
-                                                                              value="посмотреть корзину"/>
-    </form>
-    <br>
-    <a href="${pageContext.request.contextPath}/gunshop/logout">Выйти</a><br>
---%>
+<a:mainTemplate>
     <c:forEach var="product" items="${products}" varStatus="iter">
         <form action="${pageContext.request.contextPath}/gunshop/addToCart" method="post">
                 ${product.name}<input type="hidden" name="selectedProduct" value="${product.uuid}"/>

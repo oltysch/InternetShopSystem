@@ -24,6 +24,13 @@ public class ActionFactory {
         actions.put("POST/addToCart", new AddToCartAction());
         actions.put("POST/removeFromCart", new RemoveFromCartAction());
         actions.put("GET/shopcart", new ShowPageAction("shopcart"));
+        actions.put("GET/users", new ShowUsersAction());
+        actions.put("GET/guns", new ShowGunsAction());
+        actions.put("GET/bullets", new ShowBulletsAction());
+        actions.put("GET/changeUser", new ChangeUserAction());
+        actions.put("GET/makeUser", new MakeUserAction());
+        actions.put("GET/makeAdmin", new MakeAdminAction());
+        actions.put("GET/deleteUser", new DeleteUser());
     }
 
     public Action getAction(HttpServletRequest req) {

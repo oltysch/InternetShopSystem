@@ -240,4 +240,31 @@ public class JdbcUserDao implements UserDao {
         }
         return res;
     }
+
+    @Override
+    public void beginTransaction() {
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void commitConnection() {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void rollbackConnection() {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="sidebar">
     <div class="products" type="list">
         <div class="top"><a href="${pageContext.request.contextPath}/gunshop/products?prType=guns">Guns</a></div>
@@ -27,4 +28,16 @@
             </ul>
         </div>
     </div>
+    <c:if test="${user.role == 'ADMIN'}">
+        <div class="admin" type="list">
+            <div class="top">Admin block</div>
+            <div class="points">
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/admin/users">users</a>
+                    <li><a href="${pageContext.request.contextPath}/admin/guns">guns</a>
+                    <li><a href="${pageContext.request.contextPath}/admin/bullets">bullets</a>
+                </ul>
+            </div>
+        </div>
+    </c:if>
 </div>

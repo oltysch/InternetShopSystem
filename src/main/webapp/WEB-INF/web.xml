@@ -5,11 +5,20 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>servlet</servlet-name>
-        <servlet-class>com.epam.ot.Servlet</servlet-class>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>com.epam.ot.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servlet</servlet-name>
+        <servlet-name>MainServlet</servlet-name>
         <url-pattern>/gunshop/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.epam.ot.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
 </web-app>

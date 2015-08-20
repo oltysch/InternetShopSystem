@@ -25,4 +25,10 @@ public interface BulletDao {
     void insert(Bullet bullet);
 
     boolean remove(Bullet bullet);
+
+    void beginTransaction();
+
+    void commitConnection();
+
+    void rollbackConnection();
 }

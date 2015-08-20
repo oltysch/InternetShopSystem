@@ -21,7 +21,6 @@ public class ShowShopAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        //TODO Use List of Products
         List<Product> products = new ArrayList<>();
         String selectType = (String) req.getParameter("seltp");
         String productType = (String) req.getParameter("prType");

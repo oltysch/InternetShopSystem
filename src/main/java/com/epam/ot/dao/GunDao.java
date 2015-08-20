@@ -36,4 +36,10 @@ public interface GunDao {
     void insert(Gun gun);
 
     boolean remove(Gun gun);
+
+    void beginTransaction();
+
+    void commitConnection();
+
+    void rollbackConnection();
 }

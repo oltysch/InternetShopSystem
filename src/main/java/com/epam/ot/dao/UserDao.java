@@ -25,4 +25,10 @@ public interface UserDao {
     void insert(User user);
 
     boolean remove(User user);
+
+    void beginTransaction();
+
+    void commitConnection();
+
+    void rollbackConnection();
 }
