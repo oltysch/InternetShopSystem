@@ -24,17 +24,32 @@ public class ActionFactory {
         actions.put("POST/addToCart", new AddToCartAction());
         actions.put("POST/removeFromCart", new RemoveFromCartAction());
         actions.put("GET/shopcart", new ShowPageAction("shopcart"));
-        actions.put("GET/users", new ShowUsersAction());
-        actions.put("GET/guns", new ShowGunsAction());
-        actions.put("GET/bullets", new ShowBulletsAction());
-        actions.put("GET/changeUser", new ChangeUserAction());
-        actions.put("GET/makeUser", new MakeUserAction());
-        actions.put("GET/makeAdmin", new MakeAdminAction());
-        actions.put("GET/deleteUser", new DeleteUser());
+
+        actions.put("GET/admin/users", new ShowUsersAction("admin/view_users"));
+        actions.put("GET/admin/guns", new ShowGunsAction("admin/view_guns"));
+        actions.put("GET/admin/bullets", new ShowBulletsAction("admin/view_bullets"));
+
+        actions.put("GET/admin/edit_users", new ShowUsersAction("admin/edit_users"));
+        actions.put("GET/admin/edit_guns", new ShowGunsAction("admin/edit_guns"));
+        actions.put("GET/admin/edit_bullets", new ShowBulletsAction("admin/edit_bullets"));
+
+        actions.put("GET/admin/createUser", new CreateUserAction());
+        actions.put("GET/admin/changeUser", new ChangeUserAction());
+        actions.put("GET/admin/makeUser", new MakeUserAction());
+        actions.put("GET/admin/makeAdmin", new MakeAdminAction());
+        actions.put("GET/admin/deleteUser", new DeleteUserAction());
+
+        actions.put("GET/admin/createGun", new CreateGunAction());
+        actions.put("GET/admin/changeGun", new ChangeGunAction());
+        actions.put("GET/admin/deleteGun", new DeleteGunAction());
+
+        actions.put("GET/admin/createBullet", new CreateBulletAction());
+        actions.put("GET/admin/changeBullet", new ChangeBulletAction());
+        actions.put("GET/admin/deleteBullet", new DeleteBulletAction());
     }
 
-    public Action getAction(HttpServletRequest req) {
-        logger.info(req);
-        return actions.get(req.getMethod() + req.getPathInfo());
+    public Action getAction(String actionName) {
+        logger.info(actionName);
+        return actions.get(actionName);
     }
 }

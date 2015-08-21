@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RemoveFromCartAction implements Action {
     private static final Logger logger = LogManager.getLogger(RemoveFromCartAction.class);
-    private ActionResult result;
-
-    public RemoveFromCartAction() {
-        result = new ActionResult("shopcart", true);
-    }
+    private ActionResult result = new ActionResult("shopcart", true);
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

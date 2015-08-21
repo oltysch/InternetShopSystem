@@ -22,15 +22,16 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
         User user = (User) req.getSession().getAttribute("user");
         if (user != null && user.getRole() == Role.ADMIN) {
-            Action action = actionFactory.getAction(req);
+            Action action = actionFactory.getAction(actionName);
 
             ActionResult result = action.execute(req, resp);
             if (result.isRedirect()) {
-                resp.sendRedirect(req.getContextPath() + "/admin/" + result.getView());
+                resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
             } else {
-                req.getRequestDispatcher("/" + result.getView() + ".jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/jsp/" + result.getView() + ".jsp").forward(req, resp);
             }
         } else {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);

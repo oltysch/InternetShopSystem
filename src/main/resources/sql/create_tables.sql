@@ -33,12 +33,12 @@ CREATE TABLE GUNS_TTC
 );
 CREATE TABLE BULLETS
 (
-  id      BIGINT AUTO_INCREMENT PRIMARY KEY    NOT NULL,
-  uuid    UUID UNIQUE                          NOT NULL,
-  caliber VARCHAR(25)                          NOT NULL,
-  name    VARCHAR(40)                          NOT NULL,
-  bullet_type VARCHAR(50),
-  price   DOUBLE                               NOT NULL,
+  id          BIGINT AUTO_INCREMENT PRIMARY KEY    NOT NULL,
+  uuid        UUID UNIQUE                          NOT NULL,
+  caliber     VARCHAR(25)                          NOT NULL,
+  name        VARCHAR(40)                          NOT NULL,
+  bullet_type VARCHAR(50)                          NOT NULL,
+  price       DOUBLE                               NOT NULL,
   Qty         INT,
   description TEXT,
   UNIQUE (caliber, name, bullet_type),

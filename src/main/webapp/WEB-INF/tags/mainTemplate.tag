@@ -2,6 +2,7 @@
 <%--<%@ attribute name="shopcart" required="true" %>
 <%@ attribute name="exit" required="true" %>--%>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<a:basePage>--%>
 <a:header/>
 <div id="container">
@@ -18,4 +19,3 @@
     </c:choose>
 </div>
 <a:footer/>
-<%--</a:basePage>--%>

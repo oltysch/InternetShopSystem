@@ -13,11 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowShopAction implements Action {
-    private ActionResult result;
-
-    public ShowShopAction() {
-        result = new ActionResult("shop");
-    }
+    private ActionResult result = new ActionResult("shop");
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/authorization-style.css"/>
 </head>
 <body>
-
 <c:choose>
     <c:when test="${not empty user}">
         <c:redirect url="${pageContext.request.contextPath}/gunshop/products"/>

@@ -9,17 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
-public class MakeUserAction implements Action {
-    private ActionResult result = new ActionResult("users", true);
+public class CreateUserAction implements Action {
+    ActionResult actionResult = new ActionResult("users", true);
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String userUuid = req.getParameter("selectedUserUuid");
+        User user = new User(req.getParameter("login"), req.getParameter("email"), Role.valueOf(req.getParameter("role")), req.getParameter("password"));
+        user.setUuid(UUID.randomUUID());
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
-        User user = userDao.findByUuid(UUID.fromString(userUuid));
-        user.setRole(Role.USER);
-        userDao.updateUser(user);
-        return result;
+        userDao.beginTransaction();
+        userDao.insert(user);
+        userDao.commitConnection();
+        return actionResult;
     }
 }

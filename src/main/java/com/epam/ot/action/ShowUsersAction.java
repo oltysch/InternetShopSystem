@@ -12,8 +12,8 @@ import java.util.List;
 public class ShowUsersAction implements Action {
     private ActionResult result;
 
-    public ShowUsersAction() {
-        result = new ActionResult("WEB-INF/admin/edit_users");
+    public ShowUsersAction(String path) {
+        result = new ActionResult(path);
     }
 
     @Override
