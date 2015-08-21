@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowUsersAction implements Action {
-    private ActionResult result;
-
-    public ShowUsersAction() {
-        result = new ActionResult("WEB-INF/admin/edit_users");
-    }
+    private ActionResult result = new ActionResult("WEB-INF/admin/view_users");
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

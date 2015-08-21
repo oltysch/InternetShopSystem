@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class MakeAdminAction implements Action {
-    private ActionResult result;
-
-    public MakeAdminAction() {
-        result = new ActionResult("users", true);
-    }
+    private ActionResult result = new ActionResult("users", true);
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

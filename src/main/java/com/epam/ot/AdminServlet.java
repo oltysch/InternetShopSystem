@@ -22,9 +22,10 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String actionName = req.getMethod() + req.getPathInfo();
         User user = (User) req.getSession().getAttribute("user");
         if (user != null && user.getRole() == Role.ADMIN) {
-            Action action = actionFactory.getAction(req);
+            Action action = actionFactory.getAction(actionName);
 
             ActionResult result = action.execute(req, resp);
             if (result.isRedirect()) {

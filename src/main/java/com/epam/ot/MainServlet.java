@@ -22,7 +22,8 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Action action = actionFactory.getAction(req);
+        String actionName = req.getMethod() + req.getPathInfo();
+        Action action = actionFactory.getAction(actionName);
 
         ActionResult result = action.execute(req, resp);
         if (result.isRedirect()) {

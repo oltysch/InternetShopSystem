@@ -53,7 +53,6 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                //TODO add email
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getInt(1));
                 user.setUuid((UUID) resultSet.getObject(2));
@@ -80,7 +79,6 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                //TODO add email
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getInt(1));
                 user.setUuid((UUID) resultSet.getObject(2));
