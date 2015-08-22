@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class CreateBulletAction implements Action {
-    ActionResult actionResult = new ActionResult("edit_bullets", true);
+    ActionResult actionResult;
+
+    public CreateBulletAction() {
+        actionResult = new ActionResult("edit_bullets", true);
+    }
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

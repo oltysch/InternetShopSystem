@@ -13,6 +13,10 @@ import java.util.UUID;
 public class RegisterAction implements Action {
     private ActionResult result;
 
+    public RegisterAction() {
+        result = new ActionResult("success_register");
+    }
+
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         String login = req.getParameter("login");
@@ -26,15 +30,8 @@ public class RegisterAction implements Action {
         userDao.insert(user);
         req.setAttribute("login", user.getLogin());
         req.setAttribute("password", user.getPassword());
-        return new ActionResult("success_register");
+        return result;
 
-        /*TODO make login email and password checking
-        if (user != null) {
-            req.getSession().setAttribute("user", user);
-            return new ActionResult("shop", true);
-        } else {
-            req.setAttribute("loginError", "Wrong login or password!");
-            return new ActionResult("login");
-        }*/
+//        TODO make login email and password checking
     }
 }

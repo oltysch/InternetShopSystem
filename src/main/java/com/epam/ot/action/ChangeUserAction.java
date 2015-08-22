@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class ChangeUserAction implements Action {
-    ActionResult actionResult = new ActionResult("edit_users", true);
+    ActionResult actionResult;
+
+    public ChangeUserAction() {
+        actionResult = new ActionResult("edit_users", true);
+    }
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

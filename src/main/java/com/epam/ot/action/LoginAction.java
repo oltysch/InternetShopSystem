@@ -9,13 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginAction implements Action {
-    private String showIfSuccess;
-    private String shofIfWrongLogin;
-
-    public LoginAction(String showIfSuccess, String shofIfWrongLogin) {
-        this.showIfSuccess = showIfSuccess;
-        this.shofIfWrongLogin = shofIfWrongLogin;
-    }
+    ActionResult result;
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -25,14 +19,16 @@ public class LoginAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         User user = userDao.findByLogin(login);
 
+        //TODO use a cookies
         Cookie cookie = new Cookie("xid", "dkufyiaugyu87ht8h479strgh7846");
         if (user != null && (password.equals(user.getPassword()))) {
             req.getSession().setAttribute("user", user);
-            return new ActionResult(showIfSuccess, true);
+            result = new ActionResult("products", true);
         } else {
             req.setAttribute("login", login);
             req.setAttribute("loginError", "Wrong login or password!");
-            return new ActionResult(shofIfWrongLogin);
+            result = new ActionResult("login");
         }
+        return result;
     }
 }

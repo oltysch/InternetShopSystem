@@ -17,7 +17,11 @@ import java.util.UUID;
 
 public class AddToCartAction implements Action {
     private static final Logger logger = LogManager.getLogger(AddToCartAction.class);
-    private ActionResult result = new ActionResult("products", true);
+    private ActionResult result;
+
+    public AddToCartAction() {
+        result = new ActionResult("products", true);
+    }
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
