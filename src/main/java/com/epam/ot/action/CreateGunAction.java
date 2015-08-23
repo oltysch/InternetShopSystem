@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class CreateGunAction implements Action {
-    ActionResult actionResult = new ActionResult("guns", true);
+    ActionResult actionResult = new ActionResult("edit_guns", true);
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

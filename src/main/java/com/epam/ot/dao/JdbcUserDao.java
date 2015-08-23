@@ -179,10 +179,11 @@ public class JdbcUserDao implements UserDao {
     public void updateUser(User user) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.update"));
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, String.valueOf(user.getRole()));
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setString(4, user.getLogin());
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, String.valueOf(user.getRole()));
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, String.valueOf(user.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

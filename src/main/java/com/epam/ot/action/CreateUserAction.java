@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class CreateUserAction implements Action {
-    ActionResult actionResult = new ActionResult("users", true);
+    ActionResult actionResult = new ActionResult("edit_users", true);
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {

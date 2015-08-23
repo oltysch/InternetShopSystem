@@ -8,31 +8,43 @@
     </title>
 </head>
 <body>
-    <form>
-        <input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createBullet"
-               value="добавить"/>
-        <c:choose>
-            <c:when test="${not empty bullets}">
-                <c:forEach var="bullet" items="${bullets}" varStatus="iter">
-
-                    ${bullet.name} ${bullet.price}<input type="hidden" name="selectedBulletUuid"
-                                                         value="${bullet.uuid}"/>
-
-                    <input type="submit" name="submit"
-                           formaction="${pageContext.request.contextPath}/admin/changeBullet"
-                           value="изменить"/>
-                    <input type="submit" name="submit"
-                           formaction="${pageContext.request.contextPath}/admin/deleteBullet"
-                           value="удалить"/>
-                    <br>
-
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <%--TODO make this display in table instead this--%>
-                <div>в базе данных записи отсутствуют</div>
-            </c:otherwise>
-        </c:choose>
-    </form>
+<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
+        href="${pageContext.request.contextPath}/admin/edit_bullets">редактировать</a><br>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>UUID</td>
+        <td>CALIBER</td>
+        <td>NAME</td>
+        <td>BULLET_TYPE</td>
+        <td>PRICE</td>
+        <td>QTY</td>
+        <td>DESCRIPTION</td>
+    </tr>
+    <c:choose>
+        <c:when test="${not empty bullets}">
+            <c:forEach var="bullet" items="${bullets}" varStatus="iter">
+                <tr>
+                    <td><label>${bullet.id}</label></td>
+                    <td><label>${bullet.uuid}</label></td>
+                    <td><label>${bullet.caliber}</label></td>
+                    <td><label>${bullet.name}</label></td>
+                    <td><label>${bullet.type}</label></td>
+                    <td><label>${bullet.price}</label></td>
+                    <td><label>${bullet.qty}</label></td>
+                    <td><label>${bullet.description}</label></td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <%--TODO make this display in table instead this--%>
+            <tr>
+                <td>
+                    <div>в базе данных записи отсутствуют</div>
+                </td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+</table>
 </body>
 </html>
