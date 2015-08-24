@@ -29,33 +29,16 @@
                         <td><input name="login" type="text" value="${user.login}"/></td>
                         <td><input name="email" type="email" value="${user.email}"/></td>
                         <td><select name="role">
-                                <%--TODO load from bd--%>
-                            <c:choose>
-                                <c:when test="${user.role=='ADMIN'}">
-                                    <option value="ADMIN" selected>ADMIN</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="ADMIN">ADMIN</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${user.role=='USER'}">
-                                    <option value="USER" selected>USER</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="USER">USER</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${user.role=='GUEST'}">
-                                    <option value="GUEST" selected>GUEST</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="GUEST">GUEST</option>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:forEach var="current_role" items="${roles}">
+                                <c:choose>
+                                    <c:when test="${user.role==current_role}">
+                                        <option value="${current_role}" selected>${current_role}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${current_role}">${current_role}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </select></td>
                         <td><input name="password" type="text" value="${user.password}"/></td>
                         <td><input type="hidden" name="uuid"

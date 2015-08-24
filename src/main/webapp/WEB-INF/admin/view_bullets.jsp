@@ -1,3 +1,4 @@
+<%--
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,7 +32,7 @@
                 </c:forEach>
             </c:when>
             <c:otherwise>
-                <%--TODO make this display in table instead this--%>
+                &lt;%&ndash;TODO make this display in table instead this&ndash;%&gt;
                 <div>в базе данных записи отсутствуют</div>
             </c:otherwise>
         </c:choose>
@@ -39,3 +40,4 @@
 </a:mainTemplate>
 </body>
 </html>
+--%>

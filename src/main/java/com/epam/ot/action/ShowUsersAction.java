@@ -2,6 +2,7 @@ package com.epam.ot.action;
 
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
+import com.epam.ot.dao.UsersRolesDao;
 import com.epam.ot.users.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,18 @@ public class ShowUsersAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         List<User> users = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
+        UsersRolesDao usersRolesDao = daoFactory.createUsersRolesDao();
+        userDao.beginTransaction();
         users.addAll(userDao.findAll());
+        userDao.commitConnection();
+        usersRolesDao.beginTransaction();
+        roles.addAll(usersRolesDao.findAll());
+        usersRolesDao.commitConnection();
         req.setAttribute("users", users);
+        req.setAttribute("roles", roles);
         return result;
     }
 }

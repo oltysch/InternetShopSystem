@@ -1,6 +1,7 @@
 package com.epam.ot.action;
 
 import com.epam.ot.dao.BulletDao;
+import com.epam.ot.dao.BulletsTypesDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.products.Bullet;
@@ -21,10 +22,18 @@ public class ShowBulletsAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         List<Bullet> bullets = new ArrayList<>();
+        List<String> types = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
+        BulletsTypesDao bulletsTypesDao = daoFactory.createBulletsTypesDao();
+        bulletDao.beginTransaction();
         bullets.addAll(bulletDao.findAll());
+        bulletDao.commitConnection();
+        bulletsTypesDao.beginTransaction();
+        types.addAll(bulletsTypesDao.findAll());
+        bulletsTypesDao.commitConnection();
         req.setAttribute("bullets", bullets);
+        req.setAttribute("types", types);
         return result;
     }
 }

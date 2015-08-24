@@ -1,3 +1,4 @@
+<%--
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -29,7 +30,7 @@
                         <td><input type="text" value="${user.login}"/></td>
                         <td><input type="email" value="${user.email}"/></td>
                         <td><select>
-                                <%--TODO load from bd--%>
+                                &lt;%&ndash;TODO load from bd&ndash;%&gt;
                             <option value="ADMIN" selected="${user.role == 'ADMIN'}">ADMIN</option>
                             <option value="USER" selected="${user.role == 'USER'}">USER</option>
                             <option value="GUEST" selected="${user.role == 'GUEST'}">GUEST</option>
@@ -59,7 +60,7 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <%--TODO make this display in table instead this--%>
+            &lt;%&ndash;TODO make this display in table instead this&ndash;%&gt;
             <tr>
                 <td>
                     <div>в базе данных записи отсутствуют</div>
@@ -73,7 +74,7 @@
         <td><input type="text"/></td>
         <td><input type="email"/></td>
         <td><select>
-            <%--TODO load from bd--%>
+            &lt;%&ndash;TODO load from bd&ndash;%&gt;
             <option value="ADMIN">ADMIN</option>
             <option value="USER">USER</option>
             <option value="GUEST">GUEST</option>
@@ -85,3 +86,4 @@
 </table>
 </body>
 </html>
+--%>

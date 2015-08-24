@@ -2,6 +2,7 @@ package com.epam.ot.action;
 
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
+import com.epam.ot.dao.GunsTypesDao;
 import com.epam.ot.products.Gun;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,18 @@ public class ShowGunsAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         List<Gun> guns = new ArrayList<>();
+        List<String> types = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
+        GunsTypesDao gunsTypesDao = daoFactory.createGunsTypesDao();
+        gunDao.beginTransaction();
         guns.addAll(gunDao.findAll());
+        gunDao.commitConnection();
+        gunsTypesDao.beginTransaction();
+        types.addAll(gunsTypesDao.findAll());
+        gunsTypesDao.commitConnection();
         req.setAttribute("guns", guns);
+        req.setAttribute("types", types);
         return result;
     }
 }

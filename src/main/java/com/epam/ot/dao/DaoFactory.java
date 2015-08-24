@@ -13,6 +13,12 @@ public abstract class DaoFactory {
 
     public abstract UserDao createUserDao();
 
+    public abstract BulletsTypesDao createBulletsTypesDao();
+
+    public abstract GunsTypesDao createGunsTypesDao();
+
+    public abstract UsersRolesDao createUsersRolesDao();
+
     /*public abstract void beginConnectionScope();
 
     public abstract void beginTransaction();

@@ -32,42 +32,16 @@
                         <td><input name="name" type="text" value="${bullet.name}"/></td>
 
                         <td><select name="type">
-                                <%--TODO load from bd--%>
-                            <c:choose>
-                                <c:when test="${bullet.type=='Armor-piercing'}">
-                                    <option value="Armor-piercing" selected>Armor-piercing</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Armor-piercing">Armor-piercing</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${bullet.type=='Ball'}">
-                                    <option value="Ball" selected>Ball</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Ball">Ball</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${bullet.type=='Tracer'}">
-                                    <option value="Tracer" selected>Tracer</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Tracer">Tracer</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${bullet.type=='Incendiary'}">
-                                    <option value="Incendiary" selected>Incendiary</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Incendiary">Incendiary</option>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:forEach var="current_type" items="${types}">
+                                <c:choose>
+                                    <c:when test="${bullet.type==current_type}">
+                                        <option value="${current_type}" selected>${current_type}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${current_type}">${current_type}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </select></td>
 
                         <td><input name="price" type="number" value="${bullet.price}"/></td>

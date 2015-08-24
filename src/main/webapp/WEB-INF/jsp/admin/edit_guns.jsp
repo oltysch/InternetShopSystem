@@ -33,70 +33,16 @@
                         <td><label>${gun.id}</label></td>
                         <td><label>${gun.uuid}</label></td>
                         <td><select name="type">
-                                <%--TODO load from bd--%>
-                            <c:choose>
-                                <c:when test="${gun.type=='Pistol'}">
-                                    <option value="Pistol" selected>Pistol</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Pistol">Pistol</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Revolver'}">
-                                    <option value="Revolver" selected>Revolver</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Revolver">Revolver</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Rifle'}">
-                                    <option value="Rifle" selected>Rifle</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Rifle">Rifle</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Carbine'}">
-                                    <option value="Carbine" selected>Carbine</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Carbine">Carbine</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Assault Rifle'}">
-                                    <option value="Assault Rifle" selected>Assault Rifle</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Assault Rifle">Assault Rifle</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Machine Pistol'}">
-                                    <option value="Machine Pistol" selected>Machine Pistol</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Machine Pistol">Machine Pistol</option>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${gun.type=='Machine Gun'}">
-                                    <option value="Machine Gun" selected>Machine Gun</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="Machine Gun">Machine Gun</option>
-                                </c:otherwise>
-                            </c:choose>
-
+                            <c:forEach var="current_type" items="${types}">
+                                <c:choose>
+                                    <c:when test="${gun.type==current_type}">
+                                        <option value="${current_type}" selected>${current_type}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${current_type}">${current_type}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </select></td>
 
                         <td><input name="model" type="text" value="${gun.model}"/></td>

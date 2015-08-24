@@ -28,4 +28,19 @@ public class JdbcDaoFactory extends DaoFactory {
     public UserDao createUserDao() {
         return new JdbcUserDao(connectionPool.getConnection());
     }
+
+    @Override
+    public BulletsTypesDao createBulletsTypesDao() {
+        return new JdbcBulletsTypesDao(connectionPool.getConnection());
+    }
+
+    @Override
+    public GunsTypesDao createGunsTypesDao() {
+        return new JdbcGunsTypesDao(connectionPool.getConnection());
+    }
+
+    @Override
+    public UsersRolesDao createUsersRolesDao() {
+        return new JdbcUsersRolesDao(connectionPool.getConnection());
+    }
 }
