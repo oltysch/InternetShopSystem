@@ -90,7 +90,7 @@ public class JdbcGunsTypesDao implements GunsTypesDao {
     }
 
     @Override
-    public void commitConnection() {
+    public void endTransaction() {
         try {
             connection.commit();
         } catch (SQLException e) {
@@ -99,9 +99,18 @@ public class JdbcGunsTypesDao implements GunsTypesDao {
     }
 
     @Override
-    public void rollbackConnection() {
+    public void rollbackTransaction() {
         try {
             connection.rollback();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void close() {
+        try {
+            connection.close();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

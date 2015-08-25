@@ -25,7 +25,7 @@ public class MakeAdminAction implements Action {
         User user = userDao.findByUuid(UUID.fromString(userUuid));
         user.setRole(Role.ADMIN);
         userDao.updateUser(user);
-        userDao.commitConnection();
+        userDao.endTransaction();
         return result;
     }
 }

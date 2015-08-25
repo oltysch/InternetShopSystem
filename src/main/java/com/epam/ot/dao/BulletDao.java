@@ -28,7 +28,9 @@ public interface BulletDao {
 
     void beginTransaction();
 
-    void commitConnection();
+    void endTransaction();
 
-    void rollbackConnection();
+    void rollbackTransaction();
+
+    void close();
 }

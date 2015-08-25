@@ -24,7 +24,7 @@ public class CreateUserAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
         userDao.insert(user);
-        userDao.commitConnection();
+        userDao.endTransaction();
         return actionResult;
     }
 }

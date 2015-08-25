@@ -26,10 +26,10 @@ public class ShowGunsAction implements Action {
         GunsTypesDao gunsTypesDao = daoFactory.createGunsTypesDao();
         gunDao.beginTransaction();
         guns.addAll(gunDao.findAll());
-        gunDao.commitConnection();
+        gunDao.endTransaction();
         gunsTypesDao.beginTransaction();
         types.addAll(gunsTypesDao.findAll());
-        gunsTypesDao.commitConnection();
+        gunsTypesDao.endTransaction();
         req.setAttribute("guns", guns);
         req.setAttribute("types", types);
         return result;

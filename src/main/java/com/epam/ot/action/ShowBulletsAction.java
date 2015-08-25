@@ -28,10 +28,10 @@ public class ShowBulletsAction implements Action {
         BulletsTypesDao bulletsTypesDao = daoFactory.createBulletsTypesDao();
         bulletDao.beginTransaction();
         bullets.addAll(bulletDao.findAll());
-        bulletDao.commitConnection();
+        bulletDao.endTransaction();
         bulletsTypesDao.beginTransaction();
         types.addAll(bulletsTypesDao.findAll());
-        bulletsTypesDao.commitConnection();
+        bulletsTypesDao.endTransaction();
         req.setAttribute("bullets", bullets);
         req.setAttribute("types", types);
         return result;

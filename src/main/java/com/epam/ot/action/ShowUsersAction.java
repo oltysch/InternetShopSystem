@@ -26,10 +26,10 @@ public class ShowUsersAction implements Action {
         UsersRolesDao usersRolesDao = daoFactory.createUsersRolesDao();
         userDao.beginTransaction();
         users.addAll(userDao.findAll());
-        userDao.commitConnection();
+        userDao.endTransaction();
         usersRolesDao.beginTransaction();
         roles.addAll(usersRolesDao.findAll());
-        usersRolesDao.commitConnection();
+        usersRolesDao.endTransaction();
         req.setAttribute("users", users);
         req.setAttribute("roles", roles);
         return result;

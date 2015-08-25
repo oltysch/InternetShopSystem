@@ -11,7 +11,9 @@ public interface UsersRolesDao {
 
     void beginTransaction();
 
-    void commitConnection();
+    void endTransaction();
 
-    void rollbackConnection();
+    void rollbackTransaction();
+
+    void close();
 }

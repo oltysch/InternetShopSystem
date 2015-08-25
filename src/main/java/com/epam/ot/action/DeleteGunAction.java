@@ -23,7 +23,7 @@ public class DeleteGunAction implements Action {
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();
         gunDao.remove(gun);
-        gunDao.commitConnection();
+        gunDao.endTransaction();
         return actionResult;
     }
 }

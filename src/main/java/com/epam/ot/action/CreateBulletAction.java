@@ -23,7 +23,7 @@ public class CreateBulletAction implements Action {
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();
         bulletDao.insert(bullet);
-        bulletDao.commitConnection();
+        bulletDao.endTransaction();
         return actionResult;
     }
 }

@@ -23,7 +23,7 @@ public class DeleteBulletAction implements Action {
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();
         bulletDao.remove(bullet);
-        bulletDao.commitConnection();
+        bulletDao.endTransaction();
         return actionResult;
     }
 }

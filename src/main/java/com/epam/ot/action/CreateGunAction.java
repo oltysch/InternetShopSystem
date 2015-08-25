@@ -23,7 +23,7 @@ public class CreateGunAction implements Action {
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();
         gunDao.insert(gun);
-        gunDao.commitConnection();
+        gunDao.endTransaction();
         return actionResult;
     }
 }

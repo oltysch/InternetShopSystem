@@ -24,7 +24,7 @@ public class ChangeUserAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
         userDao.updateUser(user);
-        userDao.commitConnection();
+        userDao.endTransaction();
         return actionResult;
     }
 }

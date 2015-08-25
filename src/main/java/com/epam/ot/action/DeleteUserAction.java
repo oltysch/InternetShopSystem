@@ -24,7 +24,7 @@ public class DeleteUserAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
         userDao.remove(user);
-        userDao.commitConnection();
+        userDao.endTransaction();
         return actionResult;
     }
 }

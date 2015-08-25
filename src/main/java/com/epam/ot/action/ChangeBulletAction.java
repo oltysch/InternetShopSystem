@@ -23,7 +23,7 @@ public class ChangeBulletAction implements Action {
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();
         bulletDao.update(bullet);
-        bulletDao.commitConnection();
+        bulletDao.endTransaction();
         return actionResult;
     }
 }
