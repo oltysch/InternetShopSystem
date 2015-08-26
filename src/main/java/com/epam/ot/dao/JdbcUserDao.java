@@ -1,7 +1,7 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.users.Role;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.Role;
+import com.epam.ot.entity.User;
 import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;

@@ -1,6 +1,6 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Bullet;
+import com.epam.ot.entity.Bullet;
 import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;

@@ -3,8 +3,8 @@ package com.epam.ot;
 import com.epam.ot.action.Action;
 import com.epam.ot.action.ActionFactory;
 import com.epam.ot.action.ActionResult;
-import com.epam.ot.users.Role;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.Role;
+import com.epam.ot.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

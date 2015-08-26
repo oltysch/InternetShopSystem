@@ -3,16 +3,14 @@ package com.epam.ot.action;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
-import com.epam.ot.products.Gun;
-import com.epam.ot.products.Product;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.Product;
+import com.epam.ot.entity.ShoppingCart;
+import com.epam.ot.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class AddToCartAction implements Action {
@@ -25,24 +23,11 @@ public class AddToCartAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String selectedProductUuid = req.getParameter("selectedProduct");
-        String productType = req.getParameter("productType");
-        logger.info("selectedProduct=" + selectedProductUuid);
-        logger.info("productType=" + productType);
-        User user = (User) req.getSession().getAttribute("user");
-        logger.info("userLogin=" + user.getLogin());
+        UUID selectedProductUuid = UUID.fromString(req.getParameter("selectedProductUuid"));
+        logger.info("selectedProductUuid=" + selectedProductUuid);
+        ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
         DaoFactory daoFactory = DaoFactory.getInstance();
-        Product product;
-        //TODO simplify this
-        if (productType.equals("Bullet")) {
-            BulletDao bulletDao = daoFactory.createBulletDao();
-            product = bulletDao.findByUuid(UUID.fromString(selectedProductUuid));
-        } else /*(productType.equals("Gun"))*/ {
-            GunDao gunDao = daoFactory.createGunDao();
-            product = gunDao.findByUuid(UUID.fromString(selectedProductUuid));
-        }
-        user.addProduct(product);
-//        req.getSession().setAttribute("cart", guns);
+        cart.addProduct(selectedProductUuid);
         return result;
     }
 }

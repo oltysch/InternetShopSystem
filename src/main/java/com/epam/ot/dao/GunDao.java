@@ -1,8 +1,7 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Gun;
+import com.epam.ot.entity.Gun;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.UUID;
 

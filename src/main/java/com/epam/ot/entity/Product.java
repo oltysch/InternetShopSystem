@@ -3,7 +3,7 @@
  * The Basic class from Product
  */
 
-package com.epam.ot.products;
+package com.epam.ot.entity;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -1,4 +1,4 @@
-package com.epam.ot.users;
+package com.epam.ot.entity;
 
 public enum Role {
     ADMIN, USER, GUEST

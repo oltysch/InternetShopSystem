@@ -1,6 +1,6 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Gun;
+import com.epam.ot.entity.Gun;
 import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;

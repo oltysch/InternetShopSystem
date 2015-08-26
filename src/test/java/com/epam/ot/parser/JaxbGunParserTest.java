@@ -1,6 +1,6 @@
 package com.epam.ot.parser;
 
-import com.epam.ot.products.Gun;
+import com.epam.ot.entity.Gun;
 import com.epam.ot.writer.GunWriter;
 import com.epam.ot.writer.JaxbGunWriter;
 import org.junit.After;
@@ -10,8 +10,6 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-
-import static org.junit.Assert.*;
 
 public class JaxbGunParserTest {
 

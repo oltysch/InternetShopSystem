@@ -3,7 +3,7 @@ package com.epam.ot.action;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.dao.UsersRolesDao;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,6 +1,6 @@
 package com.epam.ot.writer;
 
-import com.epam.ot.products.Gun;
+import com.epam.ot.entity.Gun;
 
 import java.io.File;
 

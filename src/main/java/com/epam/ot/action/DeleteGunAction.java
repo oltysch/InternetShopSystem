@@ -2,7 +2,7 @@ package com.epam.ot.action;
 
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
-import com.epam.ot.products.Gun;
+import com.epam.ot.entity.Gun;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

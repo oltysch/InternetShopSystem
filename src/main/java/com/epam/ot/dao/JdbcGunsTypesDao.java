@@ -1,7 +1,5 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Bullet;
-import com.epam.ot.products.Gun;
 import com.epam.ot.util.PropertyManager;
 
 import java.sql.Connection;
@@ -10,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class JdbcGunsTypesDao implements GunsTypesDao {
     private final Connection connection;

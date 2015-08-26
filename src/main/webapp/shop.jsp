@@ -11,8 +11,8 @@
 <a:mainTemplate>
     <c:forEach var="product" items="${products}" varStatus="iter">
         <form action="${pageContext.request.contextPath}/gunshop/addToCart" method="post">
-                ${product.name}<input type="hidden" name="selectedProduct" value="${product.uuid}"/>
-            <input type="hidden" name="productType" value="${product.getClass().getSimpleName()}"/>
+                ${product.name}<input type="hidden" name="selectedProductUuid" value="${product.uuid}"/>
+                <%--<input type="hidden" name="productType" value="${product.getClass().getSimpleName()}"/>--%>
             <input type="submit" name="submit" value="добавить в корзину"/><br>
         </form>
     </c:forEach>

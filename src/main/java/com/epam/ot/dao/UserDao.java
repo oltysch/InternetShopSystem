@@ -1,9 +1,7 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.users.Role;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.User;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.UUID;
 

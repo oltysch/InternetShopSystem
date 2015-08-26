@@ -3,9 +3,7 @@ package com.epam.ot.action;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.BulletsTypesDao;
 import com.epam.ot.dao.DaoFactory;
-import com.epam.ot.dao.UserDao;
-import com.epam.ot.products.Bullet;
-import com.epam.ot.users.User;
+import com.epam.ot.entity.Bullet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

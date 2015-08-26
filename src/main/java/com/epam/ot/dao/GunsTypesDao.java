@@ -1,9 +1,6 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Bullet;
-
 import java.util.List;
-import java.util.UUID;
 
 public interface GunsTypesDao {
     List<String> findAll();

@@ -1,4 +1,4 @@
-package com.epam.ot.products;
+package com.epam.ot.entity;
 
 import javax.xml.bind.annotation.*;
 

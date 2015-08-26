@@ -1,6 +1,6 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.products.Bullet;
+import com.epam.ot.entity.Bullet;
 
 import java.util.List;
 import java.util.UUID;

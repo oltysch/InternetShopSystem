@@ -1,1 +1,0 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.epam.com/GunShop", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED) package com.epam.ot.products;
