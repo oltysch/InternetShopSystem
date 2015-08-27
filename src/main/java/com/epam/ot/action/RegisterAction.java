@@ -4,9 +4,12 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.Role;
 import com.epam.ot.entity.User;
+import com.epam.ot.util.PropertyManager;
+import com.epam.ot.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 import java.util.UUID;
 
 public class RegisterAction implements Action {
@@ -22,6 +25,16 @@ public class RegisterAction implements Action {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        String registerError;
+        registerError = Validator.isLoginValid(login);
+        if (registerError == null) registerError = Validator.isEmailValid(email);
+        if (registerError == null) registerError = Validator.isPasswordValid(password);
+
+        if (registerError != null) {
+            req.setAttribute("registerError", registerError);
+            return new ActionResult("register");
+        }
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         User user = new User(login, email, Role.USER, password);
@@ -30,7 +43,5 @@ public class RegisterAction implements Action {
         req.setAttribute("login", user.getLogin());
         req.setAttribute("password", user.getPassword());
         return result;
-
-//        TODO make login email and password checking
     }
 }

@@ -21,6 +21,8 @@
             <input name="email" type="email" required placeholder="Введите ваш email">
             <input name="password" type="password" required placeholder="Введите пароль">
             <input class="selector" type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
+
+            <div style="color: red">${registerError}</div>
             <footer class="clearfix">
             </footer>
         </form>

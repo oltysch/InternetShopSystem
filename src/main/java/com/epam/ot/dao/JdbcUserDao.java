@@ -222,10 +222,7 @@ public class JdbcUserDao implements UserDao {
         boolean res = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.delete"));
-            preparedStatement.setLong(1, user.getId());
-            preparedStatement.setObject(2, user.getUuid());
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setObject(1, user.getUuid());
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {

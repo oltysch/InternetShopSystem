@@ -26,6 +26,9 @@ public class LoginAction implements Action {
         if (user != null && (password.equals(user.getPassword()))) {
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("cart", cart);
+            Cookie cookie = new Cookie("xid", "udfyuiosdyty6tafuifteyfsef");
+            cookie.setMaxAge(60);
+            resp.addCookie(cookie);
             result = new ActionResult("products", true);
         } else {
             req.setAttribute("login", login);
