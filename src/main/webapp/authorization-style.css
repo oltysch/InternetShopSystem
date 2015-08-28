@@ -85,6 +85,9 @@ input[type="submit"] {
 
 #login-form input {
     font-size: 14px;
+}
+
+#login-form input[type="submit"] {
     text-transform: uppercase;
 }
 

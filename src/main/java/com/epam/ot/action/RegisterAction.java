@@ -4,12 +4,13 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.Role;
 import com.epam.ot.entity.User;
-import com.epam.ot.util.PropertyManager;
-import com.epam.ot.validator.Validator;
+import com.epam.ot.security.PasswordHashing;
+import com.epam.ot.security.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.UUID;
 
 public class RegisterAction implements Action {
@@ -24,6 +25,7 @@ public class RegisterAction implements Action {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        String hashedPassword;
 
         String registerError;
         registerError = Validator.isLoginValid(login);
@@ -35,13 +37,15 @@ public class RegisterAction implements Action {
             return new ActionResult("register");
         }
 
+        hashedPassword = PasswordHashing.generatePasswordHash(password);
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
-        User user = new User(login, email, Role.USER, password);
+        User user = new User(login, email, Role.USER, hashedPassword);
         user.setUuid(UUID.randomUUID());
         userDao.insert(user);
-        req.setAttribute("login", user.getLogin());
-        req.setAttribute("password", user.getPassword());
+        req.setAttribute("login", login);
+        req.setAttribute("password", password);
         return result;
     }
 }

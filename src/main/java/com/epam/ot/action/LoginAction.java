@@ -4,6 +4,7 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
+import com.epam.ot.security.PasswordHashing;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,16 +20,15 @@ public class LoginAction implements Action {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         User user = userDao.findByLogin(login);
-        ShoppingCart cart = new ShoppingCart();
 
         //TODO use a cookies
-//        Cookie cookie = new Cookie("xid", "dkufyiaugyu87ht8h479strgh7846");
-        if (user != null && (password.equals(user.getPassword()))) {
+        if (user != null && (PasswordHashing.validatePassword(password, user.getPassword()))) {
+            ShoppingCart cart = new ShoppingCart();
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("cart", cart);
-            Cookie cookie = new Cookie("xid", "udfyuiosdyty6tafuifteyfsef");
-            cookie.setMaxAge(60);
-            resp.addCookie(cookie);
+//            Cookie cookie = new Cookie("xid", "udfyuiosdyty6tafuifteyfsef");
+//            cookie.setMaxAge(60);
+//            resp.addCookie(cookie);
             result = new ActionResult("products", true);
         } else {
             req.setAttribute("login", login);

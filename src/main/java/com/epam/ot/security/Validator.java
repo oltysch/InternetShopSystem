@@ -1,4 +1,4 @@
-package com.epam.ot.validator;
+package com.epam.ot.security;
 
 public class Validator {
     public static String isLoginValid(String login) {
@@ -22,10 +22,10 @@ public class Validator {
     }
 
     public static String isPasswordValid(String password) {
-        if (password.length() > 60) {
+        if (password.length() > 24) {
             return "error.password.too_long";
         }
-        if (!password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$")) {
+        if (!password.matches("[A-Za-z0-9_]+")) {
             return "error.password.incorrect";
         }
         return null;

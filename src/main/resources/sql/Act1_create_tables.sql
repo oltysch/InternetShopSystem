@@ -51,9 +51,9 @@ CREATE TABLE USERS
 (
   id       BIGINT AUTO_INCREMENT PRIMARY KEY   NOT NULL,
   uuid     UUID UNIQUE                         NOT NULL,
-  login VARCHAR(25) UNIQUE                  NOT NULL,
+  login    VARCHAR(25) UNIQUE                     NOT NULL,
   email    VARCHAR(60) UNIQUE                  NOT NULL,
   role     VARCHAR(30)                         NOT NULL,
-  password VARCHAR(60) NOT NULL,
+  password VARCHAR(200)                           NOT NULL,
   FOREIGN KEY (role) REFERENCES ROLE (role)
 );
