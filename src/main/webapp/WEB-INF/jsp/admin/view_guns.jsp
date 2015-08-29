@@ -37,11 +37,11 @@
                         <td><label>${gun.price}</label></td>
                         <td><label>${gun.origin}</label></td>
                         <td><label>${gun.description}</label></td>
-                        <td><label>${gun.ttc.firingRange}</label></td>
-                        <td><label>${gun.ttc.effectiveFiringRange}</label></td>
-                        <td><label>${gun.ttc.magazineCapacity}</label></td>
-                        <td><label>${gun.ttc.caliber}</label></td>
-                        <td><label>${gun.ttc.fireRate}</label></td>
+                        <td><label>${gun.firingRange}</label></td>
+                        <td><label>${gun.effectiveFiringRange}</label></td>
+                        <td><label>${gun.magazineCapacity}</label></td>
+                        <td><label>${gun.caliber}</label></td>
+                        <td><label>${gun.fireRate}</label></td>
                     </form>
                 </tr>
             </c:forEach>

@@ -25,7 +25,7 @@
         <c:when test="${not empty bullets}">
             <c:forEach var="bullet" items="${bullets}" varStatus="iter">
                 <tr>
-                    <form>
+                    <form action="${pageContext.request.contextPath}/admin/changeBullet">
                         <td><label>${bullet.id}</label></td>
                         <td><label>${bullet.uuid}</label></td>
                         <td><input name="caliber" type="text" value="${bullet.caliber}"/></td>
@@ -44,9 +44,11 @@
                             </c:forEach>
                         </select></td>
 
-                        <td><input name="price" type="number" value="${bullet.price}"/></td>
-                        <td><input name="qty" type="number" value="${bullet.qty}"/></td>
+                        <td><input name="price" type="text" value="${bullet.price}"/></td>
+                        <td><input name="qty" type="text" value="${bullet.qty}"/></td>
                         <td><input name="description" type="text" value="${bullet.description}"/></td>
+                        <td><input type="hidden" name="uuid"
+                                   value="${bullet.uuid}"/>
                         <td><input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/changeBullet"
                                    value="обновить"/>
@@ -68,7 +70,7 @@
         </c:otherwise>
     </c:choose>
     <tr>
-        <form>
+        <form action="${pageContext.request.contextPath}/admin/createBullet">
             <td><label></label></td>
             <td><label></label></td>
             <td><input name="caliber" type="text"/></td>
@@ -81,8 +83,8 @@
                 <option value="Incendiary">Incendiary</option>
             </select></td>
 
-            <td><input name="price" type="number"/></td>
-            <td><input name="qty" type="number"/></td>
+            <td><input name="price" type="text"/></td>
+            <td><input name="qty" type="text"/></td>
             <td><input name="description" type="text"/></td>
             <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createBullet"
                        value="добавить"/>

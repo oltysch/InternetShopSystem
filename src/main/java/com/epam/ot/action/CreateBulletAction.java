@@ -17,7 +17,14 @@ public class CreateBulletAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), Double.parseDouble(req.getParameter("price")), Integer.parseInt(req.getParameter("price")));
+        String priceString = req.getParameter("price");
+        double price;
+        try {
+            price = Double.parseDouble(priceString);
+        } catch (NumberFormatException | NullPointerException e) {
+            price = 0;
+        }
+        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), price, Integer.parseInt(req.getParameter("price")));
         bullet.setUuid(UUID.randomUUID());
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();

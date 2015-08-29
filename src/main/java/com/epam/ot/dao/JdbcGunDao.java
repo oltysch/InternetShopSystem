@@ -27,7 +27,7 @@ public class JdbcGunDao implements GunDao {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -52,7 +52,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -78,7 +78,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setObject(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -105,7 +105,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -131,7 +131,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, model);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -157,7 +157,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, origin);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -183,7 +183,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -210,7 +210,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -237,7 +237,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -264,7 +264,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -291,7 +291,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -318,7 +318,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(12), resultSet.getInt(11), resultSet.getInt(13), resultSet.getInt(9), resultSet.getInt(10));
+                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
                 gun.setId(resultSet.getInt(1));
                 gun.setUuid((UUID) resultSet.getObject(2));
                 gun.setDescription(resultSet.getString(7));
@@ -345,13 +345,12 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setDouble(3, gun.getPrice());
             preparedStatement.setString(4, gun.getOrigin());
             preparedStatement.setString(5, gun.getDescription());
-            preparedStatement.setObject(6, gun.getUuid());
-            preparedStatement.setInt(7, gun.getTtc().getFiringRange());
-            preparedStatement.setInt(8, gun.getTtc().getEffectiveFiringRange());
-            preparedStatement.setInt(9, gun.getTtc().getMagazineCapacity());
-            preparedStatement.setString(10, gun.getTtc().getCaliber());
-            preparedStatement.setInt(11, gun.getTtc().getFireRate());
-            preparedStatement.setObject(12, gun.getUuid());
+            preparedStatement.setInt(6, gun.getFiringRange());
+            preparedStatement.setInt(7, gun.getEffectiveFiringRange());
+            preparedStatement.setInt(8, gun.getMagazineCapacity());
+            preparedStatement.setString(9, gun.getCaliber());
+            preparedStatement.setInt(10, gun.getFireRate());
+            preparedStatement.setObject(11, gun.getUuid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -368,18 +367,17 @@ public class JdbcGunDao implements GunDao {
     public void insert(Gun gun) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.insert"));
-            preparedStatement.setObject(1, gun.getUuid());
-            preparedStatement.setString(2, gun.getType());
-            preparedStatement.setString(3, gun.getModel());
-            preparedStatement.setDouble(4, gun.getPrice());
-            preparedStatement.setString(5, gun.getOrigin());
-            preparedStatement.setString(6, gun.getDescription());
-            preparedStatement.setObject(7, gun.getUuid());
-            preparedStatement.setInt(8, gun.getTtc().getFiringRange());
-            preparedStatement.setInt(9, gun.getTtc().getEffectiveFiringRange());
-            preparedStatement.setInt(10, gun.getTtc().getMagazineCapacity());
-            preparedStatement.setString(11, gun.getTtc().getCaliber());
-            preparedStatement.setInt(12, gun.getTtc().getFireRate());
+            preparedStatement.setString(1, gun.getType());
+            preparedStatement.setString(2, gun.getModel());
+            preparedStatement.setDouble(3, gun.getPrice());
+            preparedStatement.setString(4, gun.getOrigin());
+            preparedStatement.setString(5, gun.getDescription());
+            preparedStatement.setInt(6, gun.getFiringRange());
+            preparedStatement.setInt(7, gun.getEffectiveFiringRange());
+            preparedStatement.setInt(8, gun.getMagazineCapacity());
+            preparedStatement.setString(9, gun.getCaliber());
+            preparedStatement.setInt(10, gun.getFireRate());
+            preparedStatement.setObject(11, gun.getUuid());
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {

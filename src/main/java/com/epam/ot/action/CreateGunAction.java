@@ -17,8 +17,16 @@ public class CreateGunAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        Gun gun = new Gun(req.getParameter("type"), req.getParameter("model"), Double.parseDouble(req.getParameter("price")), req.getParameter("origin"), req.getParameter("caliber"), Integer.parseInt(req.getParameter("magazineCapacity")), Integer.parseInt(req.getParameter("fireRate")), Integer.parseInt(req.getParameter("firingRange")), Integer.parseInt(req.getParameter("effectiveFiringRange")));
+        String priceString = req.getParameter("price");
+        double price;
+        try {
+            price = Double.parseDouble(priceString);
+        } catch (NumberFormatException | NullPointerException e) {
+            price = 0;
+        }
+        Gun gun = new Gun(req.getParameter("type"), req.getParameter("model"), price, req.getParameter("origin"), req.getParameter("caliber"), Integer.parseInt(req.getParameter("magazineCapacity")), Integer.parseInt(req.getParameter("fireRate")), Integer.parseInt(req.getParameter("firingRange")), Integer.parseInt(req.getParameter("effectiveFiringRange")));
         gun.setUuid(UUID.randomUUID());
+        gun.setDescription(req.getParameter("description"));
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();

@@ -14,9 +14,7 @@ public abstract class Product {
     private long id;
     private UUID uuid;
     private String name;
-    //TODO make price class
     private Double price;
-    //TODO make applying for this
     private String description;
 
     public Product(String name, Double price) {

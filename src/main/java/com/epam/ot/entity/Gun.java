@@ -6,23 +6,46 @@ import javax.xml.bind.annotation.*;
         //TODO fix xsd and this
         "type",
         "model",
-        "origin",
-        "ttc"})
+        "origin"})
 @XmlRootElement(name = "gun")
 public class Gun extends Product {
     @XmlElement
     private String origin;
     @XmlElement
     private String type;
-    @XmlElement(name = "TTC")
-    private Gun.Ttc ttc;
+    //TODO make metric class
+    /*@XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "TTC", propOrder = {
+            "caliber",
+            "magazineCapacity",
+            "fireRate",
+            "firingRange",
+            "effectiveFiringRange"
+    })*/
+    @XmlElementWrapper(name = "TTC")
+    @XmlElement
+    private int firingRange;
+    @XmlElement
+    private int effectiveFiringRange;
+    @XmlElement
+    private int magazineCapacity;
+    //TODO make caliber class
+    @XmlElement
+    private String caliber;
+    //TODO make fire rate class
+    @XmlElement
+    private int fireRate;
 
     public Gun(String type, String model, Double price, String origin, String caliber, int magazineCapacity,
                int fireRate, int firingRange, int effectiveFiringRange) {
         super(model, price);
         this.origin = origin;
         this.type = type;
-        ttc = new Ttc(caliber, magazineCapacity, fireRate, firingRange, effectiveFiringRange);
+        this.caliber = caliber;
+        this.magazineCapacity = magazineCapacity;
+        this.fireRate = fireRate;
+        this.firingRange = firingRange;
+        this.effectiveFiringRange = effectiveFiringRange;
     }
 
     public Gun() {
@@ -31,7 +54,7 @@ public class Gun extends Product {
 
     @Override
     public String toString() {
-        return type + ": " + getModel() + " " + origin + "\n    Cal.: " + ttc.caliber + " x " + ttc.magazineCapacity + ", fRate: " + ttc.fireRate + " FR: " + ttc.firingRange + " EffectiveFR: " + ttc.effectiveFiringRange;
+        return type + ": " + getModel() + " " + origin + "\n    Cal.: " + caliber + " x " + magazineCapacity + ", fRate: " + fireRate + " FR: " + firingRange + " EffectiveFR: " + effectiveFiringRange;
     }
 
     @XmlElement(name = "model")
@@ -59,45 +82,7 @@ public class Gun extends Product {
         this.origin = origin;
     }
 
-    public Ttc getTtc() {
-        return ttc;
-    }
-
-    public void setTtc(Ttc ttc) {
-        this.ttc = ttc;
-    }
-
     public enum Handy {One_handed, Two_handed;}
-
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "TTC", propOrder = {
-            "caliber",
-            "magazineCapacity",
-            "fireRate",
-            "firingRange",
-            "effectiveFiringRange"
-    })
-    //TODO make not static
-    public static class Ttc {
-        //TODO make metric class
-        private int firingRange;
-        private int effectiveFiringRange;
-        private int magazineCapacity;
-        //TODO make caliber class
-        private String caliber;
-        //TODO make fire rate class
-        private int fireRate;
-
-        public Ttc() {
-        }
-
-        public Ttc(String caliber, int magazineCapacity, int fireRate, int firingRange, int effectiveFiringRange) {
-            this.caliber = caliber;
-            this.magazineCapacity = magazineCapacity;
-            this.fireRate = fireRate;
-            this.firingRange = firingRange;
-            this.effectiveFiringRange = effectiveFiringRange;
-        }
 
         public int getFiringRange() {
             return firingRange;
@@ -138,5 +123,4 @@ public class Gun extends Product {
         public void setCaliber(String caliber) {
             this.caliber = caliber;
         }
-    }
 }

@@ -22,7 +22,12 @@ public class LoginAction implements Action {
         User user = userDao.findByLogin(login);
 
         //TODO use a cookies
-        if (user != null && (PasswordHashing.validatePassword(password, user.getPassword()))) {
+        if (user == null || !PasswordHashing.validatePassword(password, user.getPassword())) {
+            req.setAttribute("login", login);
+            //TODO use internatioinal outputs
+            req.setAttribute("loginError", "Wrong login or password!");
+            result = new ActionResult("login");
+        } else if (!user.isBanned()) {
             ShoppingCart cart = new ShoppingCart();
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("cart", cart);
@@ -32,7 +37,8 @@ public class LoginAction implements Action {
             result = new ActionResult("products", true);
         } else {
             req.setAttribute("login", login);
-            req.setAttribute("loginError", "Wrong login or password!");
+            //TODO use internatioinal outputs
+            req.setAttribute("loginError", "Sorry, you are banned");
             result = new ActionResult("login");
         }
         return result;

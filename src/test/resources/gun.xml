@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gun xmlns="http://www.epam.com/GunShop"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://www.epam.com/GunShop http://www.epam.com/GunShop/gun.xsd">
+<gun>
     <type>pistol</type>
     <model>Glock-18</model>
     <origin>Austria</origin>

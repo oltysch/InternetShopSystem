@@ -14,6 +14,8 @@
             <c:when test="${not empty user}">
                 ${user.login}<br>                                <%--TODO check russian encodings--%>
                 <a href="${pageContext.request.contextPath}/gunshop/shopcart">shopcart</a><br>
+
+                <div>cash ${user.cash}</div>
                 <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>
             </c:when>
             <c:otherwise>

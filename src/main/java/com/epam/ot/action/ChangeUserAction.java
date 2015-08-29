@@ -20,6 +20,13 @@ public class ChangeUserAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("login"), req.getParameter("email"), Role.valueOf(req.getParameter("role")), req.getParameter("password"));
         user.setUuid(UUID.fromString(req.getParameter("uuid")));
+        String cash = req.getParameter("cash");
+        try {
+            user.setCash(Double.parseDouble(cash));
+        } catch (NumberFormatException | NullPointerException e) {
+            user.setCash(0);
+        }
+        user.setBanned(Boolean.parseBoolean(req.getParameter("banned")));
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

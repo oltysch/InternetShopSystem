@@ -18,12 +18,14 @@
         <td>EMAIL</td>
         <td>ROLE</td>
         <td>PASSWORD</td>
+        <td>CASH</td>
+        <td>BANNED</td>
     </tr>
     <c:choose>
         <c:when test="${not empty users}">
             <c:forEach var="user" items="${users}" varStatus="iter">
                 <tr>
-                    <form>
+                    <form action="${pageContext.request.contextPath}/admin/changeUser">
                         <td><label>${user.id}</label></td>
                         <td><label>${user.uuid}</label></td>
                         <td><input name="login" type="text" value="${user.login}"/></td>
@@ -41,21 +43,13 @@
                             </c:forEach>
                         </select></td>
                         <td><input name="password" type="text" value="${user.password}"/></td>
+                        <td><input name="cash" type="text" value="${user.cash}"/></td>
+                        <td><input name="banned" type="checkbox" value="${user.banned}"/></td>
                         <td><input type="hidden" name="uuid"
                                    value="${user.uuid}"/>
                             <input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/changeUser"
                                    value="обновить"/>
-                            <c:if test="${user.role == 'ADMIN'}">
-                                <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/makeUser"
-                                       value="убрать права админа"/>
-                            </c:if>
-                            <c:if test="${user.role == 'USER'}">
-                                <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/makeAdmin"
-                                       value="дать права админа"/>
-                            </c:if>
                             <input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/deleteUser"
                                    value="удалить"/>
@@ -74,7 +68,7 @@
         </c:otherwise>
     </c:choose>
     <tr>
-        <form>
+        <form action="${pageContext.request.contextPath}/admin/createUser">
             <td></td>
             <td></td>
             <td><input name="login" type="text"/></td>
@@ -83,9 +77,10 @@
                 <%--TODO load from bd--%>
                 <option value="ADMIN">ADMIN</option>
                 <option value="USER" selected>USER</option>
-                <option value="GUEST">GUEST</option>
             </select></td>
             <td><input name="password" type="text"/></td>
+            <td><input name="cash" type="text"/></td>
+            <td><input name="banned" type="checkbox"/></td>
             <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createUser"
                        value="добавить"/></td>
         </form>

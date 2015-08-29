@@ -37,6 +37,8 @@ public class ActionFactory {
         actions.put("GET/admin/changeUser", new ChangeUserAction());
         actions.put("GET/admin/makeUser", new MakeUserAction());
         actions.put("GET/admin/makeAdmin", new MakeAdminAction());
+        actions.put("GET/admin/banUser", new BanUserAction());
+        actions.put("GET/admin/unbanUser", new UnbanUserAction());
         actions.put("GET/admin/deleteUser", new DeleteUserAction());
 
         actions.put("GET/admin/createGun", new CreateGunAction());

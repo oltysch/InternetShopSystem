@@ -31,6 +31,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getInt(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -56,6 +58,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getInt(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 return user;
             } else {
                 return null;
@@ -82,6 +86,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getInt(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 return user;
             } else {
                 return null;
@@ -108,6 +114,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getLong(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 return user;
             } else {
                 return null;
@@ -134,6 +142,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getLong(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 return user;
             } else {
                 return null;
@@ -160,6 +170,8 @@ public class JdbcUserDao implements UserDao {
                 User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
                 user.setId(resultSet.getLong(1));
                 user.setUuid((UUID) resultSet.getObject(2));
+                user.setCash(resultSet.getDouble(7));
+                user.setBanned(resultSet.getBoolean(8));
                 return user;
             } else {
                 return null;
@@ -183,7 +195,9 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, String.valueOf(user.getRole()));
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, String.valueOf(user.getUuid()));
+            preparedStatement.setDouble(5, user.getCash());
+            preparedStatement.setBoolean(6, user.isBanned());
+            preparedStatement.setString(7, String.valueOf(user.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -205,6 +219,8 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, String.valueOf(user.getRole()));
             preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setDouble(6, user.getCash());
+            preparedStatement.setBoolean(7, user.isBanned());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

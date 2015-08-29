@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
-public class MakeAdminAction implements Action {
+public class BanUserAction implements Action {
     private ActionResult result;
 
-    public MakeAdminAction() {
+    public BanUserAction() {
         result = new ActionResult("view_users", true);
     }
 
@@ -23,7 +23,7 @@ public class MakeAdminAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
         User user = userDao.findByUuid(UUID.fromString(userUuid));
-        user.setRole(Role.ADMIN);
+        user.setBanned(true);
         userDao.updateUser(user);
         userDao.endTransaction();
         return result;

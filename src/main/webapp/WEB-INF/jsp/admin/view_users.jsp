@@ -18,6 +18,8 @@
         <td>EMAIL</td>
         <td>ROLE</td>
         <td>PASSWORD</td>
+        <td>CASH</td>
+        <td>BANNED</td>
     </tr>
     <c:choose>
         <c:when test="${not empty users}">
@@ -29,7 +31,31 @@
                         <td><label>${user.login}</label></td>
                         <td><label>${user.email}</label></td>
                         <td><label>${user.role}</label></td>
-                        <td><label>${user.password}</label></td>
+                        <td><label>*******</label></td>
+                        <td><label>${user.cash}</label></td>
+                        <td><label>${user.banned}</label></td>
+                        <td>
+                            <c:if test="${user.role == 'ADMIN'}">
+                                <input type="submit" name="submit"
+                                       formaction="${pageContext.request.contextPath}/admin/makeUser"
+                                       value="убрать права админа"/>
+                            </c:if>
+                            <c:if test="${user.role == 'USER'}">
+                                <input type="submit" name="submit"
+                                       formaction="${pageContext.request.contextPath}/admin/makeAdmin"
+                                       value="дать права админа"/>
+                            </c:if>
+                            <c:if test="${user.banned}">
+                                <input type="submit" name="submit"
+                                       formaction="${pageContext.request.contextPath}/admin/unbanUser"
+                                       value="разбанить пользователя"/>
+                            </c:if>
+                            <c:if test="${!user.banned}">
+                                <input type="submit" name="submit"
+                                       formaction="${pageContext.request.contextPath}/admin/banUser"
+                                       value="забанить пользователя"/>
+                            </c:if>
+                        </td>
                     </form>
                 </tr>
             </c:forEach>

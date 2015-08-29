@@ -4,6 +4,7 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.Role;
 import com.epam.ot.entity.User;
+import com.epam.ot.security.PasswordHashing;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,15 @@ public class CreateUserAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = new User(req.getParameter("login"), req.getParameter("email"), Role.valueOf(req.getParameter("role")), req.getParameter("password"));
+        User user = new User(req.getParameter("login"), req.getParameter("email"), Role.valueOf(req.getParameter("role")), PasswordHashing.generatePasswordHash(req.getParameter("password")));
         user.setUuid(UUID.randomUUID());
+        String cash = req.getParameter("cash");
+        try {
+            user.setCash(Double.parseDouble(cash));
+        } catch (NumberFormatException | NullPointerException e) {
+            user.setCash(0);
+        }
+        user.setBanned(Boolean.parseBoolean(req.getParameter("banned")));
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

@@ -29,7 +29,7 @@
         <c:when test="${not empty guns}">
             <c:forEach var="gun" items="${guns}" varStatus="iter">
                 <tr>
-                    <form>
+                    <form action="${pageContext.request.contextPath}/admin/changeGun">
                         <td><label>${gun.id}</label></td>
                         <td><label>${gun.uuid}</label></td>
                         <td><select name="type">
@@ -46,15 +46,17 @@
                         </select></td>
 
                         <td><input name="model" type="text" value="${gun.model}"/></td>
-                        <td><input name="price" type="number" value="${gun.price}"/></td>
+                        <td><input name="price" type="text" value="${gun.price}"/></td>
                         <td><input name="origin" type="text" value="${gun.origin}"/></td>
                         <td><input name="description" type="text" value="${gun.description}"/></td>
-                        <td><input name="firingRange" type="number" value="${gun.ttc.firingRange}"/></td>
-                        <td><input name="effectiveFiringRange" type="number" value="${gun.ttc.effectiveFiringRange}"/>
+                        <td><input name="firingRange" type="text" value="${gun.firingRange}"/></td>
+                        <td><input name="effectiveFiringRange" type="text" value="${gun.effectiveFiringRange}"/>
                         </td>
-                        <td><input name="magazineCapacity" type="number" value="${gun.ttc.magazineCapacity}"/></td>
-                        <td><input name="caliber" type="text" value="${gun.ttc.caliber}"/></td>
-                        <td><input name="fireRate" type="number" value="${gun.ttc.fireRate}"/></td>
+                        <td><input name="magazineCapacity" type="text" value="${gun.magazineCapacity}"/></td>
+                        <td><input name="caliber" type="text" value="${gun.caliber}"/></td>
+                        <td><input name="fireRate" type="text" value="${gun.fireRate}"/></td>
+                        <td><input type="hidden" name="uuid"
+                                   value="${gun.uuid}"/>
                         <td><input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/changeGun"
                                    value="обновить"/>
@@ -76,7 +78,7 @@
         </c:otherwise>
     </c:choose>
     <tr>
-        <form>
+        <form action="${pageContext.request.contextPath}/admin/createGun">
             <td><label></label></td>
             <td><label></label></td>
             <td><select name="type">
@@ -89,16 +91,14 @@
                 <option value="Machine Gun">Machine Gun</option>
             </select></td>
             <td><input name="model" type="text"/></td>
-            <td><input name="price" type="number"/></td>
-            <td><input name="origin" type="text"/>
-                value="${gun.description}"/>
-            </td>
+            <td><input name="price" type="text"/></td>
+            <td><input name="origin" type="text"/></td>
             <td><input name="description" type="text"/></td>
-            <td><input name="firingRange" type="number"/></td>
-            <td><input name="effectiveFiringRange" type="number"/></td>
-            <td><input name="magazineCapacity" type="number"/></td>
+            <td><input name="firingRange" type="text"/></td>
+            <td><input name="effectiveFiringRange" type="text"/></td>
+            <td><input name="magazineCapacity" type="text"/></td>
             <td><input name="caliber" type="text"/></td>
-            <td><input name="fireRate" type="number"/></td>
+            <td><input name="fireRate" type="text"/></td>
             <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createGun"
                        value="добавить"/>
             </td>
