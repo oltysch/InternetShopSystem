@@ -61,7 +61,6 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <%--TODO make this display in table instead this--%>
             <tr>
                 <td>
                     <div>в базе данных записи отсутствуют</div>

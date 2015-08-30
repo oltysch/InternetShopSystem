@@ -19,6 +19,13 @@
                     <input type="submit" name="submit" value="убрать из корзины"/><br>
                 </form>
             </c:forEach>
+            <div>${price}</div>
+            <form>
+                <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/paidShopcart"
+                       value="Оплатить">
+                <input type="button" formaction="${pageContext.request.contextPath}/gunshop/clearShopcart"
+                       value="Очистить">
+            </form>
         </c:when>
         <c:otherwise>
             <div>Ваша корзина пуста</div>

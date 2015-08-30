@@ -33,7 +33,7 @@
                         <td><label>${gun.id}</label></td>
                         <td><label>${gun.uuid}</label></td>
                         <td><label>${gun.type}</label></td>
-                        <td><label>${gun.model}</label></td>
+                        <td><label>${gun.name}</label></td>
                         <td><label>${gun.price}</label></td>
                         <td><label>${gun.origin}</label></td>
                         <td><label>${gun.description}</label></td>
@@ -47,7 +47,6 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <%--TODO make this display in table instead this--%>
             <tr>
                 <td>
                     <div>в базе данных записи отсутствуют</div>

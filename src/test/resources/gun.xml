@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gun>
+    <name>Glock-18</name>
+    <price>2000</price>
     <type>pistol</type>
-    <model>Glock-18</model>
     <origin>Austria</origin>
-    <TTC>
-        <caliber>9mm</caliber>
-        <magazineCapacity>20</magazineCapacity>
-        <fireRate>100</fireRate>
-        <firingRange>100</firingRange>
-        <effectiveFiringRange>50</effectiveFiringRange>
-    </TTC>
+    <firingRange>100</firingRange>
+    <effectiveFiringRange>50</effectiveFiringRange>
+    <magazineCapacity>20</magazineCapacity>
+    <caliber>9mm</caliber>
+    <fireRate>100</fireRate>
 </gun>

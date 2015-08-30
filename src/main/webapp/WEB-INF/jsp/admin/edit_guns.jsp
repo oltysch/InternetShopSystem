@@ -45,7 +45,7 @@
                             </c:forEach>
                         </select></td>
 
-                        <td><input name="model" type="text" value="${gun.model}"/></td>
+                        <td><input name="model" type="text" value="${gun.name}"/></td>
                         <td><input name="price" type="text" value="${gun.price}"/></td>
                         <td><input name="origin" type="text" value="${gun.origin}"/></td>
                         <td><input name="description" type="text" value="${gun.description}"/></td>
@@ -69,7 +69,6 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <%--TODO make this display in table instead this--%>
             <tr>
                 <td>
                     <div>в базе данных записи отсутствуют</div>

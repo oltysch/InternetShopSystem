@@ -3,26 +3,24 @@ package com.epam.ot.action;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
-import com.epam.ot.entity.Gun;
+import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.Product;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.ShoppingCartItem;
+import com.epam.ot.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowCartAction implements Action {
-    private ActionResult result;
-
-    public ShowCartAction() {
-        this.result = new ActionResult("shopcart");
-    }
+public class PaidCartAction implements Action {
+    ActionResult result;
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> products = new ArrayList<>();
+        User user = (User) req.getSession().getAttribute("user");
         ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
@@ -40,9 +38,21 @@ public class ShowCartAction implements Action {
         }
         bulletDao.endTransaction();
         gunDao.endTransaction();
-        req.setAttribute("products", products);
-        req.setAttribute("price", Math.round(price));
-        req.setAttribute("paidError", req.getAttribute("paidError"));
+        double cash = user.getCash();
+        if (cash >= price) {
+            cash -= price;
+            user.setCash(cash);
+            shoppingCart.clearCart();
+            req.setAttribute("paidResult", "Товар успешно оплачен!");
+            result = new ActionResult("paid_result");
+            UserDao userDao = daoFactory.createUserDao();
+            userDao.beginTransaction();
+            userDao.updateUser(user);
+            userDao.endTransaction();
+        } else {
+            result = new ActionResult("paid_result");
+            req.setAttribute("paidResult", "Ошибка на вашем счете не достаточно средств");
+        }
         return result;
     }
 }

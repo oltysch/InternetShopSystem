@@ -112,6 +112,10 @@ body a {
     /*padding: 8px;*/
 }
 
+#sidebar .products .top a {
+    color: white;
+}
+
 #sidebar div[type="list"] {
     margin: 0px 6px 18px 6px;
 }

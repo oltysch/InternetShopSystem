@@ -13,9 +13,9 @@ public class LogoutAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        Cookie cookie = new Cookie("xid", "");
-        cookie.setMaxAge(0);
-        resp.addCookie(cookie);
+//        Cookie cookie = new Cookie("xid", "");
+//        cookie.setMaxAge(0);
+//        resp.addCookie(cookie);
         req.getSession().invalidate();
         return result;
     }

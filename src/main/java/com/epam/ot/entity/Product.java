@@ -5,16 +5,22 @@
 
 package com.epam.ot.entity;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.*;
 import java.util.UUID;
 
 @XmlAccessorType(XmlAccessType.NONE)
+/*@XmlType(name = "", propOrder = {
+        "name",
+        "price",
+        "description"})*/
 public abstract class Product {
     private long id;
     private UUID uuid;
+    @XmlElement
     private String name;
+    @XmlElement(required = true)
     private Double price;
+    @XmlElement
     private String description;
 
     public Product(String name, Double price) {
@@ -65,4 +71,6 @@ public abstract class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public abstract ProductBlock toBlock();
 }

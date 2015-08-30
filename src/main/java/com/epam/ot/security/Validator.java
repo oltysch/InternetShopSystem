@@ -25,7 +25,7 @@ public class Validator {
         if (password.length() > 24) {
             return "error.password.too_long";
         }
-        if (!password.matches("[A-Za-z0-9_]+")) {
+        if (!password.matches("[A-Za-z0-9_!@#$%:;-]+")) {
             return "error.password.incorrect";
         }
         return null;

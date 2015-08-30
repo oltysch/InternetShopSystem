@@ -341,7 +341,7 @@ public class JdbcGunDao implements GunDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.update"));
             preparedStatement.setString(1, gun.getType());
-            preparedStatement.setString(2, gun.getModel());
+            preparedStatement.setString(2, gun.getName());
             preparedStatement.setDouble(3, gun.getPrice());
             preparedStatement.setString(4, gun.getOrigin());
             preparedStatement.setString(5, gun.getDescription());
@@ -368,7 +368,7 @@ public class JdbcGunDao implements GunDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.insert"));
             preparedStatement.setString(1, gun.getType());
-            preparedStatement.setString(2, gun.getModel());
+            preparedStatement.setString(2, gun.getName());
             preparedStatement.setDouble(3, gun.getPrice());
             preparedStatement.setString(4, gun.getOrigin());
             preparedStatement.setString(5, gun.getDescription());

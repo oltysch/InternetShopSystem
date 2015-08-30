@@ -1,9 +1,22 @@
 package com.epam.ot.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name = "", propOrder = {
+        "caliber",
+        "type",
+        "qty"
+})
+@XmlRootElement(name = "bullet")
 public class Bullet extends Product {
     private String caliber;
     private String type;
     private int qty;
+
+    public Bullet() {
+        super();
+    }
 
     public Bullet(String caliber, String name, String bulletType, Double price, int qty) {
         super(name, price);
@@ -39,5 +52,10 @@ public class Bullet extends Product {
     @Override
     public String getName() {
         return caliber + " " + super.getName();
+    }
+
+    @Override
+    public ProductBlock toBlock() {
+        return null;
     }
 }

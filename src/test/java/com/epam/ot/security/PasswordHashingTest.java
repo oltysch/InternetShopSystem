@@ -1,16 +1,12 @@
-package com.epam.ot;
+package com.epam.ot.security;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Vector;
-
 import static org.junit.Assert.*;
 
-public class AllClassesTests {
+public class PasswordHashingTest {
 
     @Before
     public void setUp() throws Exception {
@@ -23,7 +19,12 @@ public class AllClassesTests {
     }
 
     @Test
-    public void testMain() throws Exception {
+    public void testGeneratePasswordHash() throws Exception {
+
+    }
+
+    @Test
+    public void testValidatePassword() throws Exception {
 
     }
 }
