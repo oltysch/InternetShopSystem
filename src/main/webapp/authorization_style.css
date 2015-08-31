@@ -112,17 +112,7 @@ input[type="submit"] {
     border-radius: 0 0 3px 3px;
 }
 
-#login-form input[class="button"] {
-    background: #1dabb8;
-    border-radius: 3px;
-    color: #fff;
-    float: right;
-    font-weight: bold;
-    margin-top: 20px;
-    padding: 12px 20px;
-}
-
-#login-form input[class="selector"] {
+#login-form input[type="submit"] {
     background: #1dabb8;
     border-radius: 3px;
     width: 100%;

@@ -1,3 +1,3 @@
 <div id="footer">
-    TEST FOOTER
+    Copyright 2015
 </div>

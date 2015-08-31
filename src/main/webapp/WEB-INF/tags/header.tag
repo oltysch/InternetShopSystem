@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <%--<%@ attribute name="shopcart" required="true" %>
 <%@ attribute name="exit" required="true" %>--%>
 <div id="header">
@@ -13,7 +15,7 @@
         <c:choose>
             <c:when test="${not empty user}">
                 ${user.login}<br>                                <%--TODO check russian encodings--%>
-                <a href="${pageContext.request.contextPath}/gunshop/shopcart">shopcart</a><br>
+                <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
 
                 <div>cash ${user.cash}</div>
                 <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>

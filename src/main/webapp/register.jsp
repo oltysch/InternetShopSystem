@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Gun Shop</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/authorization-style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/authorization_style.css"/>
 </head>
 <body>
 <div class="top">
     <a href="${pageContext.request.contextPath}/">Назад</a>
         <span class="right">
-        </span>
 
+        </span>
     <div class="clr"></div>
 </div>
 <div id="login-form">
@@ -20,7 +20,7 @@
             <input name="login" type="text" required placeholder="Введите ваш логин">
             <input name="email" type="email" required placeholder="Введите ваш email">
             <input name="password" type="password" required placeholder="Введите пароль">
-            <input class="selector" type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
+            <input type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
 
             <div style="color: red">${registerError}</div>
             <footer class="clearfix">
