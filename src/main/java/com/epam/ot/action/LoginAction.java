@@ -21,7 +21,6 @@ public class LoginAction implements Action {
         UserDao userDao = daoFactory.createUserDao();
         User user = userDao.findByLogin(login);
 
-        //TODO use a cookies
         if (user == null || !PasswordHashing.validatePassword(password, user.getPassword())) {
             req.setAttribute("login", login);
             //TODO use internatioinal outputs
@@ -31,8 +30,9 @@ public class LoginAction implements Action {
             ShoppingCart cart = new ShoppingCart();
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("cart", cart);
+            //TODO make this random
 //            Cookie cookie = new Cookie("xid", "udfyuiosdyty6tafuifteyfsef");
-//            cookie.setMaxAge(60);
+//            cookie.setMaxAge(60 * 60 * 24 * 7);
 //            resp.addCookie(cookie);
             result = new ActionResult("products", true);
         } else {

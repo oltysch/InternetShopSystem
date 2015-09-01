@@ -51,5 +51,6 @@ CREATE TABLE USERS
   password VARCHAR(200)                           NOT NULL,
   cash   DOUBLE  DEFAULT (0.0),
   banned BOOLEAN DEFAULT (FALSE),
+  xid VARCHAR(100),
   FOREIGN KEY (role) REFERENCES ROLE (role)
 );

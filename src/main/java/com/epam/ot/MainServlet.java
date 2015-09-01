@@ -5,14 +5,11 @@ import com.epam.ot.action.ActionFactory;
 import com.epam.ot.action.ActionResult;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
 
 public class MainServlet extends HttpServlet {
     private ActionFactory actionFactory;
@@ -28,22 +25,36 @@ public class MainServlet extends HttpServlet {
         Action action = actionFactory.getAction(actionName);
         ActionResult result = action.execute(req, resp);
         String lang = req.getParameter("lang");
+
+//        find the language settings
         if (lang != null) {
-            req.getSession().setAttribute("lang", lang);
-        }/*
-        Cookie[] cookies = req.getCookies();
-        Cookie myCookie = null;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("lang")) {
-                    myCookie = cookies[i];
-                    break;
+//            if settings founded in request parameters - create cookie and put language settings into session
+            Cookie cookie = new Cookie("lang", lang); //cookie creating
+            cookie.setMaxAge(60 * 60 * 24 * 3); //cookie expire - 3 days
+            resp.addCookie(cookie); //add cookie into response
+            req.getSession().setAttribute("lang", lang); //and create attribute in session
+        } else {
+//            if settings not founded - then use a cookie
+            Cookie[] cookies = req.getCookies(); //getting cookies
+            Cookie myCookie = null;
+            if (cookies != null && cookies.length > 0) {
+                //found cookie with language settings
+                for (int i = 0; i < cookies.length; i++) {
+                    if (cookies[i].getName().equals("lang")) {
+                        //cookie founded
+                        myCookie = cookies[i];
+                        break;
+                    }
                 }
             }
+            if (myCookie != null) {
+                //if cookie founded - create attribute in session
+                req.getSession().setAttribute("lang", myCookie.getValue());
+                myCookie.setMaxAge(60 * 60 * 24 * 3);
+                //and refresh cookie expire date
+                resp.addCookie(myCookie);
+            }
         }
-        if (myCookie != null) {
-            req.getSession().setAttribute("lang", myCookie.getValue());
-        }*/
 
         if (result.isRedirect()) {
             resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());

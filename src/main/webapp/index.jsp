@@ -10,7 +10,7 @@
         <c:redirect url="${pageContext.request.contextPath}/gunshop/products"/>
     </c:when>
     <c:otherwise>
-        <c:redirect url="/gunshop/"/>
+        <c:redirect url="${pageContext.request.contextPath}/gunshop/"/>
     </c:otherwise>
 </c:choose>
 </body>

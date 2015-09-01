@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${lang == 'ru'}}">
+<c:if test="${lang == 'ru'}">
     <fmt:setLocale value='ru' scope="session"/>
 </c:if>
-<c:if test="${lang == 'en'}}">
-    <fmt:setLocale value='en'/>
+<c:if test="${lang == 'en'}">
+    <fmt:setLocale value='en' scope="session"/>
 </c:if>
 <fmt:setBundle basename="i18n"/>
 <html>
@@ -27,7 +27,7 @@
             <div class="clr"></div>
         </div>
         <div id="login-form">
-            <h1>Авторизация на сайте</h1>
+            <h1><fmt:message key="title.authorization"/></h1>
             <fieldset>
                 <form action="${pageContext.request.contextPath}/gunshop/login" method="post">
                     <input name="login" type="text" required placeholder="Логин" value="${login}">
