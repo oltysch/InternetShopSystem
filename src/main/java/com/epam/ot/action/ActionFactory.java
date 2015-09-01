@@ -3,7 +3,6 @@ package com.epam.ot.action;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ActionFactory {
     static {
         actions = new HashMap<>();
         actions.put("GET/", new ShowPageAction("start_page"));
-        actions.put("GET/login", new ShowPageAction("login"));
+        actions.put("GET/login", new ShowLoginPageOrAuthorize());
         actions.put("POST/login", new LoginAction());
         actions.put("GET/logout", new LogoutAction());
         actions.put("GET/register", new ShowPageAction("register"));

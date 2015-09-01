@@ -25,7 +25,6 @@ public class MainServlet extends HttpServlet {
         Action action = actionFactory.getAction(actionName);
         ActionResult result = action.execute(req, resp);
         String lang = req.getParameter("lang");
-
 //        find the language settings
         if (lang != null) {
 //            if settings founded in request parameters - create cookie and put language settings into session

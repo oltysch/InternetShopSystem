@@ -20,6 +20,14 @@ public class JdbcGunDao implements GunDao {
         propertyManager = new PropertyManager("query.properties");
     }
 
+    private Gun findFromResultSet(ResultSet resultSet) throws SQLException {
+        Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
+        gun.setId(resultSet.getInt(1));
+        gun.setUuid((UUID) resultSet.getObject(2));
+        gun.setDescription(resultSet.getString(7));
+        return gun;
+    }
+
     @Override
     public List<Gun> findAll() {
         List<Gun> guns = new ArrayList<>();
@@ -27,10 +35,7 @@ public class JdbcGunDao implements GunDao {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -46,16 +51,34 @@ public class JdbcGunDao implements GunDao {
     }
 
     @Override
+    public List<String> findAllTypes() {
+        List<String> types = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.types"));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                types.add(resultSet.getString(1));
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DaoException(e);
+            }
+        }
+        return types;
+    }
+
+    @Override
     public Gun findById(long id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.select.id"));
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 return gun;
             } else {
                 return null;
@@ -78,10 +101,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setObject(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 return gun;
             } else {
                 return null;
@@ -105,10 +125,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -131,10 +148,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, model);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -157,10 +171,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, origin);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -183,10 +194,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -210,10 +218,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -237,10 +242,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -264,10 +266,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -291,10 +290,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {
@@ -318,10 +314,7 @@ public class JdbcGunDao implements GunDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
-                gun.setId(resultSet.getInt(1));
-                gun.setUuid((UUID) resultSet.getObject(2));
-                gun.setDescription(resultSet.getString(7));
+                Gun gun = findFromResultSet(resultSet);
                 guns.add(gun);
             }
         } catch (SQLException e) {

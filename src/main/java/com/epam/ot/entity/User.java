@@ -11,12 +11,21 @@ public class User {
     private String password;
     private double cash;
     private boolean banned;
+    private String xid;
 
     public User(String login, String email, Role role, String password) {
         this.login = login;
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public String getXid() {
+        return xid;
+    }
+
+    public void setXid(String xid) {
+        this.xid = xid;
     }
 
     public String getLogin() {

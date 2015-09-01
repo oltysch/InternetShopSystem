@@ -18,6 +18,8 @@ public interface UserDao {
 
     User findByRole(String role);
 
+    User findByXid(String xid);
+
     void updateUser(User user);
 
     void insert(User user);

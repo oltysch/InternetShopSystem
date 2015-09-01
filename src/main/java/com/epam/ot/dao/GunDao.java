@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface GunDao {
     List<Gun> findAll();
 
+    List<String> findAllTypes();
+
     Gun findById(long id);
 
     Gun findByUuid(UUID uuid);

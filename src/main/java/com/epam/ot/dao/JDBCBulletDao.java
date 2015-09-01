@@ -20,6 +20,14 @@ public class JDBCBulletDao implements BulletDao {
         propertyManager = new PropertyManager("query.properties");
     }
 
+    private Bullet findFromResultSet(ResultSet resultSet) throws SQLException {
+        Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
+        bullet.setId(resultSet.getInt(1));
+        bullet.setUuid((UUID) resultSet.getObject(2));
+        bullet.setDescription(resultSet.getString(8));
+        return bullet;
+    }
+
     @Override
     public List<Bullet> findAll() {
         List<Bullet> bullets = new ArrayList<>();
@@ -27,10 +35,7 @@ public class JDBCBulletDao implements BulletDao {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -53,10 +58,7 @@ public class JDBCBulletDao implements BulletDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 return bullet;
             } else {
                 return null;
@@ -80,10 +82,7 @@ public class JDBCBulletDao implements BulletDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 return bullet;
             } else {
                 return null;
@@ -107,10 +106,7 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, caliber);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -133,10 +129,7 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -159,10 +152,7 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 bullets.add(bullet);
             }
         } catch (SQLException e) {
@@ -186,10 +176,7 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setInt(2, max);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
-                bullet.setId(resultSet.getInt(1));
-                bullet.setUuid((UUID) resultSet.getObject(2));
-                bullet.setDescription(resultSet.getString(8));
+                Bullet bullet = findFromResultSet(resultSet);
                 bullets.add(bullet);
             }
         } catch (SQLException e) {

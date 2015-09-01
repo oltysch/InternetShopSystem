@@ -21,7 +21,9 @@
             </div>
         </c:when>
         <c:otherwise>
-            <c:redirect url="/gunshop/"/>
+            ${request.setAttribute("redirect_url", request.request.requestDispatcherPath)}
+            ${request.}
+            <c:redirect url="/gunshop/login"/>
         </c:otherwise>
     </c:choose>
 </div>

@@ -21,6 +21,16 @@ public class JdbcUserDao implements UserDao {
         propertyManager = new PropertyManager("query.properties");
     }
 
+    private User findFromResultSet(ResultSet resultSet) throws SQLException {
+        User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
+        user.setId(resultSet.getLong(1));
+        user.setUuid((UUID) resultSet.getObject(2));
+        user.setCash(resultSet.getDouble(7));
+        user.setBanned(resultSet.getBoolean(8));
+        user.setXid(resultSet.getString(9));
+        return user;
+    }
+
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
@@ -28,11 +38,7 @@ public class JdbcUserDao implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.select.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getInt(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -55,11 +61,7 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getInt(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
                 return user;
             } else {
                 return null;
@@ -83,11 +85,7 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getInt(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
                 return user;
             } else {
                 return null;
@@ -111,11 +109,7 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getLong(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
                 return user;
             } else {
                 return null;
@@ -139,11 +133,7 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getLong(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
                 return user;
             } else {
                 return null;
@@ -167,11 +157,31 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (found) {
-                User user = new User(resultSet.getString(3), resultSet.getString(4), Role.valueOf(resultSet.getString(5)), resultSet.getString(6));
-                user.setId(resultSet.getLong(1));
-                user.setUuid((UUID) resultSet.getObject(2));
-                user.setCash(resultSet.getDouble(7));
-                user.setBanned(resultSet.getBoolean(8));
+                User user = findFromResultSet(resultSet);
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DaoException(e);
+            }
+        }
+    }
+
+    @Override
+    public User findByXid(String xid) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.select.xid"));
+            preparedStatement.setString(1, xid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (found) {
+                User user = findFromResultSet(resultSet);
                 return user;
             } else {
                 return null;
@@ -197,7 +207,8 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(4, user.getPassword());
             preparedStatement.setDouble(5, user.getCash());
             preparedStatement.setBoolean(6, user.isBanned());
-            preparedStatement.setString(7, String.valueOf(user.getUuid()));
+            preparedStatement.setString(7, user.getXid());
+            preparedStatement.setString(8, String.valueOf(user.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -221,6 +232,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setDouble(6, user.getCash());
             preparedStatement.setBoolean(7, user.isBanned());
+            preparedStatement.setString(8, user.getXid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
