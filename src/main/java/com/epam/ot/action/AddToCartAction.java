@@ -5,15 +5,15 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.epam.ot.util.PropertyManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 public class AddToCartAction implements Action {
-    private static final Logger logger = LogManager.getLogger(AddToCartAction.class);
+    public static final Logger logger = Logger.getLogger(PropertyManager.class);
     private ActionResult result;
 
     public AddToCartAction() {

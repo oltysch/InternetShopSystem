@@ -4,17 +4,23 @@ import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
 import com.epam.ot.entity.Product;
+import com.epam.ot.entity.ProductBlock;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowShopAction implements Action {
-    private ActionResult result = new ActionResult("shop");
+public class ShowProductsAction implements Action {
+    private ActionResult result;
+
+    public ShowProductsAction() {
+        result = new ActionResult("shop");
+    }
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
+        List<ProductBlock> productBlocks = new ArrayList<>();
         List<Product> products = new ArrayList<>();
         String selectType = (String) req.getParameter("seltp");
         String productType = (String) req.getParameter("prType");
@@ -32,7 +38,10 @@ public class ShowShopAction implements Action {
             products.addAll(gunDao.findAll());
             products.addAll(bulletDao.findAll());
         }
-        req.setAttribute("products", products);
+        for (Product product : products) {
+            productBlocks.add(product.toBlock());
+        }
+        req.setAttribute("products", productBlocks);
         return result;
     }
 }

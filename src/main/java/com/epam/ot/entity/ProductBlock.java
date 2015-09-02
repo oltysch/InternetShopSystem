@@ -1,11 +1,37 @@
 package com.epam.ot.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class ProductBlock {
     private String name;
     private String shortDescription;
+    private UUID uuid;
+    private String productType;
     private Double price;
+    private List<Characteristic> characteristics;
     private String fullDescription;
-    private String simpleDescription;
+
+    public ProductBlock() {
+        characteristics = new ArrayList<>();
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     public String getName() {
         return name;
@@ -39,11 +65,11 @@ public class ProductBlock {
         this.fullDescription = fullDescription;
     }
 
-    public String getSimpleDescription() {
-        return simpleDescription;
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
     }
 
-    public void setSimpleDescription(String simpleDescription) {
-        this.simpleDescription = simpleDescription;
+    public void addCharacteristics(String name, String value) {
+        characteristics.add(new Characteristic(name, value));
     }
 }

@@ -29,7 +29,7 @@
         <c:when test="${not empty guns}">
             <c:forEach var="gun" items="${guns}" varStatus="iter">
                 <tr>
-                    <form action="${pageContext.request.contextPath}/admin/changeGun">
+                    <form action="${pageContext.request.contextPath}/admin/change_gun">
                         <td><label>${gun.id}</label></td>
                         <td><label>${gun.uuid}</label></td>
                         <td><select name="type">
@@ -58,10 +58,10 @@
                         <td><input type="hidden" name="uuid"
                                    value="${gun.uuid}"/>
                         <td><input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/changeGun"
+                                   formaction="${pageContext.request.contextPath}/admin/change_gun"
                                    value="обновить"/>
                             <input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/deleteGun"
+                                   formaction="${pageContext.request.contextPath}/admin/delete_gun"
                                    value="удалить"/>
                         </td>
                     </form>
@@ -77,7 +77,7 @@
         </c:otherwise>
     </c:choose>
     <tr>
-        <form action="${pageContext.request.contextPath}/admin/createGun">
+        <form action="${pageContext.request.contextPath}/admin/create_gun">
             <td><label></label></td>
             <td><label></label></td>
             <td><select name="type">
@@ -98,7 +98,7 @@
             <td><input name="magazineCapacity" type="text"/></td>
             <td><input name="caliber" type="text"/></td>
             <td><input name="fireRate" type="text"/></td>
-            <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createGun"
+            <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/create_gun"
                        value="добавить"/>
             </td>
         </form>

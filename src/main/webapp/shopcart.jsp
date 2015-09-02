@@ -12,7 +12,7 @@
     <c:choose>
         <c:when test="${not empty products}">
             <c:forEach var="product" items="${products}" varStatus="iter">
-                <form action="${pageContext.request.contextPath}/gunshop/removeFromCart" method="post">
+                <form action="${pageContext.request.contextPath}/gunshop/remove_from_cart" method="post">
                         ${product.name} x ${cart.getProductCount(product.uuid)}<input type="hidden"
                                                                                       name="selectedProductUuid"
                                                                                       value="${product.uuid}"/>
@@ -21,9 +21,9 @@
             </c:forEach>
             <div>${price}</div>
             <form>
-                <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/paidShopcart"
+                <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/paid_shopcart"
                        value="Оплатить">
-                <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/clearShopcart"
+                <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/clear_shopcart"
                        value="Очистить">
             </form>
         </c:when>

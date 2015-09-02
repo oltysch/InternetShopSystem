@@ -15,7 +15,7 @@
         ${user.login}<br>
         <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
 
-        <div>cash ${user.cash}</div>
+            <div>cash ${user.cash} $</div>
         <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>
     </div>
 </div>

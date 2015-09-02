@@ -28,7 +28,7 @@
             </ul>
         </div>
     </div>
-    <c:if test="${user.role == 'ADMIN'}">
+    <c:if test="${not empty user && user.role == 'ADMIN'}">
         <div class="admin" type="list">
             <div class="top">Admin block</div>
             <div class="points">

@@ -22,7 +22,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String actionName = req.getMethod() + req.getPathInfo();
+        String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
         Action action = actionFactory.getAction(actionName);
         ActionResult result = action.execute(req, resp);
         String lang = req.getParameter("lang");

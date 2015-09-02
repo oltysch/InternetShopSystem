@@ -37,22 +37,22 @@
                         <td>
                             <c:if test="${user.role == 'ADMIN'}">
                                 <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/makeUser"
+                                       formaction="${pageContext.request.contextPath}/admin/make_user"
                                        value="убрать права админа"/>
                             </c:if>
                             <c:if test="${user.role == 'USER'}">
                                 <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/makeAdmin"
+                                       formaction="${pageContext.request.contextPath}/admin/make_admin"
                                        value="дать права админа"/>
                             </c:if>
                             <c:if test="${user.banned}">
                                 <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/unbanUser"
+                                       formaction="${pageContext.request.contextPath}/admin/unban_user"
                                        value="разбанить пользователя"/>
                             </c:if>
                             <c:if test="${!user.banned}">
                                 <input type="submit" name="submit"
-                                       formaction="${pageContext.request.contextPath}/admin/banUser"
+                                       formaction="${pageContext.request.contextPath}/admin/ban_user"
                                        value="забанить пользователя"/>
                             </c:if>
                         </td>

@@ -1,30 +1,14 @@
 package com.epam.ot.entity;
 
-import javax.xml.bind.annotation.*;
+import java.util.Map;
 
-@XmlType(name = "", propOrder = {
-        "type",
-        "origin",
-        "firingRange",
-        "effectiveFiringRange",
-        "magazineCapacity",
-        "caliber",
-        "fireRate"})
-@XmlRootElement(name = "gun")
 public class Gun extends Product {
-    @XmlElement
     private String origin;
-    @XmlElement(required = true)
     private String type;
-    @XmlElement
     private int firingRange;
-    @XmlElement
     private int effectiveFiringRange;
-    @XmlElement
     private int magazineCapacity;
-    @XmlElement
     private String caliber;
-    @XmlElement
     private int fireRate;
 
     public Gun(String type, String model, Double price, String origin, String caliber, int magazineCapacity,
@@ -99,22 +83,46 @@ public class Gun extends Product {
         this.caliber = caliber;
     }
 
-    public enum Handy {One_handed, Two_handed;}
-
     @Override
     public ProductBlock toBlock() {
         ProductBlock block = new ProductBlock();
         block.setName(getName() + " " + caliber);
+        block.setProductType("gun");
+        block.setUuid(getUuid());
         String gettingShortDescription = getDescription();
+        block.setFullDescription(getDescription());
         if (gettingShortDescription == null) {
             gettingShortDescription = "Описание отсутствует";
+            block.setShortDescription(gettingShortDescription);
+            block.setFullDescription("");
         } else if (gettingShortDescription.length() > 101) {
             gettingShortDescription = gettingShortDescription.substring(0, 100) + "...";
+            block.setShortDescription(gettingShortDescription);
         }
-        block.setShortDescription(gettingShortDescription);
         block.setPrice(getPrice());
-        block.setFullDescription("");
-        block.setSimpleDescription("");
+        if (origin != null && !origin.equals("")) {
+            block.addCharacteristics("gun.origin", origin);
+        }
+        if (type != null && !type.equals("")) {
+            block.addCharacteristics("gun.type", type);
+        }
+        if (firingRange != 0) {
+            block.addCharacteristics("gun.firingRange", String.valueOf(firingRange));
+        }
+        if (effectiveFiringRange != 0) {
+            block.addCharacteristics("gun.effectiveFiringRange", String.valueOf(effectiveFiringRange));
+        }
+        if (magazineCapacity != 0) {
+            block.addCharacteristics("gun.magazineCapacity", String.valueOf(magazineCapacity));
+        }
+        if (caliber != null && !caliber.equals("")) {
+            block.addCharacteristics("gun.caliber", caliber);
+        }
+        if (fireRate != 0) {
+            block.addCharacteristics("gun.fireRate", String.valueOf(fireRate));
+        }
         return block;
     }
+
+    public enum Handy {One_handed, Two_handed;}
 }

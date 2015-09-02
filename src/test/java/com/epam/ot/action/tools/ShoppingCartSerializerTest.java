@@ -25,15 +25,7 @@ public class ShoppingCartSerializerTest {
     //TODO make tests
     @Test
     public void testWriteCartInString() throws Exception {
-        ShoppingCart cart = new ShoppingCart();
-        cart.addProduct(UUID.randomUUID(), 3);
-        cart.addProduct(UUID.randomUUID(), 1);
-        cart.addProduct(UUID.randomUUID(), 2);
-        System.out.println(cart.getProducts());
-        String str = ShoppingCartSerializer.writeCartInString(cart);
-        System.out.println(str);
-        ShoppingCart cart2 = ShoppingCartSerializer.readCartFromString(str);
-        System.out.println(cart2);
+
     }
 
     @Test

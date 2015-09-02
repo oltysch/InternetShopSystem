@@ -25,7 +25,7 @@
         <c:when test="${not empty users}">
             <c:forEach var="user" items="${users}" varStatus="iter">
                 <tr>
-                    <form action="${pageContext.request.contextPath}/admin/changeUser">
+                    <form action="${pageContext.request.contextPath}/admin/change_user">
                         <td><label>${user.id}</label></td>
                         <td><label>${user.uuid}</label></td>
                         <td><input name="login" type="text" value="${user.login}"/></td>
@@ -48,10 +48,10 @@
                         <td><input type="hidden" name="uuid"
                                    value="${user.uuid}"/>
                             <input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/changeUser"
+                                   formaction="${pageContext.request.contextPath}/admin/change_user"
                                    value="обновить"/>
                             <input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/deleteUser"
+                                   formaction="${pageContext.request.contextPath}/admin/delete_user"
                                    value="удалить"/>
                         </td>
                     </form>
@@ -67,7 +67,7 @@
         </c:otherwise>
     </c:choose>
     <tr>
-        <form action="${pageContext.request.contextPath}/admin/createUser">
+        <form action="${pageContext.request.contextPath}/admin/create_user">
             <td></td>
             <td></td>
             <td><input name="login" type="text"/></td>
@@ -79,7 +79,7 @@
             <td><input name="password" type="text"/></td>
             <td><input name="cash" type="text"/></td>
             <td><input name="banned" type="checkbox"/></td>
-            <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/createUser"
+            <td><input type="submit" name="submit" formaction="${pageContext.request.contextPath}/admin/create_user"
                        value="добавить"/></td>
         </form>
     </tr>

@@ -1,14 +1,5 @@
 package com.epam.ot.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-@XmlType(name = "", propOrder = {
-        "caliber",
-        "type",
-        "qty"
-})
-@XmlRootElement(name = "bullet")
 public class Bullet extends Product {
     private String caliber;
     private String type;
@@ -56,6 +47,30 @@ public class Bullet extends Product {
 
     @Override
     public ProductBlock toBlock() {
-        return null;
+        ProductBlock block = new ProductBlock();
+        block.setName(caliber + " " + getName());
+        block.setProductType("bullet");
+        block.setUuid(getUuid());
+        String gettingShortDescription = getDescription();
+        block.setFullDescription(getDescription());
+        if (gettingShortDescription == null) {
+            gettingShortDescription = "Описание отсутствует";
+            block.setShortDescription(gettingShortDescription);
+            block.setFullDescription("");
+        } else if (gettingShortDescription.length() > 101) {
+            gettingShortDescription = gettingShortDescription.substring(0, 100) + "...";
+            block.setShortDescription(gettingShortDescription);
+        }
+        block.setPrice(getPrice());
+        if (caliber != null && !caliber.equals("")) {
+            block.addCharacteristics("bullet.caliber", caliber);
+        }
+        if (type != null && !type.equals("")) {
+            block.addCharacteristics("bullet.type", type);
+        }
+        if (qty != 0) {
+            block.addCharacteristics("bullet.qty", String.valueOf(qty));
+        }
+        return block;
     }
 }

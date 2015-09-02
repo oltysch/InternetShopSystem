@@ -125,7 +125,7 @@ public class ValidatorTest {
         Throwable throwable = null;
         String res = null;
         try {
-            res = Validator.isPasswordValid("&@3ItsStrong:Password123");
+            res = Validator.isPasswordValid("@3ItsStrong:Password123");
         } catch (Throwable e) {
             throwable = e;
         }

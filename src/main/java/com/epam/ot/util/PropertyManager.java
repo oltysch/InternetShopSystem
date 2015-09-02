@@ -1,7 +1,6 @@
 package com.epam.ot.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +8,7 @@ import java.util.Properties;
 
 public class PropertyManager {
     Properties properties;
-    public static final Logger logger = LogManager.getLogger(PropertyManager.class);
+    public static final Logger logger = Logger.getLogger(PropertyManager.class);
 
     public PropertyManager(String fileName) {
         properties = new Properties();
