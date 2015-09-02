@@ -28,6 +28,7 @@ public class JdbcUserDao implements UserDao {
         user.setCash(resultSet.getDouble(7));
         user.setBanned(resultSet.getBoolean(8));
         user.setXid(resultSet.getString(9));
+        user.setCart(resultSet.getString(10));
         return user;
     }
 
@@ -208,7 +209,8 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setDouble(5, user.getCash());
             preparedStatement.setBoolean(6, user.isBanned());
             preparedStatement.setString(7, user.getXid());
-            preparedStatement.setString(8, String.valueOf(user.getUuid()));
+            preparedStatement.setString(8, user.getCart());
+            preparedStatement.setString(9, String.valueOf(user.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -233,6 +235,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setDouble(6, user.getCash());
             preparedStatement.setBoolean(7, user.isBanned());
             preparedStatement.setString(8, user.getXid());
+            preparedStatement.setString(9, user.getCart());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

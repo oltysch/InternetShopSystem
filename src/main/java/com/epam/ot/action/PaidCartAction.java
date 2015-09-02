@@ -1,5 +1,6 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.ShoppingCartSerializer;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
@@ -43,6 +44,7 @@ public class PaidCartAction implements Action {
             cash -= price;
             user.setCash(cash);
             shoppingCart.clearCart();
+            user.setCart(ShoppingCartSerializer.writeCartInString(shoppingCart));
             req.setAttribute("paidResult", "Товар успешно оплачен!");
             result = new ActionResult("paid_result");
             UserDao userDao = daoFactory.createUserDao();

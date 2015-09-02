@@ -3,7 +3,6 @@ package com.epam.ot.entity;
 import javax.xml.bind.annotation.*;
 
 @XmlType(name = "", propOrder = {
-        //TODO fix xsd and this
         "type",
         "origin",
         "firingRange",
@@ -18,16 +17,13 @@ public class Gun extends Product {
     @XmlElement(required = true)
     private String type;
     @XmlElement
-    //TODO make metric class
     private int firingRange;
     @XmlElement
     private int effectiveFiringRange;
     @XmlElement
     private int magazineCapacity;
-    //TODO make caliber class
     @XmlElement
     private String caliber;
-    //TODO make fire rate class
     @XmlElement
     private int fireRate;
 

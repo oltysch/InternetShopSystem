@@ -73,7 +73,6 @@
             <td><input name="login" type="text"/></td>
             <td><input name="email" type="email"/></td>
             <td><select name="role">
-                <%--TODO load from bd--%>
                 <option value="ADMIN">ADMIN</option>
                 <option value="USER" selected>USER</option>
             </select></td>

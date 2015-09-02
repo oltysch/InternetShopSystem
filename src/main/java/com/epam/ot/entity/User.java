@@ -12,12 +12,21 @@ public class User {
     private double cash;
     private boolean banned;
     private String xid;
+    private String cart;
 
     public User(String login, String email, Role role, String password) {
         this.login = login;
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public String getCart() {
+        return cart;
+    }
+
+    public void setCart(String cart) {
+        this.cart = cart;
     }
 
     public String getXid() {
@@ -56,16 +65,16 @@ public class User {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public UUID getUuid() {
         return uuid;
     }
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Role getRole() {

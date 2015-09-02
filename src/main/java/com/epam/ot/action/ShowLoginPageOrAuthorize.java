@@ -1,9 +1,10 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.Authorizer;
+import com.epam.ot.action.tools.CookieManager;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.User;
-import com.epam.ot.security.Authorizer;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,16 +20,16 @@ public class ShowLoginPageOrAuthorize implements Action {
             redirect_url = "products";
         }
 
-        Cookie[] cookies = req.getCookies();
-        Cookie myCookie = null;
-        if (cookies != null && cookies.length > 0) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("xid")) {
-                    myCookie = cookies[i];
-                    break;
-                }
-            }
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            reopenSession(req, resp, redirect_url);
         }
+
+        return result;
+    }
+
+    private void reopenSession(HttpServletRequest req, HttpServletResponse resp, String redirect_url) {
+        Cookie myCookie = CookieManager.findCookie(req, "xid");
         if (myCookie != null) {
             DaoFactory daoFactory = DaoFactory.getInstance();
             UserDao userDao = daoFactory.createUserDao();
@@ -38,13 +39,11 @@ public class ShowLoginPageOrAuthorize implements Action {
                 Authorizer.authorizeUser(user, req, resp);
                 result = new ActionResult(redirect_url, true);
             } else {
-                result = new ActionResult("login");
+                result = new ActionResult("start_page");
             }
             userDao.endTransaction();
         } else {
-            result = new ActionResult("login");
+            result = new ActionResult("start_page");
         }
-
-        return result;
     }
 }

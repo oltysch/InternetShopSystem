@@ -1,9 +1,8 @@
 package com.epam.ot.action;
 
-import com.epam.ot.dao.BulletDao;
+import com.epam.ot.action.tools.ShoppingCartSerializer;
 import com.epam.ot.dao.DaoFactory;
-import com.epam.ot.dao.GunDao;
-import com.epam.ot.entity.Product;
+import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
 import org.apache.logging.log4j.LogManager;
@@ -26,8 +25,14 @@ public class AddToCartAction implements Action {
         UUID selectedProductUuid = UUID.fromString(req.getParameter("selectedProductUuid"));
         logger.info("selectedProductUuid=" + selectedProductUuid);
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
-        DaoFactory daoFactory = DaoFactory.getInstance();
+        User user = (User) req.getSession().getAttribute("user");
         cart.addProduct(selectedProductUuid);
+        user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        UserDao userDao = daoFactory.createUserDao();
+        userDao.beginTransaction();
+        userDao.updateUser(user);
+        userDao.endTransaction();
         return result;
     }
 }

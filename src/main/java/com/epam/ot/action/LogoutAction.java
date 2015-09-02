@@ -1,5 +1,6 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.CookieManager;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.User;
@@ -18,21 +19,9 @@ public class LogoutAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-//        Cookie cookie = new Cookie("xid", "");
-//        cookie.setMaxAge(0);
-//        resp.addCookie(cookie);
         HttpSession session = req.getSession();
         if (session != null) {
-            Cookie[] cookies = req.getCookies();
-            Cookie myCookie = null;
-            if (cookies != null && cookies.length > 0) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals("xid")) {
-                        myCookie = cookies[i];
-                        break;
-                    }
-                }
-            }
+            Cookie myCookie = CookieManager.findCookie(req, "xid");
             if (myCookie != null) {
                 myCookie.setValue("");
                 myCookie.setMaxAge(0);

@@ -12,17 +12,10 @@
         +7 777 123-45-67
     </div>
     <div class="right">
-        <c:choose>
-            <c:when test="${not empty user}">
-                ${user.login}<br>                                <%--TODO check russian encodings--%>
-                <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
+        ${user.login}<br>
+        <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
 
-                <div>cash ${user.cash}</div>
-                <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>
-            </c:when>
-            <c:otherwise>
-                <c:redirect url="/gunshop/"/>
-            </c:otherwise>
-        </c:choose>
+        <div>cash ${user.cash}</div>
+        <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>
     </div>
 </div>

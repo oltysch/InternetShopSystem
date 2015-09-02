@@ -3,6 +3,7 @@ package com.epam.ot;
 import com.epam.ot.action.Action;
 import com.epam.ot.action.ActionFactory;
 import com.epam.ot.action.ActionResult;
+import com.epam.ot.action.tools.CookieManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -34,18 +35,7 @@ public class MainServlet extends HttpServlet {
             req.getSession().setAttribute("lang", lang); //and create attribute in session
         } else {
 //            if settings not founded - then use a cookie
-            Cookie[] cookies = req.getCookies(); //getting cookies
-            Cookie myCookie = null;
-            if (cookies != null && cookies.length > 0) {
-                //found cookie with language settings
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals("lang")) {
-                        //cookie founded
-                        myCookie = cookies[i];
-                        break;
-                    }
-                }
-            }
+            Cookie myCookie = CookieManager.findCookie(req, "lang"); //getting cookies
             if (myCookie != null) {
                 //if cookie founded - create attribute in session
                 req.getSession().setAttribute("lang", myCookie.getValue());

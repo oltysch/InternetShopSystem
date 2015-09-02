@@ -1,6 +1,10 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.ShoppingCartSerializer;
+import com.epam.ot.dao.DaoFactory;
+import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
+import com.epam.ot.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +19,14 @@ public class ClearCartAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
+        User user = (User) req.getSession().getAttribute("user");
         cart.clearCart();
+        user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        UserDao userDao = daoFactory.createUserDao();
+        userDao.beginTransaction();
+        userDao.updateUser(user);
+        userDao.endTransaction();
         return result;
     }
 }
