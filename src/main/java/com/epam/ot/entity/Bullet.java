@@ -41,11 +41,6 @@ public class Bullet extends Product {
     }
 
     @Override
-    public String getName() {
-        return caliber + " " + super.getName();
-    }
-
-    @Override
     public ProductBlock toBlock() {
         ProductBlock block = new ProductBlock();
         block.setName(caliber + " " + getName());

@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>--%>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>--%>
-<%--TODO - check this--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="i18n"/>
 <html>
@@ -13,6 +10,7 @@
 </head>
 <body>
 <a:mainTemplate>
+    <a href="#" onclick="history.back()"><fmt:message key="button.back"/></a><br>
     <form>
         <div class="view_product">
             <div class="name">${product.name}</div>
@@ -21,10 +19,7 @@
                 <c:forEach var="characteristic" items="${product.characteristics}" varStatus="iter">
                     <span class="left">
                     <c:if test="${not empty characteristic.name}">
-                        <%--${characteristic.name}:--%>
-                        <%--<fmt:message var="${characteristic.name}"/>:--%>
-                        <%--<fmt:message key="${characteristic.name}" var="characteristic"></fmt:message>:--%>
-                        <fmt:message key="${characteristic.name}"></fmt:message>
+                        <fmt:message key="${characteristic.name}"/>:
                         </span><span class="right">${characteristic.value}</span><br>
                     </c:if>
                 </c:forEach>

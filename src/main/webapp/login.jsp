@@ -1,12 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${lang == 'ru'}">
-    <fmt:setLocale value='ru' scope="session"/>
-</c:if>
-<c:if test="${lang == 'en'}">
-    <fmt:setLocale value='en' scope="session"/>
-</c:if>
+<c:if test="${lang == 'ru'}"><fmt:setLocale value='ru' scope="session"/></c:if>
+<c:if test="${lang == 'en'}"><fmt:setLocale value='en' scope="session"/></c:if>
 <fmt:setBundle basename="i18n"/>
 <html>
 <head>

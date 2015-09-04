@@ -23,6 +23,7 @@ public class ActionFactory {
         actions.put("POST/gunshop/add_to_cart", new AddToCartAction());
         actions.put("POST/gunshop/remove_from_cart", new RemoveFromCartAction());
         actions.put("GET/gunshop/shopcart", new ShowCartAction());
+        actions.put("GET/gunshop/shopcart/change_product_count", new ChangeProductCountAction());
         actions.put("GET/gunshop/paid_shopcart", new PaidCartAction());
         actions.put("GET/gunshop/clear_shopcart", new ClearCartAction());
         actions.put("GET/gunshop/view_product", new ShowProductAction("view_product"));
@@ -46,11 +47,13 @@ public class ActionFactory {
         actions.put("GET/admin/delete_user", new DeleteUserAction());
 
         actions.put("GET/admin/create_gun", new CreateGunAction());
-        actions.put("GET/admin/change_gun", new ChangeGunAction());
+        actions.put("GET/admin/change_gun", new ChangeGunAction("product_editor"));
+        actions.put("GET/admin/change_gun_db", new ChangeGunAction("edit_guns"));
         actions.put("GET/admin/delete_gun", new DeleteGunAction());
 
         actions.put("GET/admin/create_bullet", new CreateBulletAction());
-        actions.put("GET/admin/change_bullet", new ChangeBulletAction());
+        actions.put("GET/admin/change_bullet", new ChangeBulletAction("product_editor"));
+        actions.put("GET/admin/change_bullet_db", new ChangeBulletAction("edit_bullets"));
         actions.put("GET/admin/delete_bullet", new DeleteBulletAction());
     }
 

@@ -1,8 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setBundle basename="i18n"/>
-<%--<%@ attribute name="shopcart" required="true" %>
-<%@ attribute name="exit" required="true" %>--%>
 <div id="header">
     <div class="left">
         <a href="${pageContext.request.contextPath}/gunshop/">Gun Shop</a>
@@ -12,6 +9,8 @@
         +7 777 123-45-67
     </div>
     <div class="right">
+        <a href="${lang != 'ru' ? '?lang=ru' : ''}">ru</a>/
+        <a href="${lang != 'en' ? '?lang=en' : ''}">en</a>
         ${user.login}<br>
         <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
 

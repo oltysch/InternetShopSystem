@@ -28,13 +28,15 @@ public class LogoutAction implements Action {
                 resp.addCookie(myCookie);
             }
             User user = (User) req.getSession().getAttribute("user");
-            user.setXid("");
-            DaoFactory daoFactory = DaoFactory.getInstance();
-            UserDao userDao = daoFactory.createUserDao();
-            userDao.beginTransaction();
-            userDao.updateUser(user);
-            userDao.endTransaction();
-            req.getSession().invalidate();
+            if (user != null) {
+                user.setXid("");
+                DaoFactory daoFactory = DaoFactory.getInstance();
+                UserDao userDao = daoFactory.createUserDao();
+                userDao.beginTransaction();
+                userDao.updateUser(user);
+                userDao.endTransaction();
+                req.getSession().invalidate();
+            }
         }
         return result;
     }

@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Gun Shop</title>
-    <link rel="stylesheet" href=${pageContext.request.contextPath}"/main_style.css"/>
+    <link rel="stylesheet" href="../../../main_style.css"/>
 </head>
 <body>
 <a:mainTemplate>
-    <a href="${pageContext.request.contextPath}/gunshop/products"><fmt:message key="back.to_products"/></a>
+    <a href="#" onclick="history.back()"><fmt:message key="button.back"/></a>
 
     <form action="${pageContext.request.contextPath}/admin/change_gun">
         <label><fmt:message key="gun.model"/>:
@@ -19,25 +19,18 @@
         <label><fmt:message key="gun.type"/>
             <select name="type">
                 <c:forEach var="current_type" items="${types}">
-                    <c:choose>
-                        <c:when test="${product.type==current_type}">
-                            <option value="${current_type}" selected>${current_type}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${current_type}">${current_type}</option>
-                        </c:otherwise>
-                    </c:choose>
+                    <option value="${current_type}" ${product.type==current_type ? 'selected' : ''}>${current_type}</option>
                 </c:forEach>
             </select>
         </label><br>
 
-        <label><fmt:message key="gun.price"/>:
+        <label><fmt:message key="price"/>:
             <input name="price" type="text" value="${product.price}"/>
         </label><br>
         <label><fmt:message key="gun.origin"/>:
             <input name="origin" type="text" value="${product.origin}"/>
         </label><br>
-        <label><fmt:message key="gun.description"/>:
+        <label><fmt:message key="description"/>:
             <input name="description" type="text" value="${product.description}"/>
         </label><br>
         <label><fmt:message key="gun.firingRange"/>:
@@ -55,8 +48,10 @@
         <label><fmt:message key="gun.fireRate"/>:
             <input name="fireRate" type="text" value="${product.fireRate}"/>
         </label><br>
-        <input type="hidden" name="uuid"
+        <input type="hidden" name="selectedProductUuid"
                value="${product.uuid}"/>
+        <input type="hidden" name="selectedProductType"
+               value="${product.toBlock().productType}"/>
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/change_gun"
                value="обновить"/>

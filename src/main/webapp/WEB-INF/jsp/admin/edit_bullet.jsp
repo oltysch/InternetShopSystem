@@ -6,38 +6,48 @@
 <html>
 <head>
     <title>Gun Shop</title>
-    <link rel="stylesheet" href=${pageContext.request.contextPath}"/main_style.css"/>
+    <link rel="stylesheet" href="../../../main_style.css"/>
 </head>
 <body>
 <a:mainTemplate>
+    <a href="#" onclick="history.back()"><fmt:message key="button.back"/></a>
+
     <form action="${pageContext.request.contextPath}/admin/change_bullet">
-        <input name="caliber" type="text" value="${bullet.caliber}"/><br>
-        <input name="name" type="text" value="${bullet.name}"/><br>
+        <label><fmt:message key="bullet.caliber"/>:
+            <input name="caliber" type="text" value="${product.caliber}"/>
+        </label><br>
+        <label><fmt:message key="bullet.name"/>:
+            <input name="name" type="text" value="${product.name}"/>
+        </label><br>
 
-        <select name="type">
-            <c:forEach var="current_type" items="${types}">
-                <c:choose>
-                    <c:when test="${bullet.type==current_type}">
-                        <option value="${current_type}" selected>${current_type}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="${current_type}">${current_type}</option>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </select><br>
+        <label><fmt:message key="bullet.type"/>:
+            <select name="type">
+                <c:forEach var="current_type" items="${types}">
+                    <option value="${current_type}" ${product.type==current_type ?
+                            'selected' : ''}>${current_type}</option>
+                </c:forEach>
+            </select>
+        </label><br>
 
-        <input name="price" type="text" value="${bullet.price}"/><br>
-        <input name="qty" type="text" value="${bullet.qty}"/><br>
-        <input name="description" type="text" value="${bullet.description}"/><br>
-        <input type="hidden" name="uuid"
-               value="${bullet.uuid}"/>
+        <label><fmt:message key="price"/>:
+            <input name="price" type="text" value="${product.price}"/>
+        </label><br>
+        <label><fmt:message key="bullet.qty"/>:
+            <input name="qty" type="text" value="${product.qty}"/>
+        </label><br>
+        <label><fmt:message key="description"/>:
+            <input name="description" type="text" value="${product.description}"/>
+        </label><br>
+        <input type="hidden" name="selectedProductUuid"
+               value="${product.uuid}"/>
+        <input type="hidden" name="selectedProductType"
+               value="${product.toBlock().productType}"/>
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/change_bullet"
-               value="обновить"/>
+               value="<fmt:message key="button.refresh"/>"/>
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/delete_bullet"
-               value="удалить"/>
+               value="<fmt:message key="button.remove"/>"/>
     </form>
 </a:mainTemplate>
 </body>

@@ -1,12 +1,11 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.Authorizer;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
-import com.epam.ot.entity.Gun;
-import com.epam.ot.entity.Product;
-import com.epam.ot.entity.ShoppingCart;
-import com.epam.ot.entity.ShoppingCartItem;
+import com.epam.ot.dao.UserDao;
+import com.epam.ot.entity.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +17,16 @@ public class ShowCartAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<Product> products = new ArrayList<>();
+        List<ProductBlock> products = new ArrayList<>();
         ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
+        User user = (User) req.getSession().getAttribute("user");
+
+        DaoFactory daoFactory = DaoFactory.getInstance();
+
+//        refreshing user's data in db and in session
+        Authorizer.refreshUserData(user);
+
         if (shoppingCart != null) {
-            DaoFactory daoFactory = DaoFactory.getInstance();
             GunDao gunDao = daoFactory.createGunDao();
             BulletDao bulletDao = daoFactory.createBulletDao();
             gunDao.beginTransaction();
@@ -31,7 +36,7 @@ public class ShowCartAction implements Action {
                 Product product = gunDao.findByUuid(item.getProductUuid());
                 if (product == null) product = bulletDao.findByUuid(item.getProductUuid());
                 if (product != null) {
-                    products.add(product);
+                    products.add(product.toBlock());
                     price += product.getPrice() * item.getCount();
                 }
             }

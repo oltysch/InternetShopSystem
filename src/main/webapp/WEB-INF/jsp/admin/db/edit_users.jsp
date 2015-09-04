@@ -4,7 +4,7 @@
 <head>
     <title>
         <title>Gun Shop</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/../style.css"/>
+        <link rel="stylesheet" href="../../../../main_style.css"/>
     </title>
 </head>
 <body>
@@ -32,14 +32,7 @@
                         <td><input name="email" type="email" value="${user.email}"/></td>
                         <td><select name="role">
                             <c:forEach var="current_role" items="${roles}">
-                                <c:choose>
-                                    <c:when test="${user.role==current_role}">
-                                        <option value="${current_role}" selected>${current_role}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${current_role}">${current_role}</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                <option value="${current_role}" ${user.role == current_role ? 'selected' : ''}>${current_role}</option>
                             </c:forEach>
                         </select></td>
                         <td><input name="password" type="text" value="${user.password}"/></td>

@@ -1,16 +1,9 @@
-<%--<%@ attribute name="login" required="true" %>--%>
-<%--<%@ attribute name="shopcart" required="true" %>
-<%@ attribute name="exit" required="true" %>--%>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<c:if test="${lang == 'ru'}}">
-    <fmt:setLocale value='ru' scope="session"/>
-</c:if>
-<c:if test="${lang == 'en'}}">
-    <fmt:setLocale value='en' scope="session"/>
-</c:if>
-<fmt:setBundle basename="i18n"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:if test="${lang == 'ru'}"><fmt:setLocale value='ru' scope="session"/></c:if>
+<c:if test="${lang == 'en'}"><fmt:setLocale value='en' scope="session"/></c:if>
+<fmt:setBundle basename="i18n" scope="session"/>
 <a:header/>
 <div id="container">
     <a:sidebar/>

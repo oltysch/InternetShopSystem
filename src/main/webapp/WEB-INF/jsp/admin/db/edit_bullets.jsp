@@ -4,7 +4,7 @@
 <head>
     <title>
         <title>Gun Shop</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/../style.css"/>
+        <link rel="stylesheet" href="../../../../main_style.css"/>
     </title>
 </head>
 <body>
@@ -25,7 +25,7 @@
         <c:when test="${not empty bullets}">
             <c:forEach var="bullet" items="${bullets}" varStatus="iter">
                 <tr>
-                    <form action="${pageContext.request.contextPath}/admin/change_bullet">
+                    <form action="${pageContext.request.contextPath}/admin/change_bullet_db">
                         <td><label>${bullet.id}</label></td>
                         <td><label>${bullet.uuid}</label></td>
                         <td><input name="caliber" type="text" value="${bullet.caliber}"/></td>
@@ -33,24 +33,17 @@
 
                         <td><select name="type">
                             <c:forEach var="current_type" items="${types}">
-                                <c:choose>
-                                    <c:when test="${bullet.type==current_type}">
-                                        <option value="${current_type}" selected>${current_type}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${current_type}">${current_type}</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                <option value="${current_type}" ${bullet.type==current_type ? 'selected' : ''}>${current_type}</option>
                             </c:forEach>
                         </select></td>
 
                         <td><input name="price" type="text" value="${bullet.price}"/></td>
                         <td><input name="qty" type="text" value="${bullet.qty}"/></td>
                         <td><input name="description" type="text" value="${bullet.description}"/></td>
-                        <td><input type="hidden" name="uuid"
+                        <td><input type="hidden" name="selectedProductUuid"
                                    value="${bullet.uuid}"/>
                         <td><input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/change_bullet"
+                                   formaction="${pageContext.request.contextPath}/admin/change_bullet_db"
                                    value="обновить"/>
                             <input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/delete_bullet"

@@ -36,4 +36,16 @@ public class Authorizer {
         xidCookie.setMaxAge(60 * 60 * 24 * 7);
         resp.addCookie(xidCookie);
     }
+
+    public static void refreshUserData(User user) {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        UserDao userDao = daoFactory.createUserDao();
+        userDao.beginTransaction();
+        User userInDB = userDao.findByUuid(user.getUuid());
+        user.setCash(userInDB.getCash());
+        user.setBanned(userInDB.isBanned());
+        userInDB.setCart(user.getCart());
+        userDao.updateUser(userInDB);
+        userDao.endTransaction();
+    }
 }

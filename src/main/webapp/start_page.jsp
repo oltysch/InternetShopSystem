@@ -1,13 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${lang == 'ru'}">
-    <fmt:setLocale value='ru' scope="session"/>
-</c:if>
-<c:if test="${lang == 'en'}">
-    <fmt:setLocale value='en' scope="session"/>
-</c:if>
-<fmt:setBundle basename="i18n"/>
+<c:if test="${lang == 'ru'}"><fmt:setLocale value='ru' scope="session"/></c:if>
+<c:if test="${lang == 'en'}"><fmt:setLocale value='en' scope="session"/></c:if>
+<fmt:setBundle basename="i18n" scope="session"/>
 <html>
 <head>
     <title>Gun Shop</title>
@@ -21,10 +17,8 @@
     <c:otherwise>
         <div class="top">
         <span class="right">
-            <c:if test="${lang == 'ru'}"><a>ru</a></c:if>
-            <c:if test="${lang != 'ru'}"><a href="?lang=ru">ru</a></c:if>
-            <c:if test="${lang == 'en'}"><a>en</a></c:if>
-            <c:if test="${lang != 'en'}"><a href="?lang=en">en</a></c:if>
+            <a href="${lang != 'ru' ? '?lang=ru' : ''}">ru</a>
+            <a href="${lang != 'en' ? '?lang=en' : ''}">en</a>
         </span>
             <div class="clr"></div>
         </div>

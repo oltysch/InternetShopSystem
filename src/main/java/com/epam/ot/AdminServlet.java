@@ -3,6 +3,7 @@ package com.epam.ot;
 import com.epam.ot.action.Action;
 import com.epam.ot.action.ActionFactory;
 import com.epam.ot.action.ActionResult;
+import com.epam.ot.action.tools.CookieManager;
 import com.epam.ot.entity.Role;
 import com.epam.ot.entity.User;
 
@@ -25,9 +26,12 @@ public class AdminServlet extends HttpServlet {
         String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
         User user = (User) req.getSession().getAttribute("user");
         if (user != null && user.getRole() == Role.ADMIN) {
-            Action action = actionFactory.getAction(actionName);
 
+            Action action = actionFactory.getAction(actionName);
             ActionResult result = action.execute(req, resp);
+
+            CookieManager.refreshLanguageCookies(req, resp);
+
             if (result.isRedirect()) {
                 resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
             } else {

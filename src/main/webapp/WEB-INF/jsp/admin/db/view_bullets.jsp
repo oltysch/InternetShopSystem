@@ -4,7 +4,7 @@
 <head>
     <title>
         <title>Gun Shop</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/../style.css"/>
+        <link rel="stylesheet" href="../../../../main_style.css"/>
     </title>
 </head>
 <body>

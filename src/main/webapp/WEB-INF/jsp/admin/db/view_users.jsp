@@ -4,7 +4,7 @@
 <head>
     <title>
         <title>Gun Shop</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/../style.css"/>
+        <link rel="stylesheet" href="../../../../main_style.css"/>
     </title>
 </head>
 <body>
@@ -35,6 +35,8 @@
                         <td><label>${user.cash}</label></td>
                         <td><label>${user.banned}</label></td>
                         <td>
+                            <input type="hidden" name="uuid"
+                                   value="${user.uuid}"/>
                             <c:if test="${user.role == 'ADMIN'}">
                                 <input type="submit" name="submit"
                                        formaction="${pageContext.request.contextPath}/admin/make_user"

@@ -13,7 +13,7 @@ public class MakeUserAction implements Action {
     private ActionResult result;
 
     public MakeUserAction() {
-        result = new ActionResult("view_users", true);
+        result = new ActionResult("users", true);
     }
 
     @Override

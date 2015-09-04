@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="sidebar">
     <div class="products" type="list">
         <div class="top"><a href="${pageContext.request.contextPath}/gunshop/products?prType=guns">Guns</a></div>

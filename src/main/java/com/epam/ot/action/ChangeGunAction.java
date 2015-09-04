@@ -11,8 +11,8 @@ import java.util.UUID;
 public class ChangeGunAction implements Action {
     ActionResult actionResult;
 
-    public ChangeGunAction() {
-        actionResult = new ActionResult("edit_guns", true);
+    public ChangeGunAction(String page) {
+        actionResult = new ActionResult(page, true);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ChangeGunAction implements Action {
             price = 0;
         }
         Gun gun = new Gun(req.getParameter("type"), req.getParameter("model"), price, req.getParameter("origin"), req.getParameter("caliber"), Integer.parseInt(req.getParameter("magazineCapacity")), Integer.parseInt(req.getParameter("fireRate")), Integer.parseInt(req.getParameter("firingRange")), Integer.parseInt(req.getParameter("effectiveFiringRange")));
-        gun.setUuid(UUID.fromString(req.getParameter("uuid")));
+        gun.setUuid(UUID.fromString(req.getParameter("selectedProductUuid")));
         gun.setDescription(req.getParameter("description"));
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();

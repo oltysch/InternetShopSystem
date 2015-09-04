@@ -4,7 +4,7 @@
 <head>
     <title>
         <title>Gun Shop</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/../style.css"/>
+        <link rel="stylesheet" href="../../../../main_style.css"/>
     </title>
 </head>
 <body>
@@ -29,19 +29,12 @@
         <c:when test="${not empty guns}">
             <c:forEach var="gun" items="${guns}" varStatus="iter">
                 <tr>
-                    <form action="${pageContext.request.contextPath}/admin/change_gun">
+                    <form action="${pageContext.request.contextPath}/admin/change_gun_db">
                         <td><label>${gun.id}</label></td>
                         <td><label>${gun.uuid}</label></td>
                         <td><select name="type">
                             <c:forEach var="current_type" items="${types}">
-                                <c:choose>
-                                    <c:when test="${gun.type==current_type}">
-                                        <option value="${current_type}" selected>${current_type}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${current_type}">${current_type}</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                <option value="${current_type}" ${gun.type==current_type ? 'selected' : ''}>${current_type}</option>
                             </c:forEach>
                         </select></td>
 
@@ -55,10 +48,10 @@
                         <td><input name="magazineCapacity" type="text" value="${gun.magazineCapacity}"/></td>
                         <td><input name="caliber" type="text" value="${gun.caliber}"/></td>
                         <td><input name="fireRate" type="text" value="${gun.fireRate}"/></td>
-                        <td><input type="hidden" name="uuid"
+                        <td><input type="hidden" name="selectedProductUuid"
                                    value="${gun.uuid}"/>
                         <td><input type="submit" name="submit"
-                                   formaction="${pageContext.request.contextPath}/admin/change_gun"
+                                   formaction="${pageContext.request.contextPath}/admin/change_gun_db"
                                    value="обновить"/>
                             <input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/delete_gun"

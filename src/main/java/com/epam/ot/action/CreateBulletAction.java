@@ -17,15 +17,21 @@ public class CreateBulletAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String priceString = req.getParameter("price");
         double price;
+        int qty;
         try {
-            price = Double.parseDouble(priceString);
+            price = Double.parseDouble(req.getParameter("price"));
         } catch (NumberFormatException | NullPointerException e) {
             price = 0;
         }
-        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), price, Integer.parseInt(req.getParameter("price")));
+        try {
+            qty = Integer.parseInt(req.getParameter("qty"));
+        } catch (NumberFormatException | NullPointerException e) {
+            qty = 0;
+        }
+        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), price, qty);
         bullet.setUuid(UUID.randomUUID());
+        bullet.setDescription(req.getParameter("description"));
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();

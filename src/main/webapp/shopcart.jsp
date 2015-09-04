@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="a" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>Gun Shop</title>
@@ -8,18 +10,15 @@
 </head>
 <body>
 <a:mainTemplate>
-    <a href="${pageContext.request.contextPath}/gunshop/products">назад</a>
+    <a href="#" onclick="history.back()"><fmt:message key="button.back"/></a>
     <c:choose>
         <c:when test="${not empty products}">
             <c:forEach var="product" items="${products}" varStatus="iter">
-                <form action="${pageContext.request.contextPath}/gunshop/remove_from_cart" method="post">
-                        ${product.name} x ${cart.getProductCount(product.uuid)}<input type="hidden"
-                                                                                      name="selectedProductUuid"
-                                                                                      value="${product.uuid}"/>
-                    <input type="submit" name="submit" value="убрать из корзины"/><br>
-                </form>
+                <a:productBlock product="${product}" buttonText="button.remove_from_cart" buttonType="remove"
+                                showCount="true">
+                </a:productBlock><br>
             </c:forEach>
-            <div>${price}</div>
+            <div>Общая цена: ${price} $</div>
             <form>
                 <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/paid_shopcart"
                        value="Оплатить">

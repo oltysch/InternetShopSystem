@@ -201,7 +201,7 @@ public class JDBCBulletDao implements BulletDao {
             preparedStatement.setDouble(4, bullet.getPrice());
             preparedStatement.setInt(5, bullet.getQty());
             preparedStatement.setString(6, bullet.getDescription());
-            preparedStatement.setLong(7, bullet.getId());
+            preparedStatement.setString(7, String.valueOf(bullet.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -242,7 +242,7 @@ public class JDBCBulletDao implements BulletDao {
         boolean res = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.delete"));
-            preparedStatement.setLong(1, bullet.getId());
+            preparedStatement.setString(1, String.valueOf(bullet.getUuid()));
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {

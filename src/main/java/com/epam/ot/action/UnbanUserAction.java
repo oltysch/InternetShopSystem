@@ -12,7 +12,7 @@ public class UnbanUserAction implements Action {
     private ActionResult result;
 
     public UnbanUserAction() {
-        result = new ActionResult("view_users", true);
+        result = new ActionResult("users", true);
     }
 
     @Override

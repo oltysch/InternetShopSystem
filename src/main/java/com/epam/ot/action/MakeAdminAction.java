@@ -13,7 +13,7 @@ public class MakeAdminAction implements Action {
     private ActionResult result;
 
     public MakeAdminAction() {
-        result = new ActionResult("view_users", true);
+        result = new ActionResult("users", true);
     }
 
     @Override

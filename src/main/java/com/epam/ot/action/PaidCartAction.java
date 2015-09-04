@@ -1,5 +1,6 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.Authorizer;
 import com.epam.ot.action.tools.ShoppingCartSerializer;
 import com.epam.ot.dao.BulletDao;
 import com.epam.ot.dao.DaoFactory;
@@ -22,8 +23,12 @@ public class PaidCartAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> products = new ArrayList<>();
         User user = (User) req.getSession().getAttribute("user");
-        ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
+
         DaoFactory daoFactory = DaoFactory.getInstance();
+
+        Authorizer.refreshUserData(user);
+
+        ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
         GunDao gunDao = daoFactory.createGunDao();
         BulletDao bulletDao = daoFactory.createBulletDao();
         gunDao.beginTransaction();
