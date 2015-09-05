@@ -25,7 +25,7 @@
                 </c:forEach>
             </div>
             <div class="description">
-                    ${product.fullDescription}
+                    ${product.getFullDescription()}
             </div>
         </div>
         <input type="hidden" name="selectedProductUuid" value="${product.uuid}"/>

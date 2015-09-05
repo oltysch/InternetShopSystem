@@ -6,12 +6,11 @@ import java.util.UUID;
 
 public class ProductBlock {
     private String name;
-    private String shortDescription;
+    private String description;
     private UUID uuid;
     private String productType;
     private Double price;
     private List<Characteristic> characteristics;
-    private String fullDescription;
 
     public ProductBlock() {
         characteristics = new ArrayList<>();
@@ -42,11 +41,19 @@ public class ProductBlock {
     }
 
     public String getShortDescription() {
-        return shortDescription;
+        String result;
+        if (description == null || description.equals("")) {
+            result = "";
+        } else if (description.length() > 101) {
+            result = description.substring(0, 100) + "...";
+        } else {
+            result = description;
+        }
+        return result;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -58,11 +65,13 @@ public class ProductBlock {
     }
 
     public String getFullDescription() {
-        return fullDescription;
-    }
-
-    public void setFullDescription(String fullDescription) {
-        this.fullDescription = fullDescription;
+        String result;
+        if (description == null) {
+            result = "";
+        } else {
+            result = description;
+        }
+        return result;
     }
 
     public List<Characteristic> getCharacteristics() {

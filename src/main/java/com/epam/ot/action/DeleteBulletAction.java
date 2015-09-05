@@ -18,7 +18,7 @@ public class DeleteBulletAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         double price;
-        int qty;
+        Integer qty;
         try {
             price = Double.parseDouble(req.getParameter("price"));
         } catch (NumberFormatException | NullPointerException e) {
@@ -27,11 +27,12 @@ public class DeleteBulletAction implements Action {
         try {
             qty = Integer.parseInt(req.getParameter("qty"));
         } catch (NumberFormatException | NullPointerException e) {
-            qty = 0;
+            qty = null;
         }
-        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), price, qty);
+        Bullet bullet = new Bullet(req.getParameter("caliber"), req.getParameter("name"), req.getParameter("bulletType"), price);
         bullet.setUuid(UUID.fromString(req.getParameter("uuid")));
         bullet.setDescription(req.getParameter("description"));
+        bullet.setQty(qty);
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();

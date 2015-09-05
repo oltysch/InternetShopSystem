@@ -23,7 +23,12 @@
         </div>
         <br>
         <span class="description">
-            ${product.shortDescription}
+            <c:if test="${product.getShortDescription() != ''}">
+                ${product.getShortDescription()}
+            </c:if>
+            <c:if test="${product.getShortDescription() == ''}">
+                <fmt:message key="product.description.missing"/>
+            </c:if>
         </span><br>
     </div>
     <input type="submit" name="submit" value="<fmt:message key='${buttonText}'/>"

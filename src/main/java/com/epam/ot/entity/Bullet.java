@@ -3,17 +3,16 @@ package com.epam.ot.entity;
 public class Bullet extends Product {
     private String caliber;
     private String type;
-    private int qty;
+    private Integer qty;
 
     public Bullet() {
         super();
     }
 
-    public Bullet(String caliber, String name, String bulletType, Double price, int qty) {
+    public Bullet(String caliber, String name, String bulletType, Double price) {
         super(name, price);
         this.caliber = caliber;
         this.type = bulletType;
-        this.qty = qty;
     }
 
     public String getCaliber() {
@@ -32,11 +31,11 @@ public class Bullet extends Product {
         this.type = type;
     }
 
-    public int getQty() {
+    public Integer getQty() {
         return qty;
     }
 
-    public void setQty(int qty) {
+    public void setQty(Integer qty) {
         this.qty = qty;
     }
 
@@ -46,16 +45,7 @@ public class Bullet extends Product {
         block.setName(caliber + " " + getName());
         block.setProductType("bullet");
         block.setUuid(getUuid());
-        String gettingShortDescription = getDescription();
-        block.setFullDescription(getDescription());
-        if (gettingShortDescription == null) {
-            gettingShortDescription = "Описание отсутствует";
-            block.setShortDescription(gettingShortDescription);
-            block.setFullDescription("");
-        } else if (gettingShortDescription.length() > 101) {
-            gettingShortDescription = gettingShortDescription.substring(0, 100) + "...";
-            block.setShortDescription(gettingShortDescription);
-        }
+        block.setDescription(getDescription());
         block.setPrice(getPrice());
         if (caliber != null && !caliber.equals("")) {
             block.addCharacteristics("bullet.caliber", caliber);
@@ -63,7 +53,7 @@ public class Bullet extends Product {
         if (type != null && !type.equals("")) {
             block.addCharacteristics("bullet.type", type);
         }
-        if (qty != 0) {
+        if (qty != null && qty > 0) {
             block.addCharacteristics("bullet.qty", String.valueOf(qty));
         }
         return block;

@@ -89,16 +89,7 @@ public class Gun extends Product {
         block.setName(getName() + " " + caliber);
         block.setProductType("gun");
         block.setUuid(getUuid());
-        String gettingShortDescription = getDescription();
-        block.setFullDescription(getDescription());
-        if (gettingShortDescription == null) {
-            gettingShortDescription = "Описание отсутствует";
-            block.setShortDescription(gettingShortDescription);
-            block.setFullDescription("");
-        } else if (gettingShortDescription.length() > 101) {
-            gettingShortDescription = gettingShortDescription.substring(0, 100) + "...";
-            block.setShortDescription(gettingShortDescription);
-        }
+        block.setDescription(getDescription());
         block.setPrice(getPrice());
         if (origin != null && !origin.equals("")) {
             block.addCharacteristics("gun.origin", origin);

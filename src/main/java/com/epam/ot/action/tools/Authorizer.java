@@ -5,12 +5,15 @@ import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
 import com.epam.ot.security.HashGenerator;
+import com.epam.ot.util.PropertyManager;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Authorizer {
+    private static PropertyManager propertyManager = new PropertyManager("connection.properties");
+
     public static void authorizeUser(User user, HttpServletRequest req, HttpServletResponse resp) {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
@@ -32,8 +35,14 @@ public class Authorizer {
         req.getSession().setAttribute("user", user);
         req.getSession().setAttribute("cart", cart);
         Cookie xidCookie = new Cookie("xid", xid);
-        //TODO load from properties
-        xidCookie.setMaxAge(60 * 60 * 24 * 7);
+
+        Integer maxLife;
+        try {
+            maxLife = Integer.parseInt(propertyManager.getProperty("cookie.max.life"));
+        } catch (NumberFormatException e) {
+            maxLife = 60 * 60 * 24 * 7;
+        }
+        xidCookie.setMaxAge(maxLife);
         resp.addCookie(xidCookie);
     }
 

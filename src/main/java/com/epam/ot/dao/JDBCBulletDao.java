@@ -21,9 +21,10 @@ public class JDBCBulletDao implements BulletDao {
     }
 
     private Bullet findFromResultSet(ResultSet resultSet) throws SQLException {
-        Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7));
+        Bullet bullet = new Bullet(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6));
         bullet.setId(resultSet.getInt(1));
         bullet.setUuid((UUID) resultSet.getObject(2));
+        bullet.setQty(resultSet.getInt(7));
         bullet.setDescription(resultSet.getString(8));
         return bullet;
     }

@@ -1,30 +1,37 @@
 package com.epam.ot.security;
 
-import org.junit.After;
-import org.junit.Before;
+import com.epam.ot.entity.TestUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class PasswordHashingTest {
 
-    @Before
-    public void setUp() throws Exception {
+    @Test
+    public void testValidatePasswordIfPasswordRight() throws Exception {
+        String password = TestUtils.generateString(9);
 
-    }
+        String hashPassword = PasswordHashing.generatePasswordHash(password);
+        Boolean validationResult = PasswordHashing.validatePassword(password, hashPassword);
+        System.out.println(validationResult.booleanValue());
 
-    @After
-    public void tearDown() throws Exception {
-
+        assertNotNull(validationResult);
+        assertNotNull(hashPassword);
+        assertNotEquals("", hashPassword);
+        assertTrue(hashPassword.length() > 100);
+        assertTrue(validationResult);
     }
 
     @Test
-    public void testGeneratePasswordHash() throws Exception {
+    public void testValidatePasswordIfPasswordWrong() throws Exception {
+        String password = "auiodfhyiud";
+        String wrongPassword = "auiodfhylud";
 
-    }
+        String hashPassword = PasswordHashing.generatePasswordHash(password);
+        Boolean validationResult = PasswordHashing.validatePassword(wrongPassword, hashPassword);
+        System.out.println(validationResult.booleanValue());
 
-    @Test
-    public void testValidatePassword() throws Exception {
-
+        assertNotNull(validationResult);
+        assertFalse(validationResult);
     }
 }
