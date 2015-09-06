@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>
@@ -8,18 +10,18 @@
     </title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
-        href="${pageContext.request.contextPath}/admin/edit_bullets">редактировать</a><br>
+<a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
+        href="${pageContext.request.contextPath}/admin/edit_bullets"><fmt:message key="button.edit"/></a><br>
 <table>
     <tr>
-        <td>ID</td>
-        <td>UUID</td>
-        <td>CALIBER</td>
-        <td>NAME</td>
-        <td>BULLET_TYPE</td>
-        <td>PRICE</td>
-        <td>QTY</td>
-        <td>DESCRIPTION</td>
+        <td><fmt:message key="db.bullets.id"/></td>
+        <td><fmt:message key="db.bullets.uuid"/></td>
+        <td><fmt:message key="db.bullets.caliber"/></td>
+        <td><fmt:message key="db.bullets.name"/></td>
+        <td><fmt:message key="db.bullets.type"/></td>
+        <td><fmt:message key="db.bullets.price"/></td>
+        <td><fmt:message key="db.bullets.qty"/></td>
+        <td><fmt:message key="db.bullets.description"/></td>
     </tr>
     <c:choose>
         <c:when test="${not empty bullets}">
@@ -39,7 +41,7 @@
         <c:otherwise>
             <tr>
                 <td>
-                    <div>в базе данных записи отсутствуют</div>
+                    <div><fmt:message key="message.db.clear"/></div>
                 </td>
             </tr>
         </c:otherwise>

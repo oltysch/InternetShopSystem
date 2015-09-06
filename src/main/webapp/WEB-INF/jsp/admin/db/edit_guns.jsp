@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>
@@ -8,22 +10,22 @@
     </title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
-        href="${pageContext.request.contextPath}/admin/guns">режим просмотра</a><br>
+<a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
+        href="${pageContext.request.contextPath}/admin/guns"><fmt:message key="button.view.mode"/></a><br>
 <table>
     <tr>
-        <td>ID</td>
-        <td>UUID</td>
-        <td>TYPE</td>
-        <td>MODEL</td>
-        <td>PRICE</td>
-        <td>ORIGIN</td>
-        <td>DESCRIPTION</td>
-        <td>FIRING_RANGE</td>
-        <td>EFFECTIVE_FIRING_RANGE</td>
-        <td>MAGAZINE_CAPACITY</td>
-        <td>CALIBER</td>
-        <td>FIRE_RATE</td>
+        <td><fmt:message key="db.guns.id"/></td>
+        <td><fmt:message key="db.guns.uuid"/></td>
+        <td><fmt:message key="db.guns.type"/></td>
+        <td><fmt:message key="db.guns.model"/></td>
+        <td><fmt:message key="db.guns.price"/></td>
+        <td><fmt:message key="db.guns.origin"/></td>
+        <td><fmt:message key="db.guns.description"/></td>
+        <td><fmt:message key="db.guns.firing.range"/></td>
+        <td><fmt:message key="db.guns.effective.firing.range"/></td>
+        <td><fmt:message key="db.guns.cartridge.capacity"/></td>
+        <td><fmt:message key="db.guns.caliber"/></td>
+        <td><fmt:message key="db.guns.fire.rate"/></td>
     </tr>
     <c:choose>
         <c:when test="${not empty guns}">
@@ -34,7 +36,8 @@
                         <td><label>${gun.uuid}</label></td>
                         <td><select name="type">
                             <c:forEach var="current_type" items="${types}">
-                                <option value="${current_type}" ${gun.type==current_type ? 'selected' : ''}>${current_type}</option>
+                                <option value="${current_type}" ${gun.type==current_type ? 'selected' : ''}><fmt:message
+                                        key="${current_type}"/></option>
                             </c:forEach>
                         </select></td>
 
@@ -64,7 +67,7 @@
         <c:otherwise>
             <tr>
                 <td>
-                    <div>в базе данных записи отсутствуют</div>
+                    <div><fmt:message key="message.db.clear"/></div>
                 </td>
             </tr>
         </c:otherwise>
@@ -74,13 +77,13 @@
             <td><label></label></td>
             <td><label></label></td>
             <td><select name="type">
-                <option value="Pistol">Pistol</option>
-                <option value="Revolver">Revolver</option>
-                <option value="Rifle">Rifle</option>
-                <option value="Carbine">Carbine</option>
-                <option value="Assault Rifle">Assault Rifle</option>
-                <option value="Machine Pistol">Machine Pistol</option>
-                <option value="Machine Gun">Machine Gun</option>
+                <option value="pistol"><fmt:message key="pistol"/></option>
+                <option value="revolver"><fmt:message key="revolver"/></option>
+                <option value="rifle"><fmt:message key="rifle"/></option>
+                <option value="carbine"><fmt:message key="carbine"/></option>
+                <option value="assault.rifle"><fmt:message key="assault.rifle"/></option>
+                <option value="machine.pistol"><fmt:message key="machine.pistol"/></option>
+                <option value="machine.gun"><fmt:message key="machine.gun"/></option>
             </select></td>
             <td><input name="model" type="text"/></td>
             <td><input name="price" type="text"/></td>

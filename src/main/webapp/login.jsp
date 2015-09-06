@@ -16,7 +16,7 @@
     </c:when>
     <c:otherwise>
         <div class="top">
-            <a href="${pageContext.request.contextPath}/">Назад</a>
+            <a href="${pageContext.request.contextPath}/"><fmt:message key="button.back"/></a>
         <span class="right">
 
         </span>
@@ -26,11 +26,15 @@
             <h1><fmt:message key="title.authorization"/></h1>
             <fieldset>
                 <form action="${pageContext.request.contextPath}/gunshop/login" method="post">
-                    <input name="login" type="text" required placeholder="Логин" value="${login}">
-                    <input name="password" type="password" required placeholder="Пароль">
-                    <input type="submit" value="ВОЙТИ">
+                    <input name="login" type="text" required placeholder="<fmt:message key="placeholder.login" />"
+                           value="${login}">
+                    <input name="password" type="password" required
+                           placeholder="<fmt:message key="placeholder.password" />">
+                    <input type="submit" value="<fmt:message key="button.enter2" />">
                     <footer class="clearfix">
-                        <div style="color: red">${loginError}</div>
+                        <c:if test="${not empty registerError}">
+                            <div style="color: red"><fmt:message key="${loginError}"/></div>
+                        </c:if>
                     </footer>
                 </form>
             </fieldset>

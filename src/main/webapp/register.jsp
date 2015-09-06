@@ -11,22 +11,26 @@
 </head>
 <body>
 <div class="top">
-    <a href="${pageContext.request.contextPath}/">Назад</a>
+    <a href="${pageContext.request.contextPath}/"><fmt:message key="button.back"/> </a>
         <span class="right">
 
         </span>
+
     <div class="clr"></div>
 </div>
 <div id="login-form">
-    <h1>Регистрация на сайте</h1>
+    <h1><fmt:message key="title.registration"/></h1>
     <fieldset>
         <form action="${pageContext.request.contextPath}/gunshop/register" method="post">
-            <input name="login" type="text" required placeholder="Введите ваш логин">
-            <input name="email" type="email" required placeholder="Введите ваш email">
-            <input name="password" type="password" required placeholder="Введите пароль">
-            <input type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
+            <input name="login" type="text" required placeholder="<fmt:message key="placeholder.enter.login" />">
+            <input name="email" type="email" required placeholder="<fmt:message key="placeholder.enter.email" />">
+            <input name="password" type="password" required
+                   placeholder="<fmt:message key="placeholder.enter.password" />">
+            <input type="submit" value="<fmt:message key="button.register" />">
 
-            <div style="color: red">${registerError}</div>
+            <c:if test="${not empty registerError}">
+                <div style="color: red"><fmt:message key="${registerError}"/></div>
+            </c:if>
             <footer class="clearfix">
             </footer>
         </form>

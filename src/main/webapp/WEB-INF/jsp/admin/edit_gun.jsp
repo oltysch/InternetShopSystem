@@ -54,10 +54,10 @@
                value="${product.toBlock().productType}"/>
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/change_gun"
-               value="обновить"/>
+               value="<fmt:message key="button.refresh"/>"/>
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/delete_gun"
-               value="удалить"/>
+               value="<fmt:message key="button.remove"/>"/>
     </form>
 </a:mainTemplate>
 </body>

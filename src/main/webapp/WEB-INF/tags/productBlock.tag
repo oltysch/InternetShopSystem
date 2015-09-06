@@ -21,7 +21,6 @@
             </a>
             <span class="price"> ${product.price} $</span>
         </div>
-        <br>
         <span class="description">
             <c:if test="${product.getShortDescription() != ''}">
                 ${product.getShortDescription()}

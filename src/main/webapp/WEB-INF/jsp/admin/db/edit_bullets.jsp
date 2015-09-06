@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>
@@ -8,18 +10,18 @@
     </title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
-        href="${pageContext.request.contextPath}/admin/bullets">режим просмотра</a><br>
+<a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
+        href="${pageContext.request.contextPath}/admin/bullets"><fmt:message key="button.view.mode"/></a><br>
 <table>
     <tr>
-        <td>ID</td>
-        <td>UUID</td>
-        <td>CALIBER</td>
-        <td>NAME</td>
-        <td>BULLET_TYPE</td>
-        <td>PRICE</td>
-        <td>QTY</td>
-        <td>DESCRIPTION</td>
+        <td><fmt:message key="db.bullets.id"/></td>
+        <td><fmt:message key="db.bullets.uuid"/></td>
+        <td><fmt:message key="db.bullets.caliber"/></td>
+        <td><fmt:message key="db.bullets.name"/></td>
+        <td><fmt:message key="db.bullets.type"/></td>
+        <td><fmt:message key="db.bullets.price"/></td>
+        <td><fmt:message key="db.bullets.qty"/></td>
+        <td><fmt:message key="db.bullets.description"/></td>
     </tr>
     <c:choose>
         <c:when test="${not empty bullets}">
@@ -33,7 +35,8 @@
 
                         <td><select name="type">
                             <c:forEach var="current_type" items="${types}">
-                                <option value="${current_type}" ${bullet.type==current_type ? 'selected' : ''}>${current_type}</option>
+                                <option value="${current_type}" ${bullet.type==current_type ? 'selected' : ''}>
+                                    <fmt:message key="${current_type}"/></option>
                             </c:forEach>
                         </select></td>
 
@@ -44,10 +47,10 @@
                                    value="${bullet.uuid}"/>
                         <td><input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/change_bullet_db"
-                                   value="обновить"/>
+                                   value="<fmt:message key="button.refresh"/>"/>
                             <input type="submit" name="submit"
                                    formaction="${pageContext.request.contextPath}/admin/delete_bullet"
-                                   value="удалить"/>
+                                   value="<fmt:message key="button.remove"/>"/>
                         </td>
                     </form>
                 </tr>
@@ -56,7 +59,7 @@
         <c:otherwise>
             <tr>
                 <td>
-                    <div>в базе данных записи отсутствуют</div>
+                    <div><fmt:message key="message.db.clear"/></div>
                 </td>
             </tr>
         </c:otherwise>
@@ -69,10 +72,10 @@
             <td><input name="name" type="text"/></td>
 
             <td><select name="type">
-                <option value="Armor-piercing">Armor-piercing</option>
-                <option value="Ball">Ball</option>
-                <option value="Tracer">Tracer</option>
-                <option value="Incendiary">Incendiary</option>
+                <option value="armor.piercing"><fmt:message key="armor.piercing"/></option>
+                <option value="ball"><fmt:message key="ball"/></option>
+                <option value="tracer"><fmt:message key="tracer"/></option>
+                <option value="incendiary"><fmt:message key="incendiary"/></option>
             </select></td>
 
             <td><input name="price" type="text"/></td>

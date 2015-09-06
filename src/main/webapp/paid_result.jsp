@@ -12,9 +12,9 @@
 </head>
 <body>
 <a:mainTemplate>
-    <div>${paidResult}</div>
+    <div><fmt:message key="${paidResult}"/></div>
     <br>
-    <a href="${pageContext.request.contextPath}/gunshop/shopcart">продолжить</a>
+    <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="button.continue"/></a>
 </a:mainTemplate>
 </body>
 </html>

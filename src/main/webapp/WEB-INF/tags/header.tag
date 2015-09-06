@@ -14,7 +14,7 @@
         ${user.login}<br>
         <a href="${pageContext.request.contextPath}/gunshop/shopcart"><fmt:message key="shopcart"/></a><br>
 
-            <div>cash ${user.cash} $</div>
-        <a href="${pageContext.request.contextPath}/gunshop/logout">exit</a>
+        <div><fmt:message key="user.cash"/> ${user.cash} $</div>
+        <a href="${pageContext.request.contextPath}/gunshop/logout"><fmt:message key="button.logout"/></a>
     </div>
 </div>

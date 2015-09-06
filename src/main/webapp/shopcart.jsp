@@ -18,16 +18,16 @@
                                 showCount="true">
                 </a:productBlock><br>
             </c:forEach>
-            <div>Общая цена: ${price} $</div>
+            <div><fmt:message key="cart.total.price"/>: ${price} $</div>
             <form>
                 <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/paid_shopcart"
-                       value="Оплатить">
+                       value="<fmt:message key="button.paid"/>">
                 <input type="submit" formaction="${pageContext.request.contextPath}/gunshop/clear_shopcart"
-                       value="Очистить">
+                       value="<fmt:message key="button.clear"/>">
             </form>
         </c:when>
         <c:otherwise>
-            <div>Ваша корзина пуста</div>
+            <div><fmt:message key="cart.clear"/></div>
         </c:otherwise>
     </c:choose>
 </a:mainTemplate>

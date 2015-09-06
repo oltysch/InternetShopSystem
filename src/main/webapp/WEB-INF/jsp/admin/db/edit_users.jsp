@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>
@@ -8,18 +10,18 @@
     </title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
-        href="${pageContext.request.contextPath}/admin/users">режим просмотра</a><br>
+<a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
+        href="${pageContext.request.contextPath}/admin/users"><fmt:message key="button.view.mode"/></a><br>
 <table>
     <tr>
-        <td>ID</td>
-        <td>UUID</td>
-        <td>LOGIN</td>
-        <td>EMAIL</td>
-        <td>ROLE</td>
-        <td>PASSWORD</td>
-        <td>CASH</td>
-        <td>BANNED</td>
+        <td><fmt:message key="db.users.id"/></td>
+        <td><fmt:message key="db.users.uuid"/></td>
+        <td><fmt:message key="db.users.login"/></td>
+        <td><fmt:message key="db.users.email"/></td>
+        <td><fmt:message key="db.users.role"/></td>
+        <td><fmt:message key="db.users.password"/></td>
+        <td><fmt:message key="db.users.cash"/></td>
+        <td><fmt:message key="db.users.banned"/></td>
     </tr>
     <c:choose>
         <c:when test="${not empty users}">
@@ -54,7 +56,7 @@
         <c:otherwise>
             <tr>
                 <td>
-                    <div>в базе данных записи отсутствуют</div>
+                    <div><fmt:message key="message.db.clear"/></div>
                 </td>
             </tr>
         </c:otherwise>

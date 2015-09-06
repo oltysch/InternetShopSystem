@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="i18n"/>
 <html>
 <head>
     <title>
@@ -8,18 +10,18 @@
     </title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/gunshop/">на главную</a> | <a
-        href="${pageContext.request.contextPath}/admin/edit_users">редактировать</a><br>
+<a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
+        href="${pageContext.request.contextPath}/admin/edit_users"><fmt:message key="button.edit"/></a><br>
 <table>
     <tr>
-        <td>ID</td>
-        <td>UUID</td>
-        <td>LOGIN</td>
-        <td>EMAIL</td>
-        <td>ROLE</td>
-        <td>PASSWORD</td>
-        <td>CASH</td>
-        <td>BANNED</td>
+        <td><fmt:message key="db.users.id"/></td>
+        <td><fmt:message key="db.users.uuid"/></td>
+        <td><fmt:message key="db.users.login"/></td>
+        <td><fmt:message key="db.users.email"/></td>
+        <td><fmt:message key="db.users.role"/></td>
+        <td><fmt:message key="db.users.password"/></td>
+        <td><fmt:message key="db.users.cash"/></td>
+        <td><fmt:message key="db.users.banned"/></td>
     </tr>
     <c:choose>
         <c:when test="${not empty users}">
@@ -40,22 +42,22 @@
                             <c:if test="${user.role == 'ADMIN'}">
                                 <input type="submit" name="submit"
                                        formaction="${pageContext.request.contextPath}/admin/make_user"
-                                       value="убрать права админа"/>
+                                       value="<fmt:message key="button.make.user"/>"/>
                             </c:if>
                             <c:if test="${user.role == 'USER'}">
                                 <input type="submit" name="submit"
                                        formaction="${pageContext.request.contextPath}/admin/make_admin"
-                                       value="дать права админа"/>
+                                       value="<fmt:message key="button.make.admin"/>"/>
                             </c:if>
                             <c:if test="${user.banned}">
                                 <input type="submit" name="submit"
                                        formaction="${pageContext.request.contextPath}/admin/unban_user"
-                                       value="разбанить пользователя"/>
+                                       value="<fmt:message key="button.unban.user"/>"/>
                             </c:if>
                             <c:if test="${!user.banned}">
                                 <input type="submit" name="submit"
                                        formaction="${pageContext.request.contextPath}/admin/ban_user"
-                                       value="забанить пользователя"/>
+                                       value="<fmt:message key="button.ban.user"/>"/>
                             </c:if>
                         </td>
                     </form>
@@ -65,7 +67,7 @@
         <c:otherwise>
             <tr>
                 <td>
-                    <div>в базе данных записи отсутствуют</div>
+                    <div><fmt:message key="message.db.clear"/></div>
                 </td>
             </tr>
         </c:otherwise>

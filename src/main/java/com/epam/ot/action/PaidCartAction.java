@@ -50,7 +50,7 @@ public class PaidCartAction implements Action {
             user.setCash(cash);
             shoppingCart.clearCart();
             user.setCart(ShoppingCartSerializer.writeCartInString(shoppingCart));
-            req.setAttribute("paidResult", "Товар успешно оплачен!");
+            req.setAttribute("paidResult", "paid.result.success");
             result = new ActionResult("paid_result");
             UserDao userDao = daoFactory.createUserDao();
             userDao.beginTransaction();
@@ -58,7 +58,7 @@ public class PaidCartAction implements Action {
             userDao.endTransaction();
         } else {
             result = new ActionResult("paid_result");
-            req.setAttribute("paidResult", "Ошибка на вашем счете не достаточно средств");
+            req.setAttribute("paidResult", "paid.result.fail");
         }
         return result;
     }

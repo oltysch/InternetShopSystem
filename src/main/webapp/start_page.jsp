@@ -30,7 +30,7 @@
                         <fmt:message key="button.enter"/> formaction="${pageContext.request.contextPath}/gunshop/login"><br>
                     <input type="submit" value=
                         <fmt:message
-                                key="button.register"/> formaction="${pageContext.request.contextPath}/gunshop/register">
+                                key="button.registration"/> formaction="${pageContext.request.contextPath}/gunshop/register">
                     <footer class="clearfix">
                     </footer>
                 </form>
