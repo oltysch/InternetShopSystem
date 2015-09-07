@@ -4,10 +4,7 @@ import com.epam.ot.entity.Role;
 import com.epam.ot.entity.User;
 import com.epam.ot.util.PropertyManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +27,27 @@ public class JdbcUserDao implements UserDao {
         user.setXid(resultSet.getString(9));
         user.setCart(resultSet.getString(10));
         return user;
+    }
+
+    private void makePreparedStatement(User user, PreparedStatement preparedStatement, int startIndex) throws SQLException {
+        preparedStatement.setString(startIndex, user.getLogin());
+        preparedStatement.setString(startIndex + 1, user.getEmail());
+        preparedStatement.setString(startIndex + 2, String.valueOf(user.getRole()));
+        preparedStatement.setString(startIndex + 3, user.getPassword());
+        preparedStatement.setDouble(startIndex + 4, user.getCash());
+        preparedStatement.setBoolean(startIndex + 5, user.isBanned());
+        String xid = user.getXid();
+        if (xid != null) {
+            preparedStatement.setString(startIndex + 6, xid);
+        } else {
+            preparedStatement.setNull(startIndex + 6, Statement.SUCCESS_NO_INFO);
+        }
+        String cart = user.getCart();
+        if (cart != null) {
+            preparedStatement.setString(startIndex + 7, cart);
+        } else {
+            preparedStatement.setNull(startIndex + 7, Statement.SUCCESS_NO_INFO);
+        }
     }
 
     @Override
@@ -202,14 +220,7 @@ public class JdbcUserDao implements UserDao {
     public void updateUser(User user) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.update"));
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, String.valueOf(user.getRole()));
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setDouble(5, user.getCash());
-            preparedStatement.setBoolean(6, user.isBanned());
-            preparedStatement.setString(7, user.getXid());
-            preparedStatement.setString(8, user.getCart());
+            makePreparedStatement(user, preparedStatement, 1);
             preparedStatement.setString(9, String.valueOf(user.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -228,14 +239,7 @@ public class JdbcUserDao implements UserDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("users.insert"));
             preparedStatement.setObject(1, user.getUuid());
-            preparedStatement.setString(2, user.getLogin());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, String.valueOf(user.getRole()));
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setDouble(6, user.getCash());
-            preparedStatement.setBoolean(7, user.isBanned());
-            preparedStatement.setString(8, user.getXid());
-            preparedStatement.setString(9, user.getCart());
+            makePreparedStatement(user, preparedStatement, 2);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

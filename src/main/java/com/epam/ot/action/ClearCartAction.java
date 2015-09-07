@@ -5,11 +5,15 @@ import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
+import com.epam.ot.util.PropertyManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class ClearCartAction implements Action {
+    public static final Logger logger = Logger.getLogger(PropertyManager.class);
     ActionResult result;
 
     public ClearCartAction() {
@@ -21,7 +25,11 @@ public class ClearCartAction implements Action {
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
         User user = (User) req.getSession().getAttribute("user");
         cart.clearCart();
-        user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        try {
+            user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        } catch (IOException e) {
+            logger.error("write cart error" + e);
+        }
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

@@ -12,7 +12,7 @@ public class GunTest {
 
     @Test
     public void testToBlockWithNormalBullet() throws Exception {
-        gun = new Gun("pistol", "Five Seven", 120.0, "USA", "7.62x64", 30, 300, 200, 50);
+        gun = new Gun("pistol", "Five Seven", 120.0);
         int descriptionLength = 150;
         gun.setDescription(TestUtils.generateString(descriptionLength));
         UUID uuid = UUID.randomUUID();
@@ -26,7 +26,7 @@ public class GunTest {
         assertEquals(gun.getPrice(), block.getPrice());
         assertEquals("gun", block.getProductType());
         assertEquals(uuid, block.getUuid());
-        assertEquals(7, block.getCharacteristics().size());
+        assertEquals(1, block.getCharacteristics().size());
         assertNotNull(block.getShortDescription());
         assertNotNull(block.getFullDescription());
         assertEquals(gun.getDescription(), block.getFullDescription());

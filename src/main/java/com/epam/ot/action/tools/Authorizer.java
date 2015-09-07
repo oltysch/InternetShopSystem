@@ -6,13 +6,16 @@ import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.User;
 import com.epam.ot.security.HashGenerator;
 import com.epam.ot.util.PropertyManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class Authorizer {
     private static PropertyManager propertyManager = new PropertyManager("connection.properties");
+    public static final Logger logger = Logger.getLogger(PropertyManager.class);
 
     public static void authorizeUser(User user, HttpServletRequest req, HttpServletResponse resp) {
         DaoFactory daoFactory = DaoFactory.getInstance();
@@ -21,12 +24,18 @@ public class Authorizer {
         String xid = HashGenerator.generateHash(req.getSession().getId());
         user.setXid(xid);
 
-        if (user.getCart() != null && !user.getCart().equals("")) {
+        try {
             cart = ShoppingCartSerializer.readCartFromString(user.getCart());
-        } else {
+        } catch (Throwable e) {
+            logger.error("reading cart error" + e);
             cart = new ShoppingCart();
         }
-        user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+
+        try {
+            user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         userDao.beginTransaction();
         userDao.updateUser(user);

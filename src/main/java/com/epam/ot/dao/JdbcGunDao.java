@@ -3,10 +3,7 @@ package com.epam.ot.dao;
 import com.epam.ot.entity.Gun;
 import com.epam.ot.util.PropertyManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,11 +18,65 @@ public class JdbcGunDao implements GunDao {
     }
 
     private Gun findFromResultSet(ResultSet resultSet) throws SQLException {
-        Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getString(6), resultSet.getString(11), resultSet.getInt(10), resultSet.getInt(12), resultSet.getInt(8), resultSet.getInt(9));
+        Gun gun = new Gun(resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5));
         gun.setId(resultSet.getInt(1));
         gun.setUuid((UUID) resultSet.getObject(2));
+        gun.setOrigin(resultSet.getString(6));
         gun.setDescription(resultSet.getString(7));
+        gun.setFiringRange(resultSet.getInt(8));
+        gun.setEffectiveFiringRange(resultSet.getInt(9));
+        gun.setMagazineCapacity(resultSet.getInt(10));
+        gun.setCaliber(resultSet.getString(11));
+        gun.setFireRate(resultSet.getInt(12));
         return gun;
+    }
+
+    private void makePreparedStatement(Gun gun, PreparedStatement preparedStatement, int startIndex) throws SQLException {
+        preparedStatement.setString(startIndex, gun.getType());
+        preparedStatement.setString(startIndex + 1, gun.getName());
+        preparedStatement.setDouble(startIndex + 2, gun.getPrice());
+        String origin = gun.getOrigin();
+        if (origin != null) {
+            preparedStatement.setString(startIndex + 3, origin);
+        } else {
+            preparedStatement.setNull(startIndex + 3, Statement.SUCCESS_NO_INFO);
+        }
+        String description = gun.getDescription();
+        if (description != null) {
+            preparedStatement.setString(startIndex + 4, description);
+        } else {
+            preparedStatement.setNull(startIndex + 4, Statement.SUCCESS_NO_INFO);
+        }
+        Integer firingRange = gun.getFiringRange();
+        if (firingRange != null) {
+            preparedStatement.setInt(startIndex + 5, firingRange);
+        } else {
+            preparedStatement.setNull(startIndex + 5, Statement.SUCCESS_NO_INFO);
+        }
+        Integer effeciveFiringRange = gun.getEffectiveFiringRange();
+        if (effeciveFiringRange != null) {
+            preparedStatement.setInt(startIndex + 6, effeciveFiringRange);
+        } else {
+            preparedStatement.setNull(startIndex + 6, Statement.SUCCESS_NO_INFO);
+        }
+        Integer magazineCapacity = gun.getMagazineCapacity();
+        if (magazineCapacity != null) {
+            preparedStatement.setInt(startIndex + 7, magazineCapacity);
+        } else {
+            preparedStatement.setNull(startIndex + 7, Statement.SUCCESS_NO_INFO);
+        }
+        String caliber = gun.getCaliber();
+        if (caliber != null) {
+            preparedStatement.setString(startIndex + 8, caliber);
+        } else {
+            preparedStatement.setNull(startIndex + 8, Statement.SUCCESS_NO_INFO);
+        }
+        Integer fireRate = gun.getFireRate();
+        if (fireRate != null) {
+            preparedStatement.setInt(startIndex + 9, fireRate);
+        } else {
+            preparedStatement.setNull(startIndex + 9, Statement.SUCCESS_NO_INFO);
+        }
     }
 
     @Override
@@ -333,16 +384,7 @@ public class JdbcGunDao implements GunDao {
     public void update(Gun gun) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.update"));
-            preparedStatement.setString(1, gun.getType());
-            preparedStatement.setString(2, gun.getName());
-            preparedStatement.setDouble(3, gun.getPrice());
-            preparedStatement.setString(4, gun.getOrigin());
-            preparedStatement.setString(5, gun.getDescription());
-            preparedStatement.setInt(6, gun.getFiringRange());
-            preparedStatement.setInt(7, gun.getEffectiveFiringRange());
-            preparedStatement.setInt(8, gun.getMagazineCapacity());
-            preparedStatement.setString(9, gun.getCaliber());
-            preparedStatement.setInt(10, gun.getFireRate());
+            makePreparedStatement(gun, preparedStatement, 1);
             preparedStatement.setObject(11, gun.getUuid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -360,17 +402,9 @@ public class JdbcGunDao implements GunDao {
     public void insert(Gun gun) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.insert"));
-            preparedStatement.setString(1, gun.getType());
-            preparedStatement.setString(2, gun.getName());
-            preparedStatement.setDouble(3, gun.getPrice());
-            preparedStatement.setString(4, gun.getOrigin());
-            preparedStatement.setString(5, gun.getDescription());
-            preparedStatement.setInt(6, gun.getFiringRange());
-            preparedStatement.setInt(7, gun.getEffectiveFiringRange());
-            preparedStatement.setInt(8, gun.getMagazineCapacity());
-            preparedStatement.setString(9, gun.getCaliber());
-            preparedStatement.setInt(10, gun.getFireRate());
-            preparedStatement.setObject(11, gun.getUuid());
+            preparedStatement.setObject(1, gun.getUuid());
+            makePreparedStatement(gun, preparedStatement, 2);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {

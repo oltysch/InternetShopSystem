@@ -3,10 +3,7 @@ package com.epam.ot.dao;
 import com.epam.ot.entity.Bullet;
 import com.epam.ot.util.PropertyManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +24,26 @@ public class JDBCBulletDao implements BulletDao {
         bullet.setQty(resultSet.getInt(7));
         bullet.setDescription(resultSet.getString(8));
         return bullet;
+    }
+
+    private void makePreparedStatement(Bullet bullet, PreparedStatement preparedStatement, int startIndex) throws SQLException {
+        preparedStatement.setString(startIndex, bullet.getCaliber());
+        preparedStatement.setString(startIndex + 1, bullet.getName());
+        preparedStatement.setString(startIndex + 2, bullet.getType());
+        preparedStatement.setDouble(startIndex + 3, bullet.getPrice());
+        Integer qty = bullet.getQty();
+        if (qty != null) {
+            preparedStatement.setInt(startIndex + 4, qty);
+        } else {
+            preparedStatement.setNull(startIndex + 4, Statement.SUCCESS_NO_INFO);
+        }
+        String description = bullet.getDescription();
+        if (description != null) {
+            preparedStatement.setString(startIndex + 5, description);
+        } else {
+            preparedStatement.setNull(startIndex + 5, Statement.SUCCESS_NO_INFO);
+        }
+
     }
 
     @Override
@@ -196,12 +213,7 @@ public class JDBCBulletDao implements BulletDao {
     public void update(Bullet bullet) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.update"));
-            preparedStatement.setString(1, bullet.getCaliber());
-            preparedStatement.setString(2, bullet.getName());
-            preparedStatement.setString(3, bullet.getType());
-            preparedStatement.setDouble(4, bullet.getPrice());
-            preparedStatement.setInt(5, bullet.getQty());
-            preparedStatement.setString(6, bullet.getDescription());
+            makePreparedStatement(bullet, preparedStatement, 1);
             preparedStatement.setString(7, String.valueOf(bullet.getUuid()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -220,12 +232,7 @@ public class JDBCBulletDao implements BulletDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("bullets.insert"));
             preparedStatement.setObject(1, bullet.getUuid());
-            preparedStatement.setString(2, bullet.getCaliber());
-            preparedStatement.setString(3, bullet.getName());
-            preparedStatement.setString(4, bullet.getType());
-            preparedStatement.setDouble(5, bullet.getPrice());
-            preparedStatement.setInt(6, bullet.getQty());
-            preparedStatement.setString(7, bullet.getDescription());
+            makePreparedStatement(bullet, preparedStatement, 2);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

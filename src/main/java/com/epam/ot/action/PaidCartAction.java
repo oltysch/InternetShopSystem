@@ -10,13 +10,17 @@ import com.epam.ot.entity.Product;
 import com.epam.ot.entity.ShoppingCart;
 import com.epam.ot.entity.ShoppingCartItem;
 import com.epam.ot.entity.User;
+import com.epam.ot.util.PropertyManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaidCartAction implements Action {
+    public static final Logger logger = Logger.getLogger(PropertyManager.class);
     ActionResult result;
 
     @Override
@@ -49,7 +53,11 @@ public class PaidCartAction implements Action {
             cash -= price;
             user.setCash(cash);
             shoppingCart.clearCart();
-            user.setCart(ShoppingCartSerializer.writeCartInString(shoppingCart));
+            try {
+                user.setCart(ShoppingCartSerializer.writeCartInString(shoppingCart));
+            } catch (IOException e) {
+                logger.error("write cart error" + e);
+            }
             req.setAttribute("paidResult", "paid.result.success");
             result = new ActionResult("paid_result");
             UserDao userDao = daoFactory.createUserDao();

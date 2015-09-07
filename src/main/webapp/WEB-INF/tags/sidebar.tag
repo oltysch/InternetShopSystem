@@ -6,20 +6,20 @@
                 key="title.guns"/></a></div>
         <div class="points">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Pistol"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=pistol"><fmt:message
                         key="pistols"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Revolver"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=revolver"><fmt:message
                         key="revolvers"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Rifle"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=rifle"><fmt:message
                         key="rifles"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Carbine"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=carbine"><fmt:message
                         key="carbines"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Assault Rifle"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=assault.rifle"><fmt:message
                         key="assault.rifles"/></a>
                 <li>
-                    <a href="${pageContext.request.contextPath}/gunshop/products?seltp=Machine Pistol"><fmt:message
+                    <a href="${pageContext.request.contextPath}/gunshop/products?seltp=machine.pistol"><fmt:message
                             key="machine.pistols"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Machine Gun"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=machine.gun"><fmt:message
                         key="machine.guns"/></a>
             </ul>
         </div>
@@ -29,13 +29,13 @@
                 key="title.bullets"/></a></div>
         <div class="points">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Armor-piercing"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=armor.piercing"><fmt:message
                         key="armor.piercing"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Ball"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=ball"><fmt:message
                         key="ball"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Tracer"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=tracer"><fmt:message
                         key="tracer"/></a>
-                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=Incendiary"><fmt:message
+                <li><a href="${pageContext.request.contextPath}/gunshop/products?seltp=incendiary"><fmt:message
                         key="incendiary"/></a>
             </ul>
         </div>

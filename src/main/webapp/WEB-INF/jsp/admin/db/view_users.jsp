@@ -11,7 +11,7 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/gunshop/"><fmt:message key="button.goto.main"/></a> | <a
-        href="${pageContext.request.contextPath}/admin/edit_users"><fmt:message key="button.edit"/></a><br>
+        href="${pageContext.request.contextPath}/admin/edit_users"><fmt:message key="button.edit.mode"/></a><br>
 <table>
     <tr>
         <td><fmt:message key="db.users.id"/></td>

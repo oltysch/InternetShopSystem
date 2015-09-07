@@ -22,10 +22,10 @@
     <h1><fmt:message key="title.registration"/></h1>
     <fieldset>
         <form action="${pageContext.request.contextPath}/gunshop/register" method="post">
-            <input name="login" type="text" required placeholder="<fmt:message key="placeholder.enter.login" />">
-            <input name="email" type="email" required placeholder="<fmt:message key="placeholder.enter.email" />">
+            <input name="login" type="text" required placeholder="<fmt:message key="placeholder.login" />">
+            <input name="email" type="email" required placeholder="<fmt:message key="placeholder.email" />">
             <input name="password" type="password" required
-                   placeholder="<fmt:message key="placeholder.enter.password" />">
+                   placeholder="<fmt:message key="placeholder.password" />">
             <input type="submit" value="<fmt:message key="button.register" />">
 
             <c:if test="${not empty registerError}">

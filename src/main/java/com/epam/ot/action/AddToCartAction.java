@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.UUID;
 
 public class AddToCartAction implements Action {
@@ -27,7 +28,11 @@ public class AddToCartAction implements Action {
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
         User user = (User) req.getSession().getAttribute("user");
         cart.addProduct(selectedProductUuid);
-        user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        try {
+            user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+        } catch (IOException e) {
+            logger.error("write cart error" + e);
+        }
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

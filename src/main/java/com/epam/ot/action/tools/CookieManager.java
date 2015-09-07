@@ -21,6 +21,7 @@ public class CookieManager {
 
     public static void refreshLanguageCookies(HttpServletRequest req, HttpServletResponse resp) {
         String lang = req.getParameter("lang");
+        String sessionLang = (String) req.getSession().getAttribute("lang");
 //        find the language settings
         if (lang != null) {
 //            if settings founded in request parameters - create cookie and put language settings into session
@@ -33,7 +34,7 @@ public class CookieManager {
             Cookie myCookie = CookieManager.findCookie(req, "lang"); //getting cookies
             if (myCookie != null) {
                 //if cookie founded - create attribute in session
-                req.getSession().setAttribute("lang", myCookie.getValue());
+                if (sessionLang == null) req.getSession().setAttribute("lang", myCookie.getValue());
                 myCookie.setMaxAge(60 * 60 * 24 * 3);
                 //and refresh cookie expire date
                 resp.addCookie(myCookie);

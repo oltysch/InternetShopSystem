@@ -1,5 +1,6 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.EntityLoader;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.GunDao;
 import com.epam.ot.entity.Gun;
@@ -17,16 +18,8 @@ public class CreateGunAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String priceString = req.getParameter("price");
-        double price;
-        try {
-            price = Double.parseDouble(priceString);
-        } catch (NumberFormatException | NullPointerException e) {
-            price = 0;
-        }
-        Gun gun = new Gun(req.getParameter("type"), req.getParameter("model"), price, req.getParameter("origin"), req.getParameter("caliber"), Integer.parseInt(req.getParameter("magazineCapacity")), Integer.parseInt(req.getParameter("fireRate")), Integer.parseInt(req.getParameter("firingRange")), Integer.parseInt(req.getParameter("effectiveFiringRange")));
-        gun.setUuid(UUID.randomUUID());
-        gun.setDescription(req.getParameter("description"));
+        Gun gun = EntityLoader.loadGunFromRequest(req);
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();

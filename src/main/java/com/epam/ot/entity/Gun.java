@@ -5,22 +5,15 @@ import java.util.Map;
 public class Gun extends Product {
     private String origin;
     private String type;
-    private int firingRange;
-    private int effectiveFiringRange;
-    private int magazineCapacity;
+    private Integer firingRange;
+    private Integer effectiveFiringRange;
+    private Integer magazineCapacity;
     private String caliber;
-    private int fireRate;
+    private Integer fireRate;
 
-    public Gun(String type, String model, Double price, String origin, String caliber, int magazineCapacity,
-               int fireRate, int firingRange, int effectiveFiringRange) {
+    public Gun(String type, String model, Double price) {
         super(model, price);
-        this.origin = origin;
         this.type = type;
-        this.caliber = caliber;
-        this.magazineCapacity = magazineCapacity;
-        this.fireRate = fireRate;
-        this.firingRange = firingRange;
-        this.effectiveFiringRange = effectiveFiringRange;
     }
 
     public Gun() {
@@ -43,35 +36,35 @@ public class Gun extends Product {
         this.origin = origin;
     }
 
-    public int getFiringRange() {
+    public Integer getFiringRange() {
         return firingRange;
     }
 
-    public void setFiringRange(int firingRange) {
+    public void setFiringRange(Integer firingRange) {
         this.firingRange = firingRange;
     }
 
-    public int getFireRate() {
+    public Integer getFireRate() {
         return fireRate;
     }
 
-    public void setFireRate(int fireRate) {
+    public void setFireRate(Integer fireRate) {
         this.fireRate = fireRate;
     }
 
-    public int getEffectiveFiringRange() {
+    public Integer getEffectiveFiringRange() {
         return effectiveFiringRange;
     }
 
-    public void setEffectiveFiringRange(int effectiveFiringRange) {
+    public void setEffectiveFiringRange(Integer effectiveFiringRange) {
         this.effectiveFiringRange = effectiveFiringRange;
     }
 
-    public int getMagazineCapacity() {
+    public Integer getMagazineCapacity() {
         return magazineCapacity;
     }
 
-    public void setMagazineCapacity(int magazineCapacity) {
+    public void setMagazineCapacity(Integer magazineCapacity) {
         this.magazineCapacity = magazineCapacity;
     }
 
@@ -97,19 +90,19 @@ public class Gun extends Product {
         if (type != null && !type.equals("")) {
             block.addCharacteristics("gun.type", type);
         }
-        if (firingRange != 0) {
+        if (firingRange != null && firingRange > 0) {
             block.addCharacteristics("gun.firingRange", String.valueOf(firingRange));
         }
-        if (effectiveFiringRange != 0) {
+        if (effectiveFiringRange != null && effectiveFiringRange > 0) {
             block.addCharacteristics("gun.effectiveFiringRange", String.valueOf(effectiveFiringRange));
         }
-        if (magazineCapacity != 0) {
+        if (magazineCapacity != null && magazineCapacity > 0) {
             block.addCharacteristics("gun.magazineCapacity", String.valueOf(magazineCapacity));
         }
         if (caliber != null && !caliber.equals("")) {
             block.addCharacteristics("gun.caliber", caliber);
         }
-        if (fireRate != 0) {
+        if (fireRate != null && fireRate > 0) {
             block.addCharacteristics("gun.fireRate", String.valueOf(fireRate));
         }
         return block;

@@ -15,20 +15,15 @@ public class ShowLoginPageOrAuthorize implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String redirect_url = (String) req.getAttribute("redirect_url");
-        if (redirect_url == null || redirect_url == "") {
-            redirect_url = "products";
-        }
-
         User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
-            reopenSession(req, resp, redirect_url);
+            reopenSession(req, resp);
         }
 
         return result;
     }
 
-    private void reopenSession(HttpServletRequest req, HttpServletResponse resp, String redirect_url) {
+    private void reopenSession(HttpServletRequest req, HttpServletResponse resp) {
         Cookie myCookie = CookieManager.findCookie(req, "xid");
         if (myCookie != null) {
             DaoFactory daoFactory = DaoFactory.getInstance();
@@ -37,7 +32,7 @@ public class ShowLoginPageOrAuthorize implements Action {
             User user = userDao.findByXid(myCookie.getValue());
             if (user != null) {
                 Authorizer.authorizeUser(user, req, resp);
-                result = new ActionResult(redirect_url, true);
+                result = new ActionResult("products", true);
             } else {
                 result = new ActionResult("start_page");
             }

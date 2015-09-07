@@ -24,14 +24,18 @@ public class MainServlet extends HttpServlet {
         String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
 
         Action action = actionFactory.getAction(actionName);
-        ActionResult result = action.execute(req, resp);
+        try {
+            ActionResult result = action.execute(req, resp);
 
-        CookieManager.refreshLanguageCookies(req, resp);
+            CookieManager.refreshLanguageCookies(req, resp);
 
-        if (result.isRedirect()) {
-            resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
-        } else {
-            req.getRequestDispatcher("/" + result.getView() + ".jsp").forward(req, resp);
+            if (result.isRedirect()) {
+                resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
+            } else {
+                req.getRequestDispatcher("/" + result.getView() + ".jsp").forward(req, resp);
+            }
+        } catch (NullPointerException e) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }
