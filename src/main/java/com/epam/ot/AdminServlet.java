@@ -23,7 +23,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
+        String actionName = req.getMethod() + req.getPathInfo();
         User user = (User) req.getSession().getAttribute("user");
         if (user != null && user.getRole() == Role.ADMIN) {
 
@@ -33,7 +33,7 @@ public class AdminServlet extends HttpServlet {
             CookieManager.refreshLanguageCookies(req, resp);
 
             if (result.isRedirect()) {
-                resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
+                resp.sendRedirect(req.getContextPath() + "/admin/" + result.getView());
             } else {
                 req.getRequestDispatcher("/WEB-INF/jsp/" + result.getView() + ".jsp").forward(req, resp);
             }

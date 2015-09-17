@@ -422,7 +422,6 @@ public class JdbcGunDao implements GunDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(propertyManager.getProperty("guns.delete"));
             preparedStatement.setString(1, String.valueOf(gun.getUuid()));
-            preparedStatement.setString(2, String.valueOf(gun.getUuid()));
             preparedStatement.executeUpdate();
             res = true;
         } catch (SQLException e) {

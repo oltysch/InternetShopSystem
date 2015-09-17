@@ -18,8 +18,9 @@ public class ShowLoginPageOrAuthorize implements Action {
         User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
             reopenSession(req, resp);
+        } else {
+            result = new ActionResult("products", true);
         }
-
         return result;
     }
 

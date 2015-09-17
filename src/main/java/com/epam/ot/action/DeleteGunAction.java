@@ -7,7 +7,6 @@ import com.epam.ot.entity.Gun;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 public class DeleteGunAction implements Action {
     ActionResult actionResult;
@@ -19,7 +18,7 @@ public class DeleteGunAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         Gun gun = EntityLoader.loadGunFromRequest(req);
-        
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();

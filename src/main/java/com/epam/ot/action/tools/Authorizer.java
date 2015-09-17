@@ -14,14 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Authorizer {
+    public static final Logger logger = Logger.getLogger(Authorizer.class);
     private static PropertyManager propertyManager = new PropertyManager("connection.properties");
-    public static final Logger logger = Logger.getLogger(PropertyManager.class);
 
-    public static void authorizeUser(User user, HttpServletRequest req, HttpServletResponse resp) {
+    /**
+     * @param user
+     * @param request
+     * @param response function for user authorization, before using this - need to check the user authentication
+     */
+    public static void authorizeUser(User user, HttpServletRequest request, HttpServletResponse response) {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         ShoppingCart cart;
-        String xid = HashGenerator.generateHash(req.getSession().getId());
+        String xid = HashGenerator.generateHash(request.getSession().getId());
         user.setXid(xid);
 
         try {
@@ -41,8 +46,8 @@ public class Authorizer {
         userDao.updateUser(user);
         userDao.endTransaction();
 
-        req.getSession().setAttribute("user", user);
-        req.getSession().setAttribute("cart", cart);
+        request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("cart", cart);
         Cookie xidCookie = new Cookie("xid", xid);
 
         Integer maxLife;
@@ -52,9 +57,12 @@ public class Authorizer {
             maxLife = 60 * 60 * 24 * 7;
         }
         xidCookie.setMaxAge(maxLife);
-        resp.addCookie(xidCookie);
+        response.addCookie(xidCookie);
     }
 
+    /**
+     * @param user just refreshes user's data from DB
+     */
     public static void refreshUserData(User user) {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();

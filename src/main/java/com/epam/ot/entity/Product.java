@@ -35,8 +35,8 @@ public abstract class Product {
         return price;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public UUID getUuid() {
@@ -47,12 +47,12 @@ public abstract class Product {
         this.uuid = uuid;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDescription() {

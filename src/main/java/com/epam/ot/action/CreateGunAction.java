@@ -19,6 +19,7 @@ public class CreateGunAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         Gun gun = EntityLoader.loadGunFromRequest(req);
+        gun.setUuid(UUID.randomUUID());
 
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();

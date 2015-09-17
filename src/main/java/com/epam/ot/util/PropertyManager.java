@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyManager {
-    Properties properties;
     public static final Logger logger = Logger.getLogger(PropertyManager.class);
+    Properties properties;
 
     public PropertyManager(String fileName) {
         properties = new Properties();

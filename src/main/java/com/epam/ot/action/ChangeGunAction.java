@@ -7,7 +7,6 @@ import com.epam.ot.entity.Gun;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 public class ChangeGunAction implements Action {
     ActionResult actionResult;

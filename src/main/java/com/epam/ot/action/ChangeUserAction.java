@@ -1,5 +1,6 @@
 package com.epam.ot.action;
 
+import com.epam.ot.action.tools.EntityLoader;
 import com.epam.ot.dao.DaoFactory;
 import com.epam.ot.dao.UserDao;
 import com.epam.ot.entity.Role;
@@ -17,16 +18,9 @@ public class ChangeUserAction implements Action {
     }
 
     @Override
-    public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = new User(req.getParameter("login"), req.getParameter("email"), Role.valueOf(req.getParameter("role")), req.getParameter("password"));
-        user.setUuid(UUID.fromString(req.getParameter("uuid")));
-        String cash = req.getParameter("cash");
-        try {
-            user.setCash(Double.parseDouble(cash));
-        } catch (NumberFormatException | NullPointerException e) {
-            user.setCash(0);
-        }
-        user.setBanned(Boolean.parseBoolean(req.getParameter("banned")));
+    public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
+        User user = EntityLoader.loadUserFromRequest(request);
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

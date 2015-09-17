@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Gun Shop</title>
-    <link rel="stylesheet" href="../../../main_style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/main_style.css"/>
 </head>
 <body>
 <a:mainTemplate>
@@ -55,9 +55,6 @@
         <input type="submit" name="submit"
                formaction="${pageContext.request.contextPath}/admin/change_gun"
                value="<fmt:message key="button.refresh"/>"/>
-        <input type="submit" name="submit"
-               formaction="${pageContext.request.contextPath}/admin/delete_gun"
-               value="<fmt:message key="button.remove"/>"/>
     </form>
 </a:mainTemplate>
 </body>

@@ -21,7 +21,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String actionName = req.getMethod() + req.getServletPath() + req.getPathInfo();
+        String actionName = req.getMethod() + req.getPathInfo();
 
         Action action = actionFactory.getAction(actionName);
         try {
@@ -30,9 +30,9 @@ public class MainServlet extends HttpServlet {
             CookieManager.refreshLanguageCookies(req, resp);
 
             if (result.isRedirect()) {
-                resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/" + result.getView());
+                resp.sendRedirect(req.getContextPath() + "/gunshop/" + result.getView());
             } else {
-                req.getRequestDispatcher("/" + result.getView() + ".jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/jsp/" + result.getView() + ".jsp").forward(req, resp);
             }
         } catch (NullPointerException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
