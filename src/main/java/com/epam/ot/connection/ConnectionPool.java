@@ -1,4 +1,4 @@
-package com.epam.ot.connectionPool;
+package com.epam.ot.connection;
 
 import com.epam.ot.util.PropertyManager;
 import org.apache.log4j.Logger;

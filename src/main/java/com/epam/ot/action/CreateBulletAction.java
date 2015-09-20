@@ -18,13 +18,14 @@ public class CreateBulletAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Bullet bullet = EntityLoader.loadBulletFromRequest(request);
-        bullet.setUuid(UUID.randomUUID());
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();
+
+        Bullet bullet = EntityLoader.loadBulletFromRequest(request);
+        bullet.setUuid(UUID.randomUUID());
         bulletDao.insert(bullet);
+
         bulletDao.endTransaction();
         return actionResult;
     }

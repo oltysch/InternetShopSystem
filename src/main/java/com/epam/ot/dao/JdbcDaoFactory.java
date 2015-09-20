@@ -1,9 +1,7 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.connectionPool.ConnectionPool;
+import com.epam.ot.connection.ConnectionPool;
 import com.epam.ot.util.PropertyManager;
-
-import java.sql.Connection;
 
 public class JdbcDaoFactory extends DaoFactory {
     private PropertyManager propertyManager = new PropertyManager("connection.properties");

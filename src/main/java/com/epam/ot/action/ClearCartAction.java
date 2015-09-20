@@ -23,18 +23,20 @@ public class ClearCartAction implements Action {
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
-        User user = (User) req.getSession().getAttribute("user");
+
         cart.clearCart();
         try {
+            User user = (User) req.getSession().getAttribute("user");
             user.setCart(ShoppingCartSerializer.writeCartInString(cart));
+
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            UserDao userDao = daoFactory.createUserDao();
+            userDao.beginTransaction();
+            userDao.updateUser(user);
+            userDao.endTransaction();
         } catch (IOException e) {
             logger.error("write cart error" + e);
         }
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        UserDao userDao = daoFactory.createUserDao();
-        userDao.beginTransaction();
-        userDao.updateUser(user);
-        userDao.endTransaction();
         return result;
     }
 }

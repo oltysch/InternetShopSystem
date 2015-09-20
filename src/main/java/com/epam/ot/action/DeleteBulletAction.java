@@ -18,12 +18,13 @@ public class DeleteBulletAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Bullet bullet = EntityLoader.loadBulletFromRequest(request);
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
         bulletDao.beginTransaction();
+
+        Bullet bullet = EntityLoader.loadBulletFromRequest(request);
         bulletDao.remove(bullet);
+
         bulletDao.endTransaction();
         return actionResult;
     }

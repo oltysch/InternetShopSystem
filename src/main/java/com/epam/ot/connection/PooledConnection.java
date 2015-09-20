@@ -1,4 +1,4 @@
-package com.epam.ot.connectionPool;
+package com.epam.ot.connection;
 
 import java.sql.*;
 import java.util.Map;

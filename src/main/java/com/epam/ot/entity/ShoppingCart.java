@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public class ShoppingCart implements Serializable {
     private static final long serialVersionUID = -3723655422050777747L;
-    //    list of items in ShoppingCart
     private List<ShoppingCartItem> products;
 
     public ShoppingCart() {
@@ -30,7 +29,9 @@ public class ShoppingCart implements Serializable {
     }
 
     /**
-     * @param productUuid insert product UUID in list, or increments count by 1
+     * insert product UUID in list, or increments count by 1
+     *
+     * @param productUuid
      */
     public void addProduct(UUID productUuid) {
         addProduct(productUuid, 1);
@@ -38,8 +39,10 @@ public class ShoppingCart implements Serializable {
 
 
     /**
+     * insert or increments product UUID in list by count
+     *
      * @param productUuid
-     * @param count       insert or increments product UUID in list by count
+     * @param count
      */
     public void addProduct(UUID productUuid, int count) {
         if (!incrementCountIfFound(productUuid, count)) {
@@ -66,7 +69,9 @@ public class ShoppingCart implements Serializable {
     }
 
     /**
-     * @param productUuid removes product by UUID from Shopcart
+     * removes product by UUID from shop cart
+     *
+     * @param productUuid
      */
     public void clearProduct(UUID productUuid) {
         ShoppingCartItem item = findItemInCart(productUuid);

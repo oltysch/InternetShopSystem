@@ -19,19 +19,21 @@ public class ShowUsersAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<User> users = new ArrayList<>();
-        List<String> roles = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         UsersRolesDao usersRolesDao = daoFactory.createUsersRolesDao();
         userDao.beginTransaction();
-        users.addAll(userDao.findAll());
-        userDao.endTransaction();
         usersRolesDao.beginTransaction();
+
+        List<User> users = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
+        users.addAll(userDao.findAll());
         roles.addAll(usersRolesDao.findAll());
-        usersRolesDao.endTransaction();
         req.setAttribute("users", users);
         req.setAttribute("roles", roles);
+
+        usersRolesDao.endTransaction();
+        userDao.endTransaction();
         return result;
     }
 }

@@ -24,6 +24,7 @@ public class EntityLoader {
         Integer fireRate;
         Integer firingRange;
         Integer effectiveFiringRange;
+
         try {
             uuid = UUID.fromString(request.getParameter("selectedProductUuid"));
         } catch (NumberFormatException | NullPointerException e) {
@@ -54,6 +55,7 @@ public class EntityLoader {
         } catch (NumberFormatException | NullPointerException e) {
             effectiveFiringRange = null;
         }
+
         Gun gun = new Gun(request.getParameter("type"), request.getParameter("model"), price);
         gun.setUuid(uuid);
         gun.setDescription(request.getParameter("description"));
@@ -74,6 +76,7 @@ public class EntityLoader {
         UUID uuid;
         double price;
         Integer qty;
+
         try {
             uuid = UUID.fromString(request.getParameter("selectedProductUuid"));
         } catch (NumberFormatException | NullPointerException e) {
@@ -89,6 +92,7 @@ public class EntityLoader {
         } catch (NumberFormatException | NullPointerException e) {
             qty = null;
         }
+
         Bullet bullet = new Bullet(request.getParameter("caliber"), request.getParameter("name"), request.getParameter("type"), price);
         bullet.setUuid(uuid);
         bullet.setDescription(request.getParameter("description"));
@@ -104,6 +108,7 @@ public class EntityLoader {
         UUID uuid;
         User user = new User(request.getParameter("login"), request.getParameter("email"), Role.valueOf(request.getParameter("role")), PasswordHashing.generatePasswordHash(request.getParameter("password")));
         String cash = request.getParameter("cash");
+
         try {
             uuid = UUID.fromString(request.getParameter("uuid"));
         } catch (NumberFormatException | NullPointerException e) {
@@ -114,6 +119,7 @@ public class EntityLoader {
         } catch (NumberFormatException | NullPointerException e) {
             user.setCash(0);
         }
+
         user.setUuid(uuid);
         user.setBanned(Boolean.parseBoolean(request.getParameter("banned")));
         return user;

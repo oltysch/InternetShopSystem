@@ -17,13 +17,15 @@ public class UnbanUserAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String userUuid = req.getParameter("uuid");
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
+
+        String userUuid = req.getParameter("uuid");
         User user = userDao.findByUuid(UUID.fromString(userUuid));
         user.setBanned(false);
         userDao.updateUser(user);
+
         userDao.endTransaction();
         return result;
     }

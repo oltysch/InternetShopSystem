@@ -20,13 +20,14 @@ public class CreateUserAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse resp) {
-        User user = EntityLoader.loadUserFromRequest(request);
-        user.setUuid(UUID.randomUUID());
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
+
+        User user = EntityLoader.loadUserFromRequest(request);
+        user.setUuid(UUID.randomUUID());
         userDao.insert(user);
+
         userDao.endTransaction();
         return actionResult;
     }

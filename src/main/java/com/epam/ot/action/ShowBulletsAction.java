@@ -19,19 +19,22 @@ public class ShowBulletsAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<Bullet> bullets = new ArrayList<>();
-        List<String> types = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         BulletDao bulletDao = daoFactory.createBulletDao();
         BulletsTypesDao bulletsTypesDao = daoFactory.createBulletsTypesDao();
         bulletDao.beginTransaction();
-        bullets.addAll(bulletDao.findAll());
-        bulletDao.endTransaction();
         bulletsTypesDao.beginTransaction();
+
+        List<Bullet> bullets = new ArrayList<>();
+        List<String> types = new ArrayList<>();
+        // load's all bullets and all bullet types
+        bullets.addAll(bulletDao.findAll());
         types.addAll(bulletsTypesDao.findAll());
-        bulletsTypesDao.endTransaction();
+
         req.setAttribute("bullets", bullets);
         req.setAttribute("types", types);
+        bulletDao.endTransaction();
+        bulletsTypesDao.endTransaction();
         return result;
     }
 }

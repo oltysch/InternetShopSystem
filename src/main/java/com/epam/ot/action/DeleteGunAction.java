@@ -17,12 +17,13 @@ public class DeleteGunAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        Gun gun = EntityLoader.loadGunFromRequest(req);
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         gunDao.beginTransaction();
+
+        Gun gun = EntityLoader.loadGunFromRequest(req);
         gunDao.remove(gun);
+
         gunDao.endTransaction();
         return actionResult;
     }

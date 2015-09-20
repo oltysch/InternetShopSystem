@@ -14,13 +14,13 @@ public class LoginAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
-        User user = userDao.findByLogin(login);
 
+        String login = req.getParameter("login");
+        User user = userDao.findByLogin(login);
+        String password = req.getParameter("password");
         if (user == null || !(PasswordHashing.validatePassword(password, user.getPassword()))) {
             req.setAttribute("login", login);
             req.setAttribute("loginError", "error.wrong_login");
@@ -33,6 +33,7 @@ public class LoginAction implements Action {
             req.setAttribute("loginError", "error.user_banned");
             result = new ActionResult("login");
         }
+
         userDao.endTransaction();
         return result;
     }

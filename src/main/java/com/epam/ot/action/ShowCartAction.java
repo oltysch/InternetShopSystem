@@ -21,16 +21,15 @@ public class ShowCartAction implements Action {
         ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
         User user = (User) req.getSession().getAttribute("user");
 
-        DaoFactory daoFactory = DaoFactory.getInstance();
-
-//        refreshing user's data in db and in session
+        // refreshing user's data in db and in session
         Authorizer.refreshUserData(user);
-
         if (shoppingCart != null) {
+            DaoFactory daoFactory = DaoFactory.getInstance();
             GunDao gunDao = daoFactory.createGunDao();
             BulletDao bulletDao = daoFactory.createBulletDao();
             gunDao.beginTransaction();
             bulletDao.beginTransaction();
+
             double price = 0;
             for (ShoppingCartItem item : shoppingCart.getProducts()) {
                 Product product = gunDao.findByUuid(item.getProductUuid());
@@ -40,12 +39,13 @@ public class ShowCartAction implements Action {
                     price += product.getPrice() * item.getCount();
                 }
             }
-            bulletDao.endTransaction();
-            gunDao.endTransaction();
             req.setAttribute("products", products);
             req.setAttribute("price", Math.round(price));
             req.setAttribute("paidError", req.getAttribute("paidError"));
             result = new ActionResult("shopcart");
+
+            bulletDao.endTransaction();
+            gunDao.endTransaction();
         } else {
             req.setAttribute("redirect_url", "shopcart");
             result = new ActionResult("", true);

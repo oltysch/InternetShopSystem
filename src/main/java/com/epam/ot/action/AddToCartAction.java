@@ -23,14 +23,14 @@ public class AddToCartAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        //getting the uuid of selected product
+        // getting the uuid of selected product
         UUID selectedProductUuid = UUID.fromString(req.getParameter("selectedProductUuid"));
         logger.info("selectedProductUuid=" + selectedProductUuid);
-        //getting shopping cart and user
+        // getting shopping cart and user
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
         User user = (User) req.getSession().getAttribute("user");
 
-        //add selected product into cart
+        // add selected product into cart
         cart.addProduct(selectedProductUuid);
         try {
             user.setCart(ShoppingCartSerializer.writeCartInString(cart));
@@ -38,6 +38,7 @@ public class AddToCartAction implements Action {
             logger.error("write cart error" + e);
         }
 
+        // update user's data in db
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

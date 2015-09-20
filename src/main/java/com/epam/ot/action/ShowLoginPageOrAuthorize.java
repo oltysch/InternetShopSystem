@@ -30,6 +30,7 @@ public class ShowLoginPageOrAuthorize implements Action {
             DaoFactory daoFactory = DaoFactory.getInstance();
             UserDao userDao = daoFactory.createUserDao();
             userDao.beginTransaction();
+
             User user = userDao.findByXid(myCookie.getValue());
             if (user != null) {
                 Authorizer.authorizeUser(user, req, resp);
@@ -37,6 +38,7 @@ public class ShowLoginPageOrAuthorize implements Action {
             } else {
                 result = new ActionResult("start_page");
             }
+
             userDao.endTransaction();
         } else {
             result = new ActionResult("start_page");

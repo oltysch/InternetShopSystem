@@ -19,19 +19,21 @@ public class ShowGunsAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<Gun> guns = new ArrayList<>();
-        List<String> types = new ArrayList<>();
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         GunsTypesDao gunsTypesDao = daoFactory.createGunsTypesDao();
         gunDao.beginTransaction();
-        guns.addAll(gunDao.findAll());
-        gunDao.endTransaction();
         gunsTypesDao.beginTransaction();
+
+        List<Gun> guns = new ArrayList<>();
+        List<String> types = new ArrayList<>();
+        guns.addAll(gunDao.findAll());
         types.addAll(gunsTypesDao.findAll());
-        gunsTypesDao.endTransaction();
         req.setAttribute("guns", guns);
         req.setAttribute("types", types);
+
+        gunDao.endTransaction();
+        gunsTypesDao.endTransaction();
         return result;
     }
 }

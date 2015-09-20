@@ -19,12 +19,13 @@ public class DeleteUserAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) {
-        User user = EntityLoader.loadUserFromRequest(request);
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
+
+        User user = EntityLoader.loadUserFromRequest(request);
         userDao.remove(user);
+
         userDao.endTransaction();
         return actionResult;
     }

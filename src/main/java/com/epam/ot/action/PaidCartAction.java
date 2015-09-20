@@ -25,45 +25,43 @@ public class PaidCartAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<Product> products = new ArrayList<>();
-        User user = (User) req.getSession().getAttribute("user");
-
         DaoFactory daoFactory = DaoFactory.getInstance();
-
-        Authorizer.refreshUserData(user);
-
-        ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
         GunDao gunDao = daoFactory.createGunDao();
         BulletDao bulletDao = daoFactory.createBulletDao();
         gunDao.beginTransaction();
         bulletDao.beginTransaction();
+
+        User user = (User) req.getSession().getAttribute("user");
+        ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
+
+        Authorizer.refreshUserData(user); // load's user cash from db
         double price = 0;
+        // calculate total price
         for (ShoppingCartItem item : shoppingCart.getProducts()) {
-            Product product = gunDao.findByUuid(item.getProductUuid());
-            if (product == null) product = bulletDao.findByUuid(item.getProductUuid());
+            Product product = gunDao.findByUuid(item.getProductUuid()); // find product in gun's table
+            if (product == null) product = bulletDao.findByUuid(item.getProductUuid()); // find product in bullets table
             if (product != null) {
-                products.add(product);
-                price += product.getPrice() * item.getCount();
+                price += product.getPrice() * item.getCount(); // when we found - increment the total price on product price
             }
         }
         bulletDao.endTransaction();
         gunDao.endTransaction();
         double cash = user.getCash();
+        // check whether the user has enough money
         if (cash >= price) {
+            // and if true then refresh user's cash
             cash -= price;
             user.setCash(cash);
+            // cleaning the shopping cart
             shoppingCart.clearCart();
             try {
                 user.setCart(ShoppingCartSerializer.writeCartInString(shoppingCart));
             } catch (IOException e) {
                 logger.error("write cart error" + e);
             }
-            req.setAttribute("paidResult", "paid.result.success");
+            req.setAttribute("paidResult", "paid.result.success"); // set's message with paid results
+            Authorizer.refreshUserData(user);
             result = new ActionResult("paid_result");
-            UserDao userDao = daoFactory.createUserDao();
-            userDao.beginTransaction();
-            userDao.updateUser(user);
-            userDao.endTransaction();
         } else {
             result = new ActionResult("paid_result");
             req.setAttribute("paidResult", "paid.result.fail");

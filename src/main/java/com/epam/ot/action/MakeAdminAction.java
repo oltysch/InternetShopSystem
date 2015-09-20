@@ -22,8 +22,10 @@ public class MakeAdminAction implements Action {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
+
         User user = userDao.findByUuid(UUID.fromString(userUuid));
         user.setRole(Role.ADMIN);
+
         userDao.updateUser(user);
         userDao.endTransaction();
         return result;

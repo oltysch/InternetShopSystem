@@ -18,9 +18,11 @@ public class Authorizer {
     private static PropertyManager propertyManager = new PropertyManager("connection.properties");
 
     /**
-     * @param user
+     * function for user authorization, before using this - need to check the user authentication
+     *
+     * @param user object for authorization
      * @param request
-     * @param response function for user authorization, before using this - need to check the user authentication
+     * @param response
      */
     public static void authorizeUser(User user, HttpServletRequest request, HttpServletResponse response) {
         DaoFactory daoFactory = DaoFactory.getInstance();
@@ -61,16 +63,23 @@ public class Authorizer {
     }
 
     /**
-     * @param user just refreshes user's data from DB
+     * just refreshes user's data from db <br>
+     * <br>
+     * loads user's cash and ban status from db <br>
+     * and saves user cart into db
+     *
+     * @param user object which will be synchronized with db
      */
     public static void refreshUserData(User user) {
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();
+
         User userInDB = userDao.findByUuid(user.getUuid());
         user.setCash(userInDB.getCash());
         user.setBanned(userInDB.isBanned());
         userInDB.setCart(user.getCart());
+
         userDao.updateUser(userInDB);
         userDao.endTransaction();
     }

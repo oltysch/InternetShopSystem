@@ -29,7 +29,6 @@ public class HashGenerator {
         return generatedPassword;
     }
 
-    //Add salt
     private static String getSalt() {
         try {
             SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");

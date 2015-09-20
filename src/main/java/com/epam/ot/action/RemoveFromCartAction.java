@@ -26,13 +26,15 @@ public class RemoveFromCartAction implements Action {
         UUID selectedProductUuid = UUID.fromString(req.getParameter("selectedProductUuid"));
         logger.info("selectedProductUuid=" + selectedProductUuid);
         ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
-        User user = (User) req.getSession().getAttribute("user");
+
         cart.clearProduct(selectedProductUuid);
+        User user = (User) req.getSession().getAttribute("user");
         try {
             user.setCart(ShoppingCartSerializer.writeCartInString(cart));
         } catch (IOException e) {
             logger.error("write cart error" + e);
         }
+
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
         userDao.beginTransaction();

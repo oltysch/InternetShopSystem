@@ -1,6 +1,5 @@
 package com.epam.ot.action;
 
-import com.epam.ot.util.PropertyManager;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -8,7 +7,7 @@ import java.util.Map;
 
 public class ActionFactory {
     public static final Logger logger = Logger.getLogger(ActionFactory.class);
-    static Map<String, Action> actions;
+    static Map<String, Action> actions; //actions mapping
 
     static {
         actions = new HashMap<>();
@@ -57,8 +56,18 @@ public class ActionFactory {
         actions.put("GET/delete_bullet", new DeleteBulletAction());
     }
 
+    /**
+     * returns an action by name
+     *
+     * @param actionName
+     * @return
+     */
     public Action getAction(String actionName) {
         logger.info(actionName);
-        return actions.get(actionName);
+        Action result = actions.get(actionName);
+        if (result == null) {
+            result = actions.get("GET/");
+        }
+        return result;
     }
 }

@@ -29,21 +29,21 @@ public class RegisterAction implements Action {
         registerError = Validator.isLoginValid(login);
         if (registerError == null) registerError = Validator.isEmailValid(email);
         if (registerError == null) registerError = Validator.isPasswordValid(password);
-
         if (registerError != null) {
             req.setAttribute("registerError", registerError);
             return new ActionResult("register");
         }
-
         hashedPassword = PasswordHashing.generatePasswordHash(password);
+        User user = new User(login, email, Role.USER, hashedPassword);
+        user.setUuid(UUID.randomUUID());
+        req.setAttribute("login", login);
+        req.setAttribute("password", password);
 
         DaoFactory daoFactory = DaoFactory.getInstance();
         UserDao userDao = daoFactory.createUserDao();
-        User user = new User(login, email, Role.USER, hashedPassword);
-        user.setUuid(UUID.randomUUID());
+        userDao.beginTransaction();
         userDao.insert(user);
-        req.setAttribute("login", login);
-        req.setAttribute("password", password);
+        userDao.endTransaction();
         return result;
     }
 }

@@ -20,13 +20,16 @@ public class ShowProductsAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        GunDao gunDao = daoFactory.createGunDao();
+        BulletDao bulletDao = daoFactory.createBulletDao();
+        gunDao.beginTransaction();
+        bulletDao.beginTransaction();
+
         List<ProductBlock> productBlocks = new ArrayList<>();
         List<Product> products = new ArrayList<>();
         String selectType = (String) req.getParameter("seltp");
         String productType = (String) req.getParameter("prType");
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        GunDao gunDao = daoFactory.createGunDao();
-        BulletDao bulletDao = daoFactory.createBulletDao();
         if (selectType != null) {
             products.addAll(gunDao.findByType(selectType));
             products.addAll(bulletDao.findByType(selectType));
@@ -42,6 +45,9 @@ public class ShowProductsAction implements Action {
             productBlocks.add(product.toBlock());
         }
         req.setAttribute("products", productBlocks);
+
+        gunDao.endTransaction();
+        bulletDao.endTransaction();
         return result;
     }
 }

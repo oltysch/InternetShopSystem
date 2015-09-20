@@ -17,11 +17,12 @@ public class ChangeProductCountAction implements Action {
     public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
         String productUuid = req.getParameter("selectedProductUuid");
         Integer newCount = null;
+        ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
+
         try {
             newCount = Integer.parseInt(req.getParameter("newCount"));
         } catch (NumberFormatException e) {
         }
-        ShoppingCart cart = (ShoppingCart) req.getSession().getAttribute("cart");
 
         if (newCount != null) {
             cart.setProductCount(UUID.fromString(productUuid), newCount);
